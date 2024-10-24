@@ -1,6 +1,7 @@
 services:
   traefik:
     image: traefik:v2.10
+    container_name: traefik
     command:
       - "--api=true"
       - "--api.dashboard=true"
@@ -27,6 +28,7 @@ services:
       - "traefik.http.middlewares.auth.basicauth.users=user:password"
   portainer:
     image: portainer/portainer-ce
+    container_name: portainer
     ports:
       - "8000:8000"
       - "9443:9443"
@@ -42,6 +44,7 @@ services:
 
   adguardhome:
     image: adguard/adguardhome
+    container_name: adguardhome
     volumes:
       - /opt/docker/adguardhome/conf:/opt/adguardhome/conf
       - /opt/docker/adguardhome/work:/opt/adguardhome/work
