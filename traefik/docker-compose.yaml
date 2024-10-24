@@ -50,7 +50,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.adguard.rule=Host(`lad.lenadlm.dev`)" # Change to your domain
-      - "traefik.http.services.adguard.loadbalancer.server.port=3000" # Default AdGuard Home port
+      - "traefik.http.services.adguard.loadbalancer.server.port=80" # Default AdGuard Home port
 
 networks:
   traefik:
