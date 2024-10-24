@@ -2,23 +2,29 @@ services:
   traefik:
     image: traefik:v2.10
     command:
-      - "--api.insecure=true" # Expose the Traefik dashboard (remove this in production)
+      - "--api=true"
+      - "--api.dashboard=true"
       - "--providers.docker=true"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
-      - "--certificatesresolvers.myresolver.acme.email=miqrata9j@mozmail.com" # Replace with your email
+      - "--certificatesresolvers.myresolver.acme.email=miqrata9j@mozmail.com"
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
     ports:
       - "80:80"
       - "443:443"
-      - "8080:8080"
+      - "8080:8080"  # Port for the Traefik dashboard (secured with Basic Auth)
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./letsencrypt:/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./letsencrypt:/letsencrypt  # Store Let's Encrypt certificates
     networks:
       - traefik
-
+    labels:
+      - "traefik.http.routers.traefik.rule=Host(`xxx.mydomain.com`)"  # Replace with your domain
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.middlewares=auth@docker"  # Apply the Basic Auth middleware
+      - "traefik.http.middlewares.auth.basicauth.users=user:password"
   portainer:
     image: portainer/portainer-ce
     ports:
@@ -31,7 +37,7 @@ services:
       - traefik
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.portainer.rule=Host(`lpo.lenadlm.dev`)" # Change to your domain
+      - "traefik.http.routers.portainer.rule=Host(`xxx.mydomain.com`)" # Change to your domain
       - "traefik.http.services.portainer.loadbalancer.server.port=9443"
 
   adguardhome:
@@ -49,7 +55,7 @@ services:
       - "3000:80/tcp"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.adguard.rule=Host(`lad.lenadlm.dev`)" # Change to your domain
+      - "traefik.http.routers.adguard.rule=Host(`xxx.mydomain.com`)" # Change to your domain
       - "traefik.http.services.adguard.loadbalancer.server.port=3000" # Default AdGuard Home port
 
 networks:
