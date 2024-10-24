@@ -46,11 +46,11 @@ services:
       - "53:53/udp"   # DNS over UDP
       - "853:853/tcp" # DNS over TLS
       - "784:784/tcp" # DNS over HTTPS
-      - "3000:3000/tcp
+      - "3000:80/tcp"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.adguard.rule=Host(`lad.lenadlm.dev`)" # Change to your domain
-      - "traefik.http.services.adguard.loadbalancer.server.port=80" # Default AdGuard Home port
+      - "traefik.http.services.adguard.loadbalancer.server.port=3000" # Default AdGuard Home port
 
 networks:
   traefik:
