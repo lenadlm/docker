@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  traefik:
+    image: traefik:v2.10
+    command:
+      - "--api.insecure=true" # Expose the Traefik dashboard (remove this in production)
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=miqrata9j@mozmail.com" # Replace with your email
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./letsencrypt:/letsencrypt
+    networks:
+      - traefik
+
+  portainer:
+    image: portainer/portainer-ce
+    ports:
+      - "8000:8000"
+      - "9443:9443"
+    volumes:
+      - portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portainer.rule=Host(`lpo.lenadlm.dev`)" # Change to your domain
+      - "traefik.http.services.portainer.loadbalancer.server.port=9443"
+
+  adguardhome:
+    image: adguard/adguardhome
+    volumes:
+      - /opt/adguardhome/conf:/opt/adguardhome/conf
+      - /opt/adguardhome/work:/opt/adguardhome/work
+    networks:
+      - traefik
+    ports:
+      - "53:53/tcp"   # DNS over TCP
+      - "53:53/udp"   # DNS over UDP
+      - "853:853/tcp" # DNS over TLS
+      - "784:784/tcp" # DNS over HTTPS
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.adguard.rule=Host(`lad.lenadlm.dev`)" # Change to your domain
+      - "traefik.http.services.adguard.loadbalancer.server.port=3000" # Default AdGuard Home port
+
+networks:
+  traefik:
+    external: true
+
+volumes:
+  portainer_data:
