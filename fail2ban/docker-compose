@@ -1,0 +1,28 @@
+services:
+  fail2ban:
+    image: crazymax/fail2ban:latest
+    container_name: fail2ban
+    volumes:
+      - ./fail2ban-data:/data
+      - /etc/fail2ban/jail.local:/data/jail.local
+      - /var/log/fail2ban.log:/data/fail2ban.log
+      - /var/log/auth.log:/data/auth.log
+    environment:
+      - F2B_LOGTARGET=STDOUT
+    restart: unless-stopped
+
+  fail2web:
+    image: ipspace/fail2web:latest
+    container_name: fail2web
+    ports:
+      - "8180:80"
+    environment:
+      - FAIL2WEB_F2BAN_SOCKET=/data/fail2ban/fail2ban.sock
+    volumes:
+      - ./fail2ban-data:/data
+    depends_on:
+      - fail2ban
+    restart: unless-stopped
+
+volumes:
+  fail2ban-data:
