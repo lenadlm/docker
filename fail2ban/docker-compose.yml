@@ -1,25 +1,36 @@
 services:
   fail2ban:
-    image: linuxserver/fail2ban:latest
+    image: crazymax/fail2ban:latest
     container_name: fail2ban
     volumes:
-      - /opt/docker/fail2ban:/data
-      - /etc/fail2ban/jail.local:/data/jail.local
+      - ./fail2ban-data:/data
+      - /opt/docker/fail2ban/jail.local:/data/jail.local
       - /var/log/fail2ban.log:/data/fail2ban.log
       - /var/log/auth.log:/data/auth.log
+      - /var/run/fail2ban/fail2ban.sock:/var/run/fail2ban/fail2ban.sock
     environment:
       - F2B_LOGTARGET=STDOUT
+      - TZ=Africa/Nairobi
+    restart: unless-stopped
+
+  fail2rest:
+    image: dietermartens/fail2rest:latest
+    container_name: fail2rest
+    ports:
+      - "5000:5000"
+    environment:
+      - F2B_FAIL2BAN_SOCKET=/var/run/fail2ban/fail2ban.sock
+    depends_on:
+      - fail2ban
     restart: unless-stopped
 
   fail2web:
-    image: dietermartens/fail2web
+    image: dietermartens/fail2web:latest
     container_name: fail2web
     ports:
       - "8180:80"
     environment:
-      - FAIL2WEB_F2BAN_SOCKET=/data/fail2ban/fail2ban.sock
-    volumes:
-      - /opt/docker/fail2ban:/data
+      - FAIL2WEB_F2BAN_SOCKET=/var/run/fail2ban/fail2ban.sock
     depends_on:
       - fail2ban
     restart: unless-stopped
