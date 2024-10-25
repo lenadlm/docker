@@ -1,6 +1,7 @@
 services:
   watchtower:
     image: containrrr/watchtower
+    container_name: watchtower
     command:
       - --cleanup=true
       - --interval=21600
