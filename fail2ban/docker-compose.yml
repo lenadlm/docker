@@ -7,7 +7,8 @@ services:
       - /etc/fail2ban/jail.local:/data/jail.local
       - /var/log/fail2ban.log:/data/fail2ban.log
       - /var/log/auth.log:/data/auth.log
-      - /var/run/fail2ban/fail2ban.sock:/var/run/fail2ban/fail2ban.sock
+      - /var/run/fail2ban:/var/run/fail2ban
+    command: /bin/sh -c "mkdir -p /var/run/fail2ban && exec fail2ban-server -f"
     environment:
       - F2B_LOGTARGET=STDOUT
       - TZ=Africa/Nairobi
