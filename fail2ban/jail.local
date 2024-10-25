@@ -1,0 +1,31 @@
+[DEFAULT]
+backend = auto
+protocol = tcp
+banaction = iptables-multiport
+action = %(banaction)s[name=%(__name__)s, port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
+
+# Dynamic ban durations
+maxretry = 3
+findtime = 1800
+bantime = 600
+bantime.increment = true
+bantime.factor = 2
+bantime.max = 86400
+
+# Aggressive bans for SSH brute-force attacks
+[sshd]
+enabled = true
+port = ssh
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 3
+findtime = 900
+bantime = 10800
+
+# Recidive jail for repeat offenders
+[recidive]
+enabled = true
+logpath = /var/log/fail2ban.log
+findtime = 86400
+bantime = 604800
+maxretry = 2
