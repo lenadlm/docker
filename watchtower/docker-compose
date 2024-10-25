@@ -1,0 +1,16 @@
+services:
+  watchtower:
+    image: containrrr/watchtower
+    command:
+      - --cleanup=true
+      - --interval=7200
+      - --log-level=debug
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - portainer_default
+
+networks:
+  portainer_default:
+    external: true
