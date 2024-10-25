@@ -1,6 +1,6 @@
 services:
   fail2ban:
-    image: crazymax/fail2ban:latest
+    image: linuxserver/fail2ban:latest
     container_name: fail2ban
     volumes:
       - /opt/docker/fail2ban:/data
@@ -12,7 +12,7 @@ services:
     restart: unless-stopped
 
   fail2web:
-    image: ipspace/fail2web:latest
+    image: dietermartens/fail2web
     container_name: fail2web
     ports:
       - "8180:80"
