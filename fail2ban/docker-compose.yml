@@ -3,7 +3,7 @@ services:
     image: crazymax/fail2ban:latest
     container_name: fail2ban
     volumes:
-      - ./fail2ban-data:/data
+      - /opt/docker/fail2ban:/data
       - /etc/fail2ban/jail.local:/data/jail.local
       - /var/log/fail2ban.log:/data/fail2ban.log
       - /var/log/auth.log:/data/auth.log
@@ -19,7 +19,7 @@ services:
     environment:
       - FAIL2WEB_F2BAN_SOCKET=/data/fail2ban/fail2ban.sock
     volumes:
-      - ./fail2ban-data:/data
+      - /opt/docker/fail2ban:/data
     depends_on:
       - fail2ban
     restart: unless-stopped
