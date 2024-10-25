@@ -3,7 +3,7 @@ services:
     image: containrrr/watchtower
     command:
       - --cleanup=true
-      - --interval=7200
+      - --interval=21600
       - --log-level=debug
     restart: always
     volumes:
