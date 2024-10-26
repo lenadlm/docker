@@ -13,28 +13,7 @@ services:
       - F2B_LOGTARGET=STDOUT
       - TZ=Africa/Nairobi
     restart: unless-stopped
-
-  fail2rest:
-    image: dietermartens/fail2rest:latest
-    container_name: fail2rest
-    ports:
-      - "5000:5000"
-    environment:
-      - F2B_FAIL2BAN_SOCKET=/var/run/fail2ban/fail2ban.sock
-    depends_on:
-      - fail2ban
-    restart: unless-stopped
-
-  fail2web:
-    image: dietermartens/fail2web:latest
-    container_name: fail2web
-    ports:
-      - "8180:80"
-    environment:
-      - FAIL2WEB_F2BAN_SOCKET=/var/run/fail2ban/fail2ban.sock
-    depends_on:
-      - fail2ban
-    restart: unless-stopped
+    networks: portainer_default
 
 volumes:
   fail2ban-data:
