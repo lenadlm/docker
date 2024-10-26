@@ -2,11 +2,12 @@
 backend = auto
 protocol = tcp
 banaction = iptables-multiport
+usedns = warn
 action = %(banaction)s[name=%(__name__)s, port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
 
 # Dynamic ban durations
 maxretry = 3
-findtime = 1800          ; 30 minutes
+findtime = 3600          ; 1 hour
 bantime = 10800          ; Starting ban time set to 3 hours
 bantime.increment = true  ; Allow dynamic increase of bantime
 bantime.factor = 2       ; Increase ban time by factor of 2 for subsequent offenses
@@ -14,23 +15,15 @@ bantime.max = 86400      ; Maximum ban time set to 24 hours
 
 # Aggressive bans for SSH brute-force attacks
 [sshd]
+mode = agressive
 enabled = true
 port = ssh
 filter = sshd
 logpath = /var/log/auth.log
 
-# Authentication failures across services
-[auth]
-enabled = true
-filter = fail2ban-auth
-action = iptables[name=auth, port=all, protocol=all]
-logpath = /var/log/auth.log
-maxretry = 5             ; Maximum of 5 retries for auth
-
 # Recidive jail for repeat offenders
 [recidive]
 enabled = true
-logpath = /var/log/fail2ban.log
 findtime = 86400         ; 1 day for recidive
 bantime = 604800         ; 1 week for recidive
-maxretry = 5             ; Maximum of 5 retries for recidive
+logpath = /var/log/fail2ban.log
