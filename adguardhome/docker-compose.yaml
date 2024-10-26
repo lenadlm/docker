@@ -10,8 +10,8 @@ services:
       - "8443:443/tcp"
       - "3000:3000/tcp"
     volumes:
-      - /opt/adguardhome/conf:/opt/adguardhome/conf
-      - /opt/adguardhome/work:/opt/adguardhome/work  
+      - /data/docker/adguardhome/conf:/data/adguardhome/conf
+      - /data/docker/adguardhome/work:/data/adguardhome/work  
     networks:
       portainer_default:
         ipv4_address: 172.30.0.53
