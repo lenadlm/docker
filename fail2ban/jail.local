@@ -24,6 +24,7 @@ logpath = /var/log/auth.log
 # Recidive jail for repeat offenders
 [recidive]
 enabled = true
+filter = recidive
 findtime = 1w            ; 1 week findtime for recidive
 bantime = 26w            ; 6 month ban for recidive
 bantime.max = -1         ; Forever!
