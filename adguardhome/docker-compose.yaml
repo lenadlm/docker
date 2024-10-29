@@ -10,8 +10,7 @@ services:
       - "8443:443/tcp"
       - "3000:3000/tcp"
     volumes:
-      - /data/docker/adguardhome/conf:/data/adguardhome/conf
-      - /data/docker/adguardhome/work:/data/adguardhome/work  
+      - adguard_data:/opt/adguardhome 
     networks:
       portainer_default:
         ipv4_address: 172.30.0.53
@@ -20,6 +19,9 @@ services:
       options:
         max-file: "10"
         max-size: "10m"
+
+volumes:
+  adguard_data:
 
 networks:
   portainer_default:
