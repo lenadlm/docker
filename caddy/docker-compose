@@ -1,0 +1,20 @@
+services:
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"    # HTTP
+      - "443:443"  # HTTPS
+    environment:
+      - CLOUDFLARE_API_TOKEN=                      # Replace with your actual Cloudflare API token
+    volumes:
+      - /opt/caddy/Caddyfile:/etc/caddy/Caddyfile  # Caddy configuration
+      - /opt/caddy/data:/data                      # Persistent data for SSL certs
+      - /opt/caddy/config:/config                  # Persistent configuration
+    networks:
+      - portainer_default
+
+networks:
+  portainer_default:
+    external: true
