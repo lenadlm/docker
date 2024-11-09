@@ -1,0 +1,22 @@
+version: "3"
+services:
+  app:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: nginx-proxy-manager
+    restart: always
+    ports:
+      - "80:80"       # HTTP
+      - "81:81"       # Admin interface
+      - "443:443"     # HTTPS
+    environment:
+      DB_SQLITE_FILE: "/data/database.sqlite"   # Default database
+    volumes:
+      - /opt/nginx-proxy-manager/data:/data
+      - /opt/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
+      - /opt/nginx-proxy-manager/dark-theme:/app/frontend/assets/css/dark-theme
+    networks:
+      - portainer_default
+
+networks:
+  portainer_default:
+    external: true
