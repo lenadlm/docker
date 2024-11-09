@@ -10,7 +10,10 @@ services:
       - "8443:443/tcp"
       - "3000:3000/tcp"
     volumes:
-      - adguard_data:/opt/adguardhome 
+      - /opt/adguardhome/work:/opt/adguardhome/work
+      - /opt/adguardhome/conf:/opt/adguardhome/conf
+     environment:
+      - TZ=Africa/Nairobi
     networks:
       portainer_default:
         ipv4_address: 172.30.0.53
