@@ -2,6 +2,7 @@ services:
   portainer:
     image: portainer/portainer-ce:latest
     container_name: portainer
+    restart: unless-stopped
     ports:
       - 9443:9443
     volumes:
@@ -12,7 +13,11 @@ services:
     networks:
       default:
         ipv4_address: 172.30.0.10
-    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "10m"
 
 volumes:
   data:
