@@ -1,28 +1,60 @@
 services:
-  portainer:
-    image: portainer/portainer-ce:latest
-    container_name: portainer
+  adguardhome:
+    image: adguard/adguardhome:latest
+    container_name: adguardhome
+    restart: unless-stopped
     ports:
-      - 9443:9443
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "8180:80/tcp"
+      - "8443:443/tcp"
+      - "3000:3000/tcp"
     volumes:
-      - portainer_data:/data
+      - /opt/adguardhome/work:/opt/adguardhome/work
+      - /opt/adguardhome/conf:/opt/adguardhome/conf
+	    - /opt/adguardhome/logs:/opt/adguardhome/logs
+    environment:
+      - TZ=Africa/Nairobi
+	    - ADGUARDHOME_LOG_LEVEL=debug
+    networks:
+      portainer_default:
+        ipv4_address: 172.30.0.53
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "10"
+        max-size: "10m"
+
+  nginx-proxy-manager:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: nginx-proxy-manager
+    restart: always
+    ports:
+      - "80:80"       # HTTP
+      - "81:81"       # Admin interface
+      - "443:443"     # HTTPS
+    environment:
+      DB_SQLITE_FILE: "/data/database.sqlite"
+    volumes:
+      - /opt/nginx-proxy-manager/data:/data
+      - /opt/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
+      - /opt/nginx-proxy-manager/dark-theme:/app/frontend/assets/css/dark-theme
+    networks:
+      - portainer_default
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    command:
+      - --cleanup=true
+      - --interval=21600
+      - --log-level=debug
+    restart: always
+    volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
-      default:
-        ipv4_address: 172.30.0.10
-    restart: unless-stopped
-
-volumes:
-  portainer_data:
+      - portainer_default
 
 networks:
-  default:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.30.0.0/16
-
-        
-
-
-    
+  portainer_default:
+    external: true
