@@ -8,12 +8,12 @@ action = %(banaction)s[name=%(__name__)s, port="any", protocol="%(protocol)s", c
 
 # Dynamic ban durations
 maxretry = 3
-findtime = 12h            ; 12 hours default findtime
+findtime = 6h             ; 6 hours default findtime
 bantime = 24h             ; Starting ban time set to 1 day
 bantime.increment = true  ; Allow dynamic increase of bantime
 bantime.factor = 2        ; Increase ban time by factor of 2 for subsequent offenses
-bantime.max = 4w          ; Maximum ban time set to 1 month
-bantime.rndtime = 6h      ; Random time added to the ban duration, up to 6 hours
+bantime.max = 4w          ; Maximum ban time set to 4 weeks
+bantime.rndtime = 24h     ; Random time added to the ban duration, up to 24 hours
 
 # Aggressive bans for SSH brute-force attacks
 [sshd]
@@ -28,7 +28,7 @@ enabled = true
 filter = recidive
 banaction = iptables-allports
 action = %(banaction)s[name=%(__name__)s, port="any", protocol="%(protocol)s", chain="%(chain)s"]
-findtime = 4w            ; 1 month findtime for recidive
-bantime = 12w            ; 3 month ban for recidive
-bantime.max = -1         ; Forever!
+findtime = 1w            ; 1 week findtime for recidive
+bantime = 4w             ; 1 month ban for recidive
+bantime.max = -1         ; infinity
 logpath = /var/log/fail2ban.log
