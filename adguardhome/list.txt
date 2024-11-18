@@ -1,5 +1,5 @@
-^hlag.com
-^hl.lan
-^zscaler.com
-^microsoft.com
-^zscalertwo.net
+||hlag.com^
+||hl.lan^
+||zscaler.com^
+||microsoft.com^
+||zscalertwo.net^
