@@ -3,4 +3,4 @@
 ||zscaler.com^
 ||microsoft.com^
 ||zscalertwo.net^
-pac.zscalertwo.net^
+||pac.zscalertwo.net^
