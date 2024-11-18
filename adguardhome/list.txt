@@ -1,6 +1,6 @@
-||hlag.com^^$important
-||hl.lan^^$important
-||zscaler.com^^$important
-||microsoft.com^^$important
-||zscalertwo.net^^$important
-||pac.zscalertwo.net^^$important
+||hlag.com^$important
+||hl.lan^$important
+||zscaler.com^$important
+||microsoft.com^$important
+||zscalertwo.net^$important
+||pac.zscalertwo.net^$important
