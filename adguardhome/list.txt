@@ -3,5 +3,6 @@
 ||zscaler.com^$important
 ||microsoft.com^$important
 ||zscaler.com^$important
+||zscaler.net^$important
 ||zscalertwo.net^$important
 ||pac.zscalertwo.net^$important
