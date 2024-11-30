@@ -16,4 +16,4 @@
 ||zscaler.net^$important
 ||zscalertwo.net^$important
 ||pac.zscalertwo.net^$important
-||data.microsoft.com^
+||data.microsoft.com^$important
