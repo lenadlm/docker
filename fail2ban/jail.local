@@ -4,7 +4,7 @@ port = ssh
 protocol = tcp
 allowipv6 = false
 chain = INPUT
-banaction = iptables-allports
+banaction = iptables-multiport
 action = %(banaction)s[name=%(__name__)s, port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
 
 # Dynamic ban durations
