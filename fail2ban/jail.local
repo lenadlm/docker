@@ -1,18 +1,16 @@
 [DEFAULT]
 backend = auto
-port = any
+port = ssh
 protocol = tcp
-allowipv6 = auto
-banaction = iptables-multiport
-action = %(banaction)s[name=%(__name__)s, port="any", protocol="%(protocol)s", chain="%(chain)s"]
+allowipv6 = false
+chain = INPUT
+banaction = iptables-allports
+action = %(banaction)s[name=%(__name__)s, port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"]
 
 # Dynamic ban durations
 maxretry = 3
-findtime = 6h             ; 6 hours default findtime
-bantime = 24h             ; Starting ban time set to 1 day
 bantime.increment = true  ; Allow dynamic increase of bantime
 bantime.factor = 2        ; Increase ban time by factor of 2 for subsequent offenses
-bantime.max = 4w          ; Maximum ban time set to 4 weeks
 bantime.rndtime = 24h     ; Random time added to the ban duration, up to 24 hours
 
 # Aggressive bans for SSH brute-force attacks
@@ -20,14 +18,15 @@ bantime.rndtime = 24h     ; Random time added to the ban duration, up to 24 hour
 mode = aggressive
 enabled = true
 filter = sshd
+findtime = 6h             ; 6 hours default findtime
+bantime = 24h             ; Starting ban time set to 1 day
+bantime.max = 4w          ; Maximum ban time set to 4 weeks
 logpath = /var/log/auth.log
 
 # Recidive jail for repeat offenders
 [recidive]
 enabled = true
 filter = recidive
-banaction = iptables-allports
-action = %(banaction)s[name=%(__name__)s, port="any", protocol="%(protocol)s", chain="%(chain)s"]
 findtime = 1w            ; 1 week findtime for recidive
 bantime = 4w             ; 1 month ban for recidive
 bantime.max = -1         ; infinity
