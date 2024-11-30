@@ -3,17 +3,14 @@
 ##################
 @@||microsoft.com^
 @@||web.facebook.com^$important
-#
-#
-#
+
 ##################
 # BLOCKLIST
 ##################
 ||hlag.com^$important
 ||hl.lan^$important
 ||zscaler.com^$important
-0.0.0.0 *.data.microsoft.com^
-||zscaler.com^$important
 ||zscaler.net^$important
 ||zscalertwo.net^$important
 ||pac.zscalertwo.net^$important
+||data.microsoft.com^
