@@ -1,7 +1,7 @@
 ||hlag.com^$important
 ||hl.lan^$important
 ||zscaler.com^$important
-||microsoft.com^$important
+||data.microsoft.com^$important
 ||zscaler.com^$important
 ||zscaler.net^$important
 ||zscalertwo.net^$important
