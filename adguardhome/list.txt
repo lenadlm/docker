@@ -2,5 +2,6 @@
 ||hl.lan^$important
 ||zscaler.com^$important
 ||microsoft.com^$important
+||zscaler.com^$important
 ||zscalertwo.net^$important
 ||pac.zscalertwo.net^$important
