@@ -1,15 +1,9 @@
-##################
-# mylist
-# 2024-11-30
-##################
-##################
-# ALLOWLIST
-##################
+! Name : mylist
+! Last Modified : 2024-11-30
+!
+! ALLOWLIST
 @@||web.facebook.com^
-
-##################
-# BLOCKLIST
-##################
+! BLOCKLIST
 ||hlag.com^$important
 ||hl.lan^$important
 ||zscaler.com^$important
