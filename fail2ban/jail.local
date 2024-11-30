@@ -20,14 +20,14 @@ enabled = true
 filter = sshd
 findtime = 6h             ; 6 hours default findtime
 bantime = 24h             ; Starting ban time set to 1 day
-bantime.max = 4w          ; Maximum ban time set to 4 weeks
+bantime.max = 4w          ; Maximum ban time set to 1 month
 logpath = /var/log/auth.log
 
 # Recidive jail for repeat offenders
 [recidive]
 enabled = true
 filter = recidive
-findtime = 1w            ; 1 week findtime for recidive
-bantime = 4w             ; 1 month ban for recidive
-bantime.max = -1         ; infinity
+findtime = 4w             ; 1 month findtime for recidive
+bantime = 12w             ; 3 month ban for recidive
+bantime.max = -1          ; infinity
 logpath = /var/log/fail2ban.log
