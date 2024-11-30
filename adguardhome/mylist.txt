@@ -1,9 +1,9 @@
 ! Name : mylist
 ! Last Modified : 2024-11-30
 !
-! ALLOWLIST
+! -- ALLOWLIST --
 @@||web.facebook.com^
-! BLOCKLIST
+! -- BLOCKLIST --
 ||hlag.com^$important
 ||hl.lan^$important
 ||zscaler.com^$important
