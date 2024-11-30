@@ -6,7 +6,7 @@
 # ALLOWLIST
 ##################
 @@||microsoft.com^
-@@||web.facebook.com^$important
+@@||web.facebook.com^
 
 ##################
 # BLOCKLIST
