@@ -2,9 +2,9 @@
 ! Last Modified : 2024-11-30
 !
 ! -- ALLOWLIST --
-@@||web.facebook.com^
-@@||facebook.com^
-@@||tiktok.com^
+@@||web.facebook.com^$important
+@@||facebook.com^$important
+@@||tiktok.com^$important
 
 ! -- BLOCKLIST --
 ||hlag.com^$important
