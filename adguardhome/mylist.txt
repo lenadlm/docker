@@ -3,6 +3,9 @@
 !
 ! -- ALLOWLIST --
 @@||web.facebook.com^
+@@||facebook.com^
+@@||tiktok.com^
+
 ! -- BLOCKLIST --
 ||hlag.com^$important
 ||hl.lan^$important
