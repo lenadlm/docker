@@ -7,6 +7,7 @@
 @@||tiktok.com^$important
 @@||tiktokcdn.com^$important
 @@||lgtvsdp.com^$important
+@@||livescore.com^$important
 !
 ! -- BLOCKLIST --
 ||hlag.com^$important
