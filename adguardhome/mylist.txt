@@ -6,6 +6,7 @@
 @@||facebook.com^$important
 @@||tiktok.com^$important
 @@||tiktokcdn.com^$important
+@@||lgtvsdp.com^$important
 !
 ! -- BLOCKLIST --
 ||hlag.com^$important
