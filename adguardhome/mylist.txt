@@ -6,7 +6,7 @@
 @@||facebook.com^$important
 @@||tiktok.com^$important
 @@||tiktokcdn.com^$important
-
+!
 ! -- BLOCKLIST --
 ||hlag.com^$important
 ||hl.lan^$important
