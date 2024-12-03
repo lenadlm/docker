@@ -12,10 +12,10 @@ services:
     volumes:
       - /opt/adguardhome/work:/opt/adguardhome/work
       - /opt/adguardhome/conf:/opt/adguardhome/conf
-	    - /opt/adguardhome/logs:/opt/adguardhome/logs
+      - /opt/adguardhome/logs:/opt/adguardhome/logs
     environment:
       - TZ=Africa/Nairobi
-	    - ADGUARDHOME_LOG_LEVEL=debug
+      - ADGUARDHOME_LOG_LEVEL=debug
     networks:
       portainer_default:
         ipv4_address: 172.30.0.53
@@ -30,15 +30,27 @@ services:
     container_name: nginx-proxy-manager
     restart: always
     ports:
-      - "80:80"       # HTTP
-      - "81:81"       # Admin interface
-      - "443:443"     # HTTPS
+      - "80:80"
+      - "81:81"
+      - "443:443"
     environment:
       DB_SQLITE_FILE: "/data/database.sqlite"
     volumes:
       - /opt/nginx-proxy-manager/data:/data
       - /opt/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
-      - /opt/nginx-proxy-manager/dark-theme:/app/frontend/assets/css/dark-theme
+    networks:
+      - portainer_default
+
+services:
+  samsung-tvplus:
+    image: matthuisman/samsung-tvplus-for-channels
+    container_name: samsung-tvplus
+    restart: unless-stopped
+    environment:
+      - REGIONS=all
+      - TZ=Africa/Nairobi
+    ports:
+      - "8182:80"
     networks:
       - portainer_default
 
