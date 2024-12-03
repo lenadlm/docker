@@ -41,7 +41,6 @@ services:
     networks:
       - portainer_default
 
-services:
   samsung-tvplus:
     image: matthuisman/samsung-tvplus-for-channels
     container_name: samsung-tvplus
