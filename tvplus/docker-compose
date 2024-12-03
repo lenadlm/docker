@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  samsung-tvplus:
+    image: matthuisman/samsung-tvplus-for-channels
+    container_name: samsung-tvplus
+    restart: unless-stopped
+    environment:
+      - REGIONS=all
+      - TZ=Africa/Nairobi
+    ports:
+      - "8182:80"
+    networks:
+      - portainer_default
+
+networks:
+  portainer_default:
+    external: true
