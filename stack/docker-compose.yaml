@@ -52,6 +52,22 @@ services:
       - "8182:80"
     networks:
       - portainer_default
+      
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    restart: unless-stopped
+    ports:
+      - "8096:8096"
+    volumes:
+      - /opt/jellyfin/config:/config
+      - /opt/jellyfin/cache:/cache
+      - /opt/jellyfin/media:/media
+    environment:
+      - TZ=Africa/Nairobi
+      - JELLYFIN_PublishedServerUrl= #url
+    networks:
+      - portainer_default
 
   watchtower:
     image: containrrr/watchtower
