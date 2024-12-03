@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    networks:
+      - portainer_default
+    ports:
+      - "8096:8096"
+    volumes:
+      - /opt/jellyfin/config:/config
+      - /opt/jellyfin/cache:/cache
+      - /opt/jellyfin/media:/media
+    environment:
+      - TZ=Africa/Nairobi
+      - JELLYFIN_PublishedServerUrl=http://m3u.lenadlm.dev
+    restart: unless-stopped
+
+networks:
+  portainer_default:
+    external: true
