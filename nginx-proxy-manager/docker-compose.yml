@@ -1,5 +1,5 @@
 services:
-  nginx-proxy-manager:
+  app:
     image: jc21/nginx-proxy-manager:latest
     container_name: nginx-proxy-manager
     restart: always
@@ -15,6 +15,12 @@ services:
       - /opt/nginx-proxy-manager/dark-theme:/app/frontend/assets/css/dark-theme
     networks:
       - portainer_default
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:81"] 
+      interval: 1m
+      timeout: 30s
+      retries: 3
+      start_period: 2m
 
 networks:
   portainer_default:
