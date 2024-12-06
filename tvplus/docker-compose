@@ -12,6 +12,11 @@ services:
       - "8182:80"
     networks:
       - portainer_default
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "3"
+        max-size: "10m"
 
 networks:
   portainer_default:
