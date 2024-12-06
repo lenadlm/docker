@@ -25,7 +25,12 @@ services:
         reservations:
           memory: "256M"
     user: "1001:1001"
-
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:34400"]
+      interval: 1m
+      timeout: 30s
+      retries: 3
+      start_period: 2m
 
 networks:
   portainer_default:
