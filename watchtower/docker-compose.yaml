@@ -4,11 +4,15 @@ services:
     container_name: watchtower
     command:
       - --cleanup=true
-      - --interval=21600
-      - --log-level=debug
+      - --include-restarting
+      - --interval=86400
+      - --trace
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.docker/config.json:/config.json
+    environment:
+      - DOCKER_CONFIG=/config.json
     networks:
       - portainer_default
 
