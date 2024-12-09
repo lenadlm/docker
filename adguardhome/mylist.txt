@@ -10,6 +10,7 @@
 @@||lgtvsdp.com^$important
 @@||livescore.com^$important
 @@||ttwstatic.com^$important
+@@||truecaller.com^$importan
 !
 ! -- BLOCKLIST --
 ||hlag.com^$important
