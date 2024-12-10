@@ -6,16 +6,15 @@ services:
     ports:
       - "53:53/tcp"
       - "53:53/udp"
+      - "853:853/tcp"
       - "8180:80/tcp"
       - "8443:443/tcp"
       - "3000:3000/tcp"
     volumes:
       - /opt/adguardhome/work:/opt/adguardhome/work
       - /opt/adguardhome/conf:/opt/adguardhome/conf
-      - /opt/adguardhome/logs:/opt/adguardhome/logs
     environment:
       - TZ=Africa/Nairobi
-      - ADGUARDHOME_LOG_LEVEL=debug
     networks:
       portainer_default:
         ipv4_address: 172.30.0.53
@@ -24,23 +23,62 @@ services:
       options:
         max-file: "10"
         max-size: "10m"
-
-  nginx-proxy-manager:
+	
+services:
+  app:
     image: jc21/nginx-proxy-manager:latest
     container_name: nginx-proxy-manager
     restart: always
     ports:
-      - "80:80"
-      - "81:81"
-      - "443:443"
+      - "80:80"       # HTTP
+      - "81:81"       # Admin interface
+      - "443:443"     # HTTPS
     environment:
-      DB_SQLITE_FILE: "/data/database.sqlite"
+      DB_SQLITE_FILE: "/data/database.sqlite"   # Default database
     volumes:
       - /opt/nginx-proxy-manager/data:/data
       - /opt/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
+      - /opt/nginx-proxy-manager/dark-theme:/app/frontend/assets/css/dark-theme
     networks:
       - portainer_default
 
+services:
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    command:
+      - --cleanup=true
+      - --include-restarting
+      - --interval=86400
+      - --trace
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.docker/config.json:/config.json
+    environment:
+      - DOCKER_CONFIG=/config.json
+    networks:
+      - portainer_default
+
+services:
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    command:
+      - --cleanup=true
+      - --include-restarting
+      - --interval=86400
+      - --trace
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/.docker/config.json:/config.json
+    environment:
+      - DOCKER_CONFIG=/config.json
+    networks:
+      - portainer_default
+
+services:
   samsung-tvplus:
     image: matthuisman/samsung-tvplus-for-channels
     container_name: samsung-tvplus
@@ -52,36 +90,12 @@ services:
       - "8182:80"
     networks:
       - portainer_default
-      
-  jellyfin:
-    image: jellyfin/jellyfin:latest
-    container_name: jellyfin
-    restart: unless-stopped
-    ports:
-      - "8096:8096"
-    volumes:
-      - /opt/jellyfin/config:/config
-      - /opt/jellyfin/cache:/cache
-      - /opt/jellyfin/media:/media
-    environment:
-      - TZ=Africa/Nairobi
-      - JELLYFIN_PublishedServerUrl= #url
-    networks:
-      - portainer_default
-
-  watchtower:
-    image: containrrr/watchtower
-    container_name: watchtower
-    command:
-      - --cleanup=true
-      - --interval=21600
-      - --log-level=debug
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - portainer_default
-
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "3"
+        max-size: "10m"
+		
 networks:
   portainer_default:
     external: true
