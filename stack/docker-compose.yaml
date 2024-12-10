@@ -23,7 +23,7 @@ services:
       options:
         max-file: "10"
         max-size: "10m"
-	
+
 services:
   app:
     image: jc21/nginx-proxy-manager:latest
@@ -95,7 +95,7 @@ services:
       options:
         max-file: "3"
         max-size: "10m"
-		
+
 networks:
   portainer_default:
     external: true
