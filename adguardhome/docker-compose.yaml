@@ -6,6 +6,7 @@ services:
     ports:
       - "53:53/tcp"
       - "53:53/udp"
+      - "853:853/tcp"
       - "8180:80/tcp"
       - "8443:443/tcp"
       - "3000:3000/tcp"
@@ -22,15 +23,6 @@ services:
       options:
         max-file: "10"
         max-size: "10m"
-    healthcheck:
-      test: ["CMD", "wget", "--spider", "http://localhost:80"]
-      interval: 1m
-      timeout: 30s
-      retries: 3
-      start_period: 1m
-
-volumes:
-  adguard_data:
 
 networks:
   portainer_default:
