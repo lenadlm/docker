@@ -11,6 +11,7 @@ services:
       - /opt/xteve/:/etc/xteve
       - /opt/xteve/config/:/etc/xteve/config
       - /opt/xteve/backups/:/etc/xteve/backups
+    user: "1001:1001"
     networks:
       - portainer_default
     logging:
@@ -24,14 +25,7 @@ services:
           memory: "512M"
         reservations:
           memory: "256M"
-    user: "1001:1001"
-    healthcheck:
-      test: ["CMD", "wget", "--spider", "http://localhost:34400"]
-      interval: 1m
-      timeout: 30s
-      retries: 3
-      start_period: 2m
-
+          
 networks:
   portainer_default:
     external: true
