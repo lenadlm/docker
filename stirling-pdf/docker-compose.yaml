@@ -1,0 +1,21 @@
+services:
+  stirling:
+    image: ghcr.io/stirlingstaging/stirling:latest
+    container_name: stirling
+    ports:
+      - "9080:9080"
+    environment:
+      STIRLING_ADMIN_USERNAME: admin
+      STIRLING_ADMIN_PASSWORD: changeme
+      STIRLING_MEDIA_PATH: /media
+      STIRLING_LOG_LEVEL: info
+    volumes:
+      - /opt/stirling/media:/media:ro
+      - /opt/stirling/config:/config
+    restart: unless-stopped
+    networks:
+      - portainer_default
+
+networks:
+  portainer_default:
+    external: true
