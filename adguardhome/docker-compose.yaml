@@ -1,27 +1,8 @@
 services:
-  netbird:
-    image: netbirdio/netbird:latest
-    container_name: netbird
-    ports:
-      - "51820:51820/udp" # WireGuard port
-    environment:
-      - NETBIRD_CONFIG=/etc/netbird/config
-      - NETBIRD_AUTH_TOKEN=<your-auth-token>
-    volumes:
-      - /opt/netbird/config:/etc/netbird
-    networks:
-      network:
-        ipv4_address: 172.20.0.2 # Fixed IP for NetBird container
-    cap_add:
-      - NET_ADMIN
-      - SYS_MODULE
-    sysctls:
-      net.ipv4.conf.all.src_valid_mark: "1" # Necessary for WireGuard
-    restart: unless-stopped
-
-  adguard:
+  adguardhome:
     image: adguard/adguardhome:latest
-    container_name: adguard
+    container_name: adguardhome
+    restart: unless-stopped
     ports:
       - "53:53/tcp"
       - "53:53/udp"
@@ -30,19 +11,19 @@ services:
       - "8443:443/tcp"
       - "3000:3000/tcp"
     volumes:
-      - /opt/adguard/work:/opt/adguardhome/work
-      - /opt/adguard/conf:/opt/adguardhome/conf
+      - /opt/adguardhome/work:/opt/adguardhome/work
+      - /opt/adguardhome/conf:/opt/adguardhome/conf
     environment:
       - TZ=Africa/Nairobi
     networks:
-      network:
-        ipv4_address: 172.20.0.53 # Fixed IP for AdGuard container
-    restart: unless-stopped
+      portainer_default:
+        ipv4_address: 172.30.0.53
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "10"
+        max-size: "10m"
 
 networks:
-  network:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.20.0.0/24
-          gateway: 172.20.0.1
+  portainer_default:
+    external: true
