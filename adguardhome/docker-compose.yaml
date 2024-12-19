@@ -6,6 +6,7 @@ services:
       - "51820:51820/udp" # WireGuard port
     environment:
       - NETBIRD_CONFIG=/etc/netbird/config
+      - NETBIRD_AUTH_TOKEN=<your-auth-token>
     volumes:
       - /opt/netbird/config:/etc/netbird
     networks:
