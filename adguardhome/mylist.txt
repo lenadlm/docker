@@ -6,7 +6,6 @@
 @@||facebook.com^$important
 @@||tiktok.com^$important
 @@||tiktokcdn.com^$important
-@@||tiktokv.com^$important
 @@||lgtvsdp.com^$important
 @@||livescore.com^$important
 @@||ttwstatic.com^$important
