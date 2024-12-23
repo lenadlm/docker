@@ -1,17 +1,19 @@
 services:
   stirling:
-    image: ghcr.io/stirlingstaging/stirling:latest
-    container_name: stirling
+    image: frooodle/s-pdf:latest
+    container_name: stirling-pdf
     ports:
-      - "9080:9080"
+      - "9080:8080"
     environment:
-      STIRLING_ADMIN_USERNAME: admin
-      STIRLING_ADMIN_PASSWORD: changeme
-      STIRLING_MEDIA_PATH: /media
-      STIRLING_LOG_LEVEL: info
+      - TZ=Africa/Nairobi
+      - SECURITY_ENABLE_LOGIN=true
+      - DOCKER_ENABLE_SECURITY=true
+      - SECURITY_INITIALLOGIN_USERNAME=<username>
+      - SECURITY_INITIALLOGIN_PASSWORD=<password>
     volumes:
       - /opt/stirling/media:/media:ro
       - /opt/stirling/config:/config
+      - /opt/stirling/data:/usr/share/tessdata
     restart: unless-stopped
     networks:
       - portainer_default
