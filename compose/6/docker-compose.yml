@@ -1,0 +1,23 @@
+services:
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    command:
+      - --cleanup=true
+      - --include-restarting
+      - --interval=10800
+      - --trace
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /mnt/d/data/docker/watchtower/config.json:/config.json
+    environment:
+      - DOCKER_CONFIG=/config.json
+    networks:
+      - portainer_default
+    dns:
+      - 172.30.0.53
+
+networks:
+  portainer_default:
+    external: true
