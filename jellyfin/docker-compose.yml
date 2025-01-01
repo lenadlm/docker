@@ -16,6 +16,10 @@ services:
       - portainer_default  # Use the existing portainer_default network
     dns:
       - 172.30.0.53
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "5"
 
 networks:
   portainer_default:
