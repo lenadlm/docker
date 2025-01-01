@@ -1,0 +1,30 @@
+services:
+  kali-linux:
+    image: lscr.io/linuxserver/kali-linux:latest
+    container_name: kali-linux
+    security_opt:
+      - seccomp:unconfined # Disables seccomp for extended permissions
+    environment:
+      - PUID=1000          # User ID for file permissions
+      - PGID=1000          # Group ID for file permissions
+      - TZ=Africa/Nairobi  # Sets container's timezone
+      - SUBFOLDER=/        # Optional: Subfolder for web server (if any)
+      - TITLE=Kali Linux   # Optional: Custom title for logs/UI
+    volumes:
+      - /mnt/d/data/docker/kali-linux/data:/config         # Persistent storage for container config
+      - /var/run/docker.sock:/var/run/docker.sock # Optional: Access to Docker socket
+    ports:
+      - 3000:3000          # Maps host port 3000 to container port 3000
+      - 3001:3001          # Maps host port 3001 to container port 3001
+    devices:
+      - /dev/dri:/dev/dri  # Optional: Shares GPU for hardware acceleration
+    shm_size: "1gb"        # Optional: Sets shared memory for better performance
+    restart: unless-stopped # Automatically restarts unless manually stopped
+    dns:
+      - 172.30.0.53        # Configures Pi-hole as the DNS resolver
+    networks:
+      - portainer_default  # Attaches the container to the external network
+
+networks:
+  portainer_default:
+    external: true         # Uses the pre-existing Docker network

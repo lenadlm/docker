@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  plex:
+    image: lscr.io/linuxserver/plex:latest  # Updated image
+    container_name: plex
+    restart: unless-stopped
+    networks:
+      - portainer_default  # Use the existing portainer_default network
+    dns:
+      - 172.30.0.53 # Use pi-hole as dns resolver
+    environment:
+      - PUID=1000  # Set your PUID (replace with the correct ID)
+      - PGID=1000  # Set your PGID (replace with the correct ID)
+      - TZ=Africa/Nairobi
+      - VERSION=docker
+    volumes:
+      - /mnt/d/data/docker/plex/config:/config
+      - /mnt/d/data/docker/plex/transcode:/transcode
+      - /mnt/d/data/docker/media:/data
+    ports:
+      - "32400:32400"  # Plex default port for web access
+    privileged: true
+
+networks:
+  portainer_default:
+    external: true  # Tells Docker Compose to use the existing external network
