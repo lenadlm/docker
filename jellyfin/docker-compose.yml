@@ -3,18 +3,19 @@ services:
     image: jellyfin/jellyfin:latest
     container_name: jellyfin
     restart: unless-stopped
-    networks:
-      - portainer_default  # Use the existing portainer_default network
     environment:
-      - PUID=1000  # Set your PUID (replace with the correct ID)
-      - PGID=1000  # Set your PGID (replace with the correct ID)
+      - PUID=1000
+      - PGID=1000
     volumes:
       - /mnt/d/data/docker/jellyfin/config:/config
       - /mnt/d/data/docker/jellyfin/cache:/cache
       - /mnt/d/data/docker/media:/media
     ports:
       - "8096:8096"  # Jellyfin default port
-    user: "1000:1000"  # Ensure this matches your PUID and PGID
+    networks:
+      - portainer_default  # Use the existing portainer_default network
+    dns:
+      - 172.30.0.53
 
 networks:
   portainer_default:
