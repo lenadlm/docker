@@ -13,3 +13,11 @@ services:
     environment:
       - FFMPEG_BIN=/usr/bin/ffmpeg
       - FFPROBE_BIN=/usr/bin/ffprobe
+    networks:
+      - portainer_default
+    dns:
+      - 172.30.0.53
+
+networks:
+  portainer_default:
+    external: true 
