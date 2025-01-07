@@ -1,0 +1,15 @@
+services:
+  server:
+    container_name: stremio_server
+    image: stremio/server:latest
+    ports:
+      - 11470:11470
+      - 12470:12470
+    volumes:
+      - /usr/bin/ffmpeg:/bin/ffmpeg:ro
+      - /usr/bin/ffprobe:/bin/ffprobe:ro
+    networks:
+      - proxy
+    environment:
+      - FFMPEG_BIN=/usr/bin/ffmpeg
+      - FFPROBE_BIN=/usr/bin/ffprobe
