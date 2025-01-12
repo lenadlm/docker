@@ -19,4 +19,5 @@
 ||pac.zscalertwo.net^$important
 ||data.microsoft.com^$important
 ||ads.microsoft.com^$important
-||iqbroker.com^$important
+||iqbroker.com^
+||thesurferprotector.com^
