@@ -1,0 +1,43 @@
+# This is an example torrc file for configuring Tor
+
+# Set the DataDirectory where Tor stores its state
+DataDirectory /var/lib/tor
+
+# Set the SOCKS port that Tor will listen on
+SocksPort 9050
+
+# Set the ORPort for Tor's internal communication (Relay node setting)
+ORPort 9001
+
+# Set the IP address and port for control
+ControlPort 9051
+
+# Enable ControlPort for controlling Tor via a script or application
+# Generate the password using: tor --hash-password <your_password>
+HashedControlPassword 16:B81CD144AD434FD360007650B5DC022E42CDDF038E1FAFCD8C8B732292
+
+# Enable logging to the file log file (optional)
+# Log notice file /var/log/tor/notice.log
+
+# Log notices and errors to standard output (useful for Docker containers)
+Log notice stdout
+
+# Enable Tor's default exit nodes
+ExitNodes {us}
+
+# Disable DNS resolution via Tor
+DisableNetwork 0
+
+# Allow bridges (useful if you're in a censored region)
+UseBridges 1
+
+# Enable an onion service (hidden service)
+# This example creates an onion service that forwards to an internal web server
+HiddenServiceDir /var/lib/tor/hidden_service/
+HiddenServicePort 80 127.0.0.1:8080  # Forward requests to local port 8080
+
+# Set a list of bridge relays to use (example)
+Bridge obfs4 1.2.3.4:5678
+
+# Optionally specify a Tor directory for the Relay node
+# NickName MyRelayNode
