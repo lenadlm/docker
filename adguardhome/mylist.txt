@@ -21,3 +21,4 @@
 ||ads.microsoft.com^$important
 ||iqbroker.com^$important
 ||thesurferprotector.com^$important
+||targetchain-flow.com^$important
