@@ -4,7 +4,7 @@
 DataDirectory /var/lib/tor
 
 # Set the SOCKS port that Tor will listen on
-SocksPort 9050
+SocksPort 0.0.0.0:9050
 
 # Set the ORPort for Tor's internal communication (Relay node setting)
 ORPort 9001
