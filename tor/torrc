@@ -3,23 +3,14 @@
 # SocksPort configuration (restricted to localhost)
 SocksPort 0.0.0.0:9050
 
-# ControlPort with authentication
-ControlPort 9051
+# ControlPort for Tor management, restricted to localhost
+ControlPort 127.0.0.1:9051
 HashedControlPassword 16:B81CD144AD434FD360007650B5DC022E42CDDF038E1FAFCD8C8B732292
-CookieAuthentication 1
+# CookieAuthentication 0
 
 # Logging and data directory
-Log notice file /var/log/tor/notices.log
+Log notice stdout
 DataDirectory /var/lib/tor
-
-# (Optional) Disable UseBridges if set
-# UseBridges 0
 
 # Disable DNS resolution via Tor
 DisableNetwork 0
-
-# Allow bridges (useful if you're in a censored region)
-UseBridges 1
-
-# Optionally specify a Tor directory for the Relay node
-# NickName MyRelayNode
