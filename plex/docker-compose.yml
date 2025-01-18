@@ -3,6 +3,7 @@ services:
   plex:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
+    restart: unless-stopped
     environment:
       - PUID=1000
       - PGID=1000
@@ -13,7 +14,6 @@ services:
       - /d/data/docker/plex/config:/config   # Plex library configuration
       - /d/data/docker/plex/data:/data 
       - /d/data/docker/media:/media
-    restart: unless-stopped
     networks:
       - portainer_default
     dns:
