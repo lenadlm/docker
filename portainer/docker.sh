@@ -49,6 +49,7 @@ docker run -d \
     --name=portainer \
     --restart=always \
     -p 9443:9443 \
+    -p 3000:3000 \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v $PORTAINER_DATA:/data \
     --network=portainer_default \
