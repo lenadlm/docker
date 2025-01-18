@@ -2,19 +2,19 @@ services:
   pihole:
     image: pihole/pihole:latest
     container_name: pihole
-    networks:
-      - portainer_default
+    restart: always
     environment:
       TZ: "Africa/Nairobi"
       WEBPASSWORD: "pihole"
     volumes:
-      - /mnt/d/data/docker/pihole/etc-pihole:/etc/pihole
-      - /mnt/d/data/docker/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
+      - /d/data/docker/pihole/etc-pihole:/etc/pihole
+      - /d/data/docker/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
     ports:
       - "53:53/tcp"
       - "53:53/udp"
       - "80:80"
-    restart: always
+    networks:
+      - portainer_default
     dns:
       - 127.0.0.1
       - 1.1.1.1
