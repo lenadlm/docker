@@ -10,9 +10,9 @@ services:
       - VERSION=docker
       # - PLEX_CLAIM= # Optional, replace with claim token if needed
     volumes:
-      - /mnt/d/data/docker/plex/config:/config   # Plex library configuration
-      - /mnt/d/data/docker/plex/data:/data 
-      - /mnt/d/data/docker/media:/media
+      - /d/data/docker/plex/config:/config   # Plex library configuration
+      - /d/data/docker/plex/data:/data 
+      - /d/data/docker/media:/media
     restart: unless-stopped
     networks:
       - portainer_default
