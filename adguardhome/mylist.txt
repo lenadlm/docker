@@ -22,3 +22,4 @@
 ||iqbroker.com^$important
 ||thesurferprotector.com^$important
 ||targetchain-flow.com^$important
+||iqbroker.com^
