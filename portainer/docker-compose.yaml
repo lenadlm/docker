@@ -11,7 +11,7 @@ services:
     environment:
       - PORTAINER_THEME=dark
     networks:
-      default:
+      portainer_default:
         ipv4_address: 172.30.0.10
     logging:
       driver: "json-file"
@@ -23,8 +23,5 @@ volumes:
   data:
 
 networks:
-  default:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.30.0.0/16
+  portainer_default:
+    external: true
