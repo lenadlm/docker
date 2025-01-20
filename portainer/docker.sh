@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# run
+# Run the script using:
 # chmod +x docker.sh
-# sudo docker.sh
+# sudo ./docker.sh
 
-# Script to install Docker, set up the portainer_default network, and deploy Portainer
+# Script to set up the portainer_default network and deploy Portainer using docker-compose
 set -e
 
 # Ensure the script is being run as root
@@ -33,39 +33,58 @@ apt install -y \
     gnupg \
     lsb-release
 
-# Add Docker's official GPG key and set up the repository
-curl -fsSL https://download.docker.com/linux/$OS/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/$OS $(lsb_release -cs) stable" \
-    | tee /etc/apt/sources.list.d/docker.list > /dev/null
+# Check if Docker is installed, and install if missing
+if ! command -v docker &>/dev/null; then
+    echo "Docker not found. Installing..."
+    curl -fsSL https://download.docker.com/linux/$OS/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/$OS $(lsb_release -cs) stable" \
+        | tee /etc/apt/sources.list.d/docker.list > /dev/null
+    apt update
+    apt install -y docker-ce docker-ce-cli containerd.io
+    systemctl enable docker
+    systemctl start docker
+else
+    echo "Docker is already installed. Skipping installation."
+fi
 
-# Install Docker Engine and Docker Compose
-apt update
-apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+# Check if Docker Compose is installed, and install if missing
+if ! command -v docker-compose &>/dev/null; then
+    echo "Docker Compose not found. Installing..."
+    apt install -y docker-compose-plugin
+else
+    echo "Docker Compose is already installed. Skipping installation."
+fi
 
-# Enable and start Docker service
-systemctl enable docker
-systemctl start docker
+# Create the portainer_default Docker network with a custom gateway
+docker network create \
+    --driver bridge \
+    --subnet=172.30.0.0/24 \
+    --gateway=172.30.0.1 \
+    portainer_default || echo "Network 'portainer_default' already exists."
 
-# Create the portainer_default Docker network
-docker network create portainer_default || echo "Network 'portainer_default' already exists."
+# Define variables for deployment
+COMPOSE_FILE_URL="https://raw.githubusercontent.com/lenadlm/docker/main/portainer/docker-compose.yaml"
+COMPOSE_DIR="/opt/portainer"
 
-# Deploy Portainer using Docker
-PORTAINER_DATA="/opt/portainer"
-mkdir -p $PORTAINER_DATA
-docker run -d \
-    --name=portainer \
-    --restart=always \
-    -p 9443:9443 \
-    -p 3000:3000 \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    -v $PORTAINER_DATA:/data \
-    --network=portainer_default \
-    portainer/portainer-ce
+# Check if the URL is accessible
+if ! curl -Isf $COMPOSE_FILE_URL; then
+    echo "The specified URL is not accessible. Please check the link."
+    exit 1
+fi
+
+# Download the docker-compose file to the target directory
+mkdir -p $COMPOSE_DIR
+curl -fsSL $COMPOSE_FILE_URL -o $COMPOSE_DIR/docker-compose.yaml
+
+# Navigate to the compose directory and deploy Portainer
+cd $COMPOSE_DIR
+docker-compose up -d
 
 # Print success message
 cat <<EOF
-Portainer has been successfully installed and is accessible at:
-https://<your_server_ip>:9443
+Portainer has been successfully installed and deployed using Docker Compose.
+The Docker Compose file is located at: $COMPOSE_DIR/docker-compose.yaml
+Access Portainer at: https://<your_server_ip>:9443
 
 Please configure Portainer via the web interface.
 EOF
