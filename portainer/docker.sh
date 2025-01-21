@@ -4,7 +4,7 @@
 # chmod +x docker.sh
 # sudo ./docker.sh
 
-# Script to set up the portainer_default network and deploy Portainer using the new "docker compose"
+# Script to set up the portainer_default network and deploy Portainer using Docker Compose
 set -e
 
 # Ensure the script is being run as root
@@ -34,13 +34,22 @@ apt install -y \
     gnupg \
     lsb-release
 
-# Check if Docker is installed, and install if missing
+# Install Docker if not installed
 if ! command -v docker &>/dev/null; then
     echo "Docker not found. Installing..."
+
+    # Add Docker GPG key
+    echo "Adding Docker GPG key..."
     curl -fsSL https://download.docker.com/linux/$OS/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg || {
-        echo "Failed to fetch Docker GPG key. Check your OS and internet connection."; exit 1; }
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/$OS $(lsb_release -cs) stable" \
-        | tee /etc/apt/sources.list.d/docker.list > /dev/null
+        echo "Failed to fetch Docker GPG key. Exiting."; exit 1; }
+
+    # Add Docker repository
+    echo "Adding Docker repository..."
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \
+https://download.docker.com/linux/$OS $(lsb_release -cs) stable" | \
+    tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+    # Update package list and install Docker
     apt update
     apt install -y docker-ce docker-ce-cli containerd.io
     systemctl enable docker
@@ -49,7 +58,7 @@ else
     echo "Docker is already installed. Skipping installation."
 fi
 
-# Check if Docker Compose (plugin version) is installed, and install if missing
+# Install Docker Compose plugin if not installed
 if ! docker compose version &>/dev/null; then
     echo "Docker Compose (plugin) not found. Installing..."
     apt install -y docker-compose-plugin
@@ -85,7 +94,7 @@ echo "Downloading Docker Compose file..."
 mkdir -p $COMPOSE_DIR
 curl -fsSL $COMPOSE_FILE_URL -o $COMPOSE_DIR/docker-compose.yaml
 
-# Navigate to the compose directory and deploy Portainer using the new "docker compose"
+# Navigate to the compose directory and deploy Portainer using Docker Compose
 echo "Deploying Portainer using Docker Compose..."
 cd $COMPOSE_DIR
 docker compose up -d
