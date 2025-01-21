@@ -13,18 +13,19 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
-# Check if the operating system is Debian, Ubuntu, or Raspbian
-OS=$(lsb_release -is 2>/dev/null || echo "Unknown")
-if [[ $OS == "Raspbian" ]]; then
-    OS="debian"  # Raspbian uses Debian packages
+# Detect the operating system and adjust for Raspbian
+OS=$(lsb_release -is 2>/dev/null | tr '[:upper:]' '[:lower:]' || echo "unknown")
+if [[ $OS == "raspbian" ]]; then
+    OS="debian"  # Treat Raspbian as Debian for compatibility
 fi
 
-if [[ ! $OS =~ ^(Debian|Ubuntu|debian)$ ]]; then
+if [[ ! $OS =~ ^(debian|ubuntu)$ ]]; then
     echo "This script only supports Debian, Ubuntu, or Raspbian."
     exit 1
 fi
 
 # Update and install prerequisites
+echo "Updating system and installing prerequisites..."
 apt update && apt upgrade -y
 apt install -y \
     apt-transport-https \
@@ -36,7 +37,8 @@ apt install -y \
 # Check if Docker is installed, and install if missing
 if ! command -v docker &>/dev/null; then
     echo "Docker not found. Installing..."
-    curl -fsSL https://download.docker.com/linux/$OS/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    curl -fsSL https://download.docker.com/linux/$OS/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg || {
+        echo "Failed to fetch Docker GPG key. Check your OS and internet connection."; exit 1; }
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/$OS $(lsb_release -cs) stable" \
         | tee /etc/apt/sources.list.d/docker.list > /dev/null
     apt update
@@ -56,35 +58,44 @@ else
 fi
 
 # Create the portainer_default Docker network with a custom gateway
-docker network create \
-    --driver bridge \
-    --subnet=172.30.0.0/24 \
-    --gateway=172.30.0.1 \
-    portainer_default || echo "Network 'portainer_default' already exists."
+if ! docker network inspect portainer_default >/dev/null 2>&1; then
+    echo "Creating the portainer_default Docker network..."
+    docker network create \
+        --driver bridge \
+        --subnet=172.30.0.0/24 \
+        --gateway=172.30.0.1 \
+        portainer_default
+else
+    echo "Network 'portainer_default' already exists. Skipping creation."
+fi
 
 # Define variables for deployment
 COMPOSE_FILE_URL="https://raw.githubusercontent.com/lenadlm/docker/main/portainer/docker-compose.yaml"
 COMPOSE_DIR="/opt/docker/portainer"
 
 # Check if the URL is accessible
+echo "Validating Docker Compose file URL..."
 if ! curl -Isf $COMPOSE_FILE_URL; then
-    echo "The specified URL is not accessible. Please check the link."
+    echo "The specified URL is not accessible: $COMPOSE_FILE_URL"
     exit 1
 fi
 
 # Download the docker-compose file to the target directory
+echo "Downloading Docker Compose file..."
 mkdir -p $COMPOSE_DIR
 curl -fsSL $COMPOSE_FILE_URL -o $COMPOSE_DIR/docker-compose.yaml
 
 # Navigate to the compose directory and deploy Portainer using the new "docker compose"
+echo "Deploying Portainer using Docker Compose..."
 cd $COMPOSE_DIR
 docker compose up -d
 
 # Print success message
+SERVER_IP=$(hostname -I | awk '{print $1}')
 cat <<EOF
 Portainer has been successfully installed and deployed using Docker Compose (plugin version).
 The Docker Compose file is located at: $COMPOSE_DIR/docker-compose.yaml
-Access Portainer at: https://<your_server_ip>:9443
+Access Portainer at: https://$SERVER_IP:9443
 
 Please configure Portainer via the web interface.
 EOF
