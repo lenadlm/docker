@@ -1,5 +1,5 @@
 ! Name : mylist
-! Last Modified : 2025-01-12
+! Last Modified : 2025-01-23
 !
 ! -- ALLOWLIST --
 @@||web.facebook.com^$important
