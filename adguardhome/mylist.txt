@@ -9,6 +9,7 @@
 @@||livescore.com^$important
 @@||ttwstatic.com^$important
 @@||truecaller.com^$important
+@@||spotify.com^$important
 !
 ! -- BLOCKLIST --
 ||hlag.com^$important
