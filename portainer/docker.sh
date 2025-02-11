@@ -73,6 +73,8 @@ if ! docker network inspect portainer_default >/dev/null 2>&1; then
         --driver bridge \
         --subnet=172.30.0.0/24 \
         --gateway=172.30.0.1 \
+        --ip-range=172.30.0.2/25 \
+        --attachable \
         portainer_default
 else
     echo "Network 'portainer_default' already exists. Skipping creation."
