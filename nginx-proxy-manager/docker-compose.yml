@@ -12,7 +12,6 @@ services:
     volumes:
       - /opt/nginx-proxy-manager/data:/data
       - /opt/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
-      - /opt/nginx-proxy-manager/dark-theme:/app/frontend/assets/css/dark-theme
     networks:
       - portainer_default
 
