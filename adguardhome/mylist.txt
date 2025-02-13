@@ -21,9 +21,8 @@
 ||pac.zscalertwo.net^$important
 ||data.microsoft.com^$important
 ||ads.microsoft.com^$important
-||iqbroker.com^$important
-||thesurferprotector.com^$important
-||targetchain-flow.com^$important
+||thesurferprotector.com^
+||targetchain-flow.com^
 ||iqbroker.com^
 ||pukabolomen.shop^
 ||toptitaniumapp.monster^
