@@ -10,7 +10,7 @@
 @@||ttwstatic.com^$important
 @@||truecaller.com^$important
 @@||spotify.com^$important
-@@||lg-app.dstv.com^$important
+@@||lg-app.dstv.com^
 !
 ! -- BLOCKLIST --
 ||hlag.com^$important
