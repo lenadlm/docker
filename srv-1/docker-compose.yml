@@ -1,4 +1,5 @@
 services:
+
   adguardhome:
     image: adguard/adguardhome:latest
     container_name: adguardhome
@@ -29,7 +30,6 @@ services:
           cpus: "1.0"
           memory: "512M"
 
-services:
   docker-socket-proxy:
     image: tecnativa/docker-socket-proxy:latest
     container_name: docker-socket-proxy
@@ -68,7 +68,6 @@ services:
         max-size: "5m"
         max-file: "3"
 
-services:
   dozzle:
     container_name: dozzle
     image: amir20/dozzle:latest
@@ -94,7 +93,6 @@ services:
           cpus: "0.50"
           memory: "256M"
 
-services:
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
@@ -108,7 +106,6 @@ services:
     volumes:
       - /opt/homepage/config:/app/config
 
-services:
   nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:latest
     container_name: nginx-proxy-manager
@@ -127,7 +124,6 @@ services:
       - /opt/nginx-proxy-manager/data:/data
       - /opt/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
 
-services:
   samsung-tvplus:
     image: matthuisman/samsung-tvplus-for-channels
     container_name: samsung-tvplus
@@ -140,7 +136,6 @@ services:
     networks:
       - portainer_default
 
-services:
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
