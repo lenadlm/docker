@@ -1,0 +1,30 @@
+! Name : mylist
+! Last Modified : 2025-01-23
+!
+! -- ALLOWLIST --
+@@||web.facebook.com^$important
+@@||facebook.com^$important
+@@||tiktok.com^$important
+@@||tiktokcdn.com^$important
+@@||livescore.com^$important
+@@||ttwstatic.com^$important
+@@||truecaller.com^$important
+@@||spotify.com^$important
+@@||lg-app.dstv.com^
+!
+! -- BLOCKLIST --
+||hlag.com^$important
+||hl.lan^$important
+||zscaler.com^$important
+||zscaler.net^$important
+||zscalertwo.net^$important
+||pac.zscalertwo.net^$important
+||data.microsoft.com^$important
+||ads.microsoft.com^$important
+||thesurferprotector.com^
+||targetchain-flow.com^
+||iqbroker.com^
+||pukabolomen.shop^
+||toptitaniumapp.monster^
+||gi.discusteleost.top^
+||1xbet.co.ke^
