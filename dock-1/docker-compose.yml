@@ -76,12 +76,10 @@ services:
           cpus: "1.0"
           memory: 200M
 
-
 networks:
   portainer_default:
     external: true
-
-
+\
 services:
   duckdns:
     image: lscr.io/linuxserver/duckdns:latest
