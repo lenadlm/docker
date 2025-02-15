@@ -76,10 +76,57 @@ services:
           cpus: "1.0"
           memory: 200M
 
+services:
+  pihole:
+    image: pihole/pihole:latest
+    container_name: pihole
+    networks:
+      portainer_default:
+        ipv4_address: 172.30.0.53
+    environment:
+      - TZ=Africa/Nairobi
+      - WEBPASSWORD=${WEBPASSORD}
+    volumes:
+      - /d/data/docker/pihole/etc-pihole:/etc/pihole
+      - /d/data/docker/pihole/etc-dnsmasq:/etc/dnsmasq.d
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "80:80"
+    restart: always
+    dns:
+      - 45.90.28.166
+      - 45.90.30.166
+    cap_add:
+      - NET_ADMIN
+
+services:
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+      - VERSION=docker
+      - PLEX_CLAIM=${PLEX_CLAIM}
+    ports:
+      - "32400:32400"
+    networks:
+      - portainer_default
+    dns:
+      - 172.30.0.53
+    volumes:
+      - /d/data/docker/plex/config:/config
+      - /d/data/docker/plex/data:/data
+      - /d/data/docker/plex/transcode:/transcode
+      - /d/data/media:/media
+   
 networks:
   portainer_default:
     external: true
-\
+
 services:
   duckdns:
     image: lscr.io/linuxserver/duckdns:latest
