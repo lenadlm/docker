@@ -2,12 +2,12 @@ services:
   tor:
     container_name: tor
     image: lenadlm/tor:latest
+    restart: always
     ports:
       - "9050:9050"
       - "9051:9051"
     volumes:
       - /d/data/docker/tor/torrc:/etc/tor/torrc
-    restart: always
     networks:
       - portainer_default
   
