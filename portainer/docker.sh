@@ -73,7 +73,6 @@ if ! docker network inspect portainer_default >/dev/null 2>&1; then
         --driver bridge \
         --subnet=172.30.0.0/24 \
         --gateway=172.30.0.1 \
-        --ip-range=172.30.0.2/25 \
         --attachable \
         portainer_default
 else
@@ -105,7 +104,7 @@ docker compose up -d
 SERVER_IP=$(hostname -I | awk '{print $1}')
 cat <<EOF
 Portainer has been successfully installed and deployed using Docker Compose (plugin version).
-The Docker Compose file is located at: $COMPOSE_DIR/docker-compose.yaml
+The Docker Compose file is located at: $COMPOSE_DIR/docker-compose.yml
 Access Portainer at: https://$SERVER_IP:9443
 
 Please configure Portainer via the web interface.
