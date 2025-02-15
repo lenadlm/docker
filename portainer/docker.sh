@@ -94,7 +94,7 @@ fi
 # Download the docker-compose file to the target directory
 echo "Downloading Docker Compose file..."
 mkdir -p $COMPOSE_DIR
-curl -fsSL $COMPOSE_FILE_URL -o $COMPOSE_DIR/docker-compose.yaml
+curl -fsSL $COMPOSE_FILE_URL -o $COMPOSE_DIR/docker-compose.yml
 
 # Navigate to the compose directory and deploy Portainer using Docker Compose
 echo "Deploying Portainer using Docker Compose..."
