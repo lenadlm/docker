@@ -122,7 +122,76 @@ services:
       - /d/data/docker/plex/data:/data
       - /d/data/docker/plex/transcode:/transcode
       - /d/data/media:/media
-   
+
+services:
+  samsung-tvplus:
+    image: matthuisman/samsung-tvplus-for-channels
+    container_name: samsung-tvplus
+    restart: unless-stopped
+    environment:
+      - REGIONS=ca|gb|us
+      - TZ=Africa/Nairobi
+    ports:
+      - "8182:80"
+    networks:
+      - portainer_default
+    dns:
+      - 172.30.0.53
+
+services:
+  tor:
+    container_name: tor
+    image: lenadlm/tor:latest
+    restart: always
+    networks:
+      - portainer_default
+    ports:
+      - "9050:9050"
+      - "9051:9051"
+    volumes:
+      - /d/data/docker/tor/torrc:/etc/tor/torrc
+
+services:
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    command:
+      - --cleanup=true
+      - --include-restarting
+      - --interval=10800
+      - --trace
+    restart: always
+    networks:
+      - portainer_default
+    dns:
+      - 172.30.0.53
+    environment:
+      - DOCKER_HOST=tcp://docker-socket-proxy:2375
+      - TZ=Africa/Nairobi
+
+services:
+  xteve:
+    image: tinyserve/xteve:latest
+    container_name: xteve
+    restart: unless-stopped
+    privileged: true
+    environment:
+      - TZ=Africa/Nairobi
+    networks:
+      - portainer_default
+    dns:
+      - 172.30.0.53
+    ports:
+      - "34400:34400"
+    volumes:
+      - /d/data/docker/xteve/config:/etc/xteve/config
+      - /opt/docker/xteve/backups:/etc/xteve/backups
+      - /opt/docker/xteve/logs:/etc/xteve/logs
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "5"
+
 networks:
   portainer_default:
     external: true
