@@ -82,7 +82,7 @@ services:
         ipv4_address: 172.30.0.53
     environment:
       - TZ=Africa/Nairobi
-      - WEBPASSWORD=${WEBPASSORD}
+      - WEBPASSWORD=${WEBPASSWORD}
     volumes:
       - /d/data/docker/pihole/etc-pihole:/etc/pihole
       - /d/data/docker/pihole/etc-dnsmasq:/etc/dnsmasq.d
@@ -133,18 +133,6 @@ services:
     dns:
       - 172.30.0.53
 
-  tor:
-    container_name: tor
-    image: lenadlm/tor:latest
-    restart: always
-    networks:
-      - portainer_default
-    ports:
-      - "9050:9050"
-      - "9051:9051"
-    volumes:
-      - /d/data/docker/tor/torrc:/etc/tor/torrc
-
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
@@ -184,10 +172,6 @@ services:
         max-size: "10m"
         max-file: "5"
 
-networks:
-  portainer_default:
-    external: true
-
   duckdns:
     image: lscr.io/linuxserver/duckdns:latest
     container_name: duckdns
@@ -203,3 +187,7 @@ networks:
       - LOG_FILE=true
     volumes:
       - /d/data/docker/duckdns/config:/config
+
+networks:
+  portainer_default:
+    external: true
