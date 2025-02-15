@@ -1,34 +1,18 @@
-# Tor Configuration File
+# Use Alpine as the base image
+FROM alpine:latest
 
-# SocksPort configuration (restricted to localhost)
-SocksPort 0.0.0.0:9050
+# Install Tor
+RUN apk update && apk add --no-cache tor
 
-# ControlPort for Tor management, restricted to localhost
-ControlPort 127.0.0.1:9051
-HashedControlPassword 16:B81CD144AD434FD360007650B5DC022E42CDDF038E1FAFCD8C8B732292
-# CookieAuthentication 0
+# Copy torrc from the build directory into the container
+COPY torrc /etc/tor/torrc
 
-# Logging and data directory
-Log notice stdout
-DataDirectory /var/lib/tor
+# Ensure the torrc file is owned by the Tor user
+RUN chown -R tor /etc/tor
 
-# Disable DNS resolution via Tor (keep as 0 to allow Tor's internal DNS resolution for .onion)
-DisableNetwork 0
+# Switch to the Tor user
+USER tor
 
-# Optional: Ensure Tor handles hidden services correctly
-# (This is already enabled by default, but including here for clarity)
-HiddenServiceDir /var/lib/tor/hidden_service/
-HiddenServicePort 80 127.0.0.1:80
-
-# Optionally, configure bandwidth (not required, but helpful for optimal use)
-BandwidthRate 100 KB
-BandwidthBurst 200 KB
-
-# Ensure DNS requests go through Tor and not your ISP
-# UseBridges 1  # Uncomment this if you need to use Tor bridges
-
-# Exit node restrictions (optional)
-# ExitNodes {us}  # Uncomment this to limit exit nodes to a specific country
-
-# If you want to route traffic through specific nodes (e.g., only use Tor as a client)
-StrictNodes 0
+# Set the entrypoint and default command
+ENTRYPOINT ["tor"]
+CMD ["-f", "/etc/tor/torrc"]
