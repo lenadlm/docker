@@ -12,5 +12,23 @@ HashedControlPassword 16:B81CD144AD434FD360007650B5DC022E42CDDF038E1FAFCD8C8B732
 Log notice stdout
 DataDirectory /var/lib/tor
 
-# Disable DNS resolution via Tor
+# Disable DNS resolution via Tor (keep as 0 to allow Tor's internal DNS resolution for .onion)
 DisableNetwork 0
+
+# Optional: Ensure Tor handles hidden services correctly
+# (This is already enabled by default, but including here for clarity)
+HiddenServiceDir /var/lib/tor/hidden_service/
+HiddenServicePort 80 127.0.0.1:80
+
+# Optionally, configure bandwidth (not required, but helpful for optimal use)
+BandwidthRate 100 KB
+BandwidthBurst 200 KB
+
+# Ensure DNS requests go through Tor and not your ISP
+# UseBridges 1  # Uncomment this if you need to use Tor bridges
+
+# Exit node restrictions (optional)
+# ExitNodes {us}  # Uncomment this to limit exit nodes to a specific country
+
+# If you want to route traffic through specific nodes (e.g., only use Tor as a client)
+StrictNodes 0
