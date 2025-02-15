@@ -1,0 +1,163 @@
+services:
+  adguardhome:
+    image: adguard/adguardhome:latest
+    container_name: adguardhome
+    restart: always
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "853:853/tcp"
+      - "853:853/udp"
+      - "8180:80/tcp"
+      - "8443:443/tcp"
+    volumes:
+      - /opt/adguardhome/work:/opt/adguardhome/work
+      - /opt/adguardhome/conf:/opt/adguardhome/conf
+    environment:
+      - TZ=Africa/Nairobi
+    networks:
+      portainer_default:
+        ipv4_address: 172.30.0.53
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "5m"
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "512M"
+
+services:
+  docker-socket-proxy:
+    image: tecnativa/docker-socket-proxy:latest
+    container_name: docker-socket-proxy
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      CONTAINERS: 1
+      IMAGES: 1
+      NETWORKS: 1
+      SERVICES: 1
+      TASKS: 1
+      INFO: 1
+      VERSION: 1
+      EXEC: 1
+      SYSTEM: 1
+      POST: 1
+      GET: 1
+      TZ: "Africa/Nairobi"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      portainer_default:
+        ipv4_address: 172.30.0.30
+    ports:
+      - "127.0.0.1:2375:2375"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: "256M"
+          pids: 50
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "3"
+
+services:
+  dozzle:
+    container_name: dozzle
+    image: amir20/dozzle:latest
+    restart: unless-stopped
+    environment:
+      DOCKER_HOST: tcp://docker-socket-proxy:2375
+    ports:
+      - "8880:8080"
+    networks:
+      - portainer_default
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: "256M"
+
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    environment:
+      DOCKER_HOST: tcp://docker-socket-proxy:2375
+    ports:
+      - "3001:3000"
+    restart: unless-stopped
+    networks:
+      - portainer_default
+    volumes:
+      - /opt/homepage/config:/app/config
+
+services:
+  nginx-proxy-manager:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: nginx-proxy-manager
+    restart: always
+    ports:
+      - "80:80"
+      - "81:81"
+      - "443:443"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+    networks:
+      - portainer_default
+    volumes:
+      - /opt/nginx-proxy-manager/data:/data
+      - /opt/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
+
+services:
+  samsung-tvplus:
+    image: matthuisman/samsung-tvplus-for-channels
+    container_name: samsung-tvplus
+    restart: unless-stopped
+    environment:
+      - REGIONS=all
+      - TZ=Africa/Nairobi
+    ports:
+      - "8182:80"
+    networks:
+      - portainer_default
+
+services:
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    command:
+      - --cleanup=true
+      - --include-restarting
+      - --interval=86400
+      - --trace
+    environment:
+      TZ: 'Africa/Nairobi'
+      DOCKER_HOST: tcp://docker-socket-proxy:2375
+    networks:
+      - portainer_default
+    volumes:
+      - /home/lenadlm/.docker/config.json:/config.json
+
+networks:
+  portainer_default:
+    external: true
