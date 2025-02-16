@@ -62,7 +62,7 @@ services:
       - PGID=1000
       - TZ=Africa/Nairobi
       - KOMETA_CONFIG=/config/config.yml
-      - KOMETA_TIME=03:00
+      - KOMETA_TIME=06:00
     networks:
       - portainer_default
     dns:
