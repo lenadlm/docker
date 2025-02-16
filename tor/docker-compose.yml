@@ -7,7 +7,7 @@ services:
       - "9050:9050"
       - "9051:9051"
     volumes:
-      - /d/data/docker/tor/torrc:/etc/tor/torrc
+      - /d/data/docker/tor:/etc/tor
     networks:
       - portainer_default
   
