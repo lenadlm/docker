@@ -164,9 +164,7 @@ services:
     ports:
       - "34400:34400"
     volumes:
-      - /d/data/docker/xteve/config:/etc/xteve/config
-      - /d/data/docker/xteve/backup:/etc/xteve/backup
-      - /d/data/docker/xteve/logs:/etc/xteve/logs
+      - /d/data/docker/xteve:/etc/xteve
     logging:
       options:
         max-size: "10m"
