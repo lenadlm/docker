@@ -11,14 +11,14 @@ services:
       - "853:853/udp"
       - "8180:80/tcp"
       - "8443:443/tcp"
-    volumes:
-      - /opt/adguardhome/work:/opt/adguardhome/work
-      - /opt/adguardhome/conf:/opt/adguardhome/conf
     environment:
       - TZ=Africa/Nairobi
     networks:
       portainer_default:
         ipv4_address: 172.30.0.53
+    volumes:
+      - /opt/adguardhome/work:/opt/adguardhome/work
+      - /opt/adguardhome/conf:/opt/adguardhome/conf
     logging:
       driver: "json-file"
       options:
