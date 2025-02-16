@@ -1,0 +1,110 @@
+services:
+
+  mariadb:
+    image: mariadb:latest
+    container_name: kodi-mariadb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: kodi
+      MYSQL_USER: kodi
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - portainer_default
+    dns:
+      - 172.30.0.53
+    volumes:
+      - ${DATADIR}/kodi/mariadb:/var/lib/mysql
+
+  kodi-headless:
+    image: linuxserver/kodi-headless:latest
+    container_name: kodi-headless
+    restart: unless-stopped
+    depends_on:
+      - mariadb
+    networks:
+      - portainer_default
+    dns:
+      - 172.30.0.53
+    environment:
+      - TZ=Africa/Nairobi
+    volumes:
+      - ${DATADIR}/kodi/config:/config
+
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+      - VERSION=docker
+      - PLEX_CLAIM=${PLEX_CLAIM}
+    ports:
+      - "32400:32400"
+    devices:
+      - "/dev/dri:/dev/dri"
+    networks:
+      - portainer_default
+    dns:
+      - 172.30.0.53
+    volumes:
+      - ${DATADIR}/plex/config:/config
+      - /d/data/media:/media
+
+  plex-meta-manager:
+    image: lscr.io/linuxserver/plex-meta-manager:latest
+    container_name: plex-meta-manager
+    restart: unless-stopped
+    environment:
+      - TZ=Africa/Nairobi
+      - PUID=1000
+      - PGID=1000
+      - PMM_CONFIG=/config/config.yml
+      - PMM_TIME=03:00
+      - PMM_RUN=True
+    networks:
+      - portainer_default
+    dns:
+      - 172.30.0.53
+    volumes:
+      - ${DATADIR}/plex/pmm/config:/config
+
+  samsung-tvplus:
+    image: matthuisman/samsung-tvplus-for-channels
+    container_name: samsung-tvplus
+    restart: unless-stopped
+    environment:
+      - REGIONS=ca|gb|us
+      - TZ=Africa/Nairobi
+    ports:
+      - "8182:80"
+    networks:
+      - portainer_default
+    dns:
+      - 172.30.0.53
+
+  xteve:
+    image: tinyserve/xteve:latest
+    container_name: xteve
+    restart: unless-stopped
+    privileged: true
+    environment:
+      - TZ=Africa/Nairobi
+    networks:
+      - portainer_default
+    dns:
+      - 172.30.0.53
+    ports:
+      - "34400:34400"
+    volumes:
+      - ${DATADIR}/xteve:/etc/xteve
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+networks:
+  portainer_default:
+    external: true
