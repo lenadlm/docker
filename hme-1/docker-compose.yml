@@ -84,8 +84,8 @@ services:
       - TZ=Africa/Nairobi
       - WEBPASSWORD=${WEBPASSWORD}
     volumes:
-      - /d/data/docker/pihole/etc-pihole:/etc/pihole
-      - /d/data/docker/pihole/etc-dnsmasq:/etc/dnsmasq.d
+      - /d/data/docker/pihole/pihole:/etc/pihole
+      - /d/data/docker/pihole/dnsmasq.d:/etc/dnsmasq.d
     ports:
       - "53:53/tcp"
       - "53:53/udp"
