@@ -11,6 +11,7 @@
 @@||truecaller.com^$important
 @@||spotify.com^$important
 @@||lg-app.dstv.com^
+@@||docker.com^
 !
 ! -- BLOCKLIST --
 ||hlag.com^$important
