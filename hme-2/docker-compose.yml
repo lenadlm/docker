@@ -53,25 +53,6 @@ services:
       - ${DATADIR}/plex/config:/config
       - /d/data/media:/media
 
-  plex-meta-manager:
-    image: lscr.io/linuxserver/plex-meta-manager:latest
-    container_name: plex-meta-manager
-    restart: unless-stopped
-    environment:
-      - TZ=Africa/Nairobi
-      - PUID=1000
-      - PGID=1000
-      - PMM_CONFIG=/config/config.yml
-      - PMM_TIME=03:00
-      - PMM_RUN=True
-    networks:
-      - portainer_default
-    dns:
-      - 172.30.0.53
-    volumes:
-      - ${DATADIR}/plex/pmm/config:/config
-      - ${DATADIR}/plex/pmm/assets:/config/assets
-
   samsung-tvplus:
     image: matthuisman/samsung-tvplus-for-channels
     container_name: samsung-tvplus
