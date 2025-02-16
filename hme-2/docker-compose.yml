@@ -17,7 +17,7 @@ services:
       - ${DATADIR}/kodi/mariadb:/var/lib/mysql
 
   kodi-headless:
-    image: matthuisman/kodi-headless
+    image: matthuisman/kodi-headless:Matrix
     container_name: kodi-headless
     restart: unless-stopped
     depends_on:
