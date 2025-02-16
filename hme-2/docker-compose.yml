@@ -17,19 +17,31 @@ services:
       - ${DATADIR}/kodi/mariadb:/var/lib/mysql
 
   kodi-headless:
-    image: linuxserver/kodi-headless:latest
+    image: matthuisman/kodi-headless:latest
     container_name: kodi-headless
     restart: unless-stopped
     depends_on:
       - mariadb
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: Africa/Nairobi
+      MYSQL_HOST: mariadb
+      MYSQL_USER: kodi
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: kodi
+    ports:
+      - "8080:8080"
+      - "9090:9090"
+      - "9777:9777/udp"
     networks:
       - portainer_default
     dns:
       - 172.30.0.53
-    environment:
-      - TZ=Africa/Nairobi
+    env_file:
+      - ${DATADIR}/kodi/kodi.env
     volumes:
-      - ${DATADIR}/kodi/config:/config
+      - ${DATADIR}/kodi/config:/config/.kodi
 
   plex:
     image: lscr.io/linuxserver/plex:latest
