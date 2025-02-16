@@ -53,6 +53,23 @@ services:
       - ${DATADIR}/plex/config:/config
       - /d/data/media:/media
 
+  kometa:
+    image: lscr.io/linuxserver/kometa:latest
+    container_name: kometa
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+      - KOMETA_CONFIG=/config/config.yml
+      - KOMETA_TIME=03:00
+    networks:
+      - portainer_default
+    dns:
+      - 172.30.0.53
+    volumes:
+      - ${DATADIR}/plex/kometa/config:/config
+
   samsung-tvplus:
     image: matthuisman/samsung-tvplus-for-channels
     container_name: samsung-tvplus
