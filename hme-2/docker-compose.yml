@@ -70,6 +70,7 @@ services:
       - 172.30.0.53
     volumes:
       - ${DATADIR}/plex/pmm/config:/config
+      - ${DATADIR}/plex/pmm/assets:/config/assets
 
   samsung-tvplus:
     image: matthuisman/samsung-tvplus-for-channels
