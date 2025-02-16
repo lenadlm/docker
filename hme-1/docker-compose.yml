@@ -77,25 +77,25 @@ services:
   pihole:
     image: pihole/pihole:latest
     container_name: pihole
+    restart: always
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "80:80"
     networks:
       portainer_default:
         ipv4_address: 172.30.0.53
+    dns:
+      - 45.90.28.166
+      - 45.90.30.166
+    cap_add:
+      - NET_ADMIN
     environment:
       - TZ=Africa/Nairobi
       - WEBPASSWORD=${WEBPASSWORD}
     volumes:
       - /d/data/docker/pihole/pihole:/etc/pihole
       - /d/data/docker/pihole/dnsmasq.d:/etc/dnsmasq.d
-    ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "80:80"
-    restart: always
-    dns:
-      - 45.90.28.166
-      - 45.90.30.166
-    cap_add:
-      - NET_ADMIN
 
   plex:
     image: lscr.io/linuxserver/plex:latest
@@ -136,12 +136,12 @@ services:
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
+    restart: always
     command:
       - --cleanup=true
       - --include-restarting
       - --interval=10800
       - --trace
-    restart: always
     networks:
       - portainer_default
     dns:
