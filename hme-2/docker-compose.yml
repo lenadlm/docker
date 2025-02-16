@@ -38,8 +38,8 @@ services:
       - portainer_default
     dns:
       - 172.30.0.53
-    env_file:
-      - ${DATADIR}/kodi/kodi.env
+    # env_file:
+      # - ${DATADIR}/kodi/kodi.env
     volumes:
       - ${DATADIR}/kodi/config:/config/.kodi
 
