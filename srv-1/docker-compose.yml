@@ -96,11 +96,11 @@ services:
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
+    restart: unless-stopped
     environment:
       DOCKER_HOST: tcp://docker-socket-proxy:2375
     ports:
       - "3001:3000"
-    restart: unless-stopped
     networks:
       - portainer_default
     volumes:
