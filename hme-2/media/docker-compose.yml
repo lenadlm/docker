@@ -5,7 +5,7 @@ services:
     container_name: kodi-mariadb
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: kodi-root
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: kodi
       MYSQL_USER: kodi
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
