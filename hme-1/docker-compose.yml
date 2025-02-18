@@ -116,7 +116,7 @@ services:
     volumes:
       - ${DATADIR}/homeassistant/config:/config
       - /etc/localtime:/etc/localtime:ro
-      - /run/user/1000/bus:run/dbus:ro
+      - /run/user/1000/bus:/run/dbus:ro
 
   watchtower:
     image: containrrr/watchtower
