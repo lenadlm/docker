@@ -53,7 +53,7 @@ services:
     image: amir20/dozzle:latest
     restart: unless-stopped
     environment:
-      DOCKER_HOST: tcp://docker-socket-proxy:2375
+      - DOCKER_HOST=tcp://docker-socket-proxy:2375
     ports:
       - "8880:8080"
     networks:
@@ -97,6 +97,26 @@ services:
     volumes:
       - ${DATADIR}/pihole/pihole:/etc/pihole
       - ${DATADIR}/pihole/dnsmasq.d:/etc/dnsmasq.d
+
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: homeassistant
+    restart: always
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    network_mode: host
+    environment:
+      - DOCKER_HOST=tcp://docker-socket-proxy:2375
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+   # devices:
+   #   - /dev/ttyUSB0:/dev/ttyUSB0 # Example for Zigbee stick
+    volumes:
+      - ${DATADIR}/homeassistant/config:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:run/dbus:ro
 
   watchtower:
     image: containrrr/watchtower
