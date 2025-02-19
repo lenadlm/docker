@@ -14,8 +14,9 @@ services:
       - "32400:32400"
     devices:
       - "/dev/dri:/dev/dri"
-    portainer_default:
-      ipv4_address: 172.30.0.15
+    networks:
+      portainer_default:
+        ipv4_address: 172.30.0.15
     dns:
       - 172.30.0.53
     volumes:
