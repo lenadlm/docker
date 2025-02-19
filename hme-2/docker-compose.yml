@@ -40,12 +40,32 @@ services:
     volumes:
       - ${DATADIR}/plex/kometa/config:/config
 
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+      - JELLYFIN_PublishedServerUrl=http://192.168.0.50
+    ports:
+      - 8096:8096
+      - 8920:8920
+      - 7359:7359/udp
+      - 1900:1900/udp
+    networks:
+      portainer_default:
+        ipv4_address: 172.30.0.15
+    volumes:
+      - ${DATADIR}/jellyfin/library:/config
+      - /d/data/media:/data
+
   samsung-tvplus:
     image: matthuisman/samsung-tvplus-for-channels
     container_name: samsung-tvplus
     restart: unless-stopped
     environment:
-      - REGIONS=ca|gb|us
       - TZ=Africa/Nairobi
     ports:
       - "8182:80"
