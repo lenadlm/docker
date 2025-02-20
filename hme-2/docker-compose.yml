@@ -16,7 +16,7 @@ services:
       - "/dev/dri:/dev/dri"
     networks:
       portainer_default:
-        ipv4_address: 172.30.0.15
+        ipv4_address: 172.30.0.32
     dns:
       - 172.30.0.53
     volumes:
@@ -48,12 +48,13 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Africa/Nairobi
-      - JELLYFIN_PublishedServerUrl=http://192.168.0.50
+      - JELLYFIN_PublishedServerUrl=http://192.168.0.105
     ports:
       - 8096:8096
-      - 8920:8920
       - 7359:7359/udp
       - 1900:1900/udp
+    devices:
+      - "/dev/dri:/dev/dri"
     networks:
       portainer_default:
         ipv4_address: 172.30.0.15
