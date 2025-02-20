@@ -48,7 +48,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Africa/Nairobi
-      - JELLYFIN_CACHE_DIR=/data/cache
+      - JELLYFIN_CACHE_DIR=/config/cache
       - LIBVA_DRIVER_NAME=iHD
     ports:
       - 8096:8096
@@ -61,8 +61,6 @@ services:
         ipv4_address: 172.30.0.15
     volumes:
       - ${DATADIR}/jellyfin/library:/config
-      - ${DATADIR}/jellyfin/plugins:/config/plugins
-      - ${DATADIR}/jellyfin/cache:/data/cache
       - /d/data/media:/data
 
   samsung-tvplus:
