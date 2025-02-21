@@ -99,19 +99,6 @@ services:
           cpus: "0.50"
           memory: "256M"
 
-  homepage:
-    image: ghcr.io/gethomepage/homepage:latest
-    container_name: homepage
-    restart: unless-stopped
-    environment:
-      DOCKER_HOST: tcp://docker-socket-proxy:2375
-    ports:
-      - "3001:3000"
-    networks:
-      - portainer_default
-    volumes:
-      - /opt/homepage/config:/app/config
-
   nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:latest
     container_name: nginx-proxy-manager
@@ -129,6 +116,19 @@ services:
     volumes:
       - /opt/nginx-proxy-manager/data:/data
       - /opt/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
+
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    restart: unless-stopped
+    environment:
+      DOCKER_HOST: tcp://docker-socket-proxy:2375
+    ports:
+      - "3001:3000"
+    networks:
+      - portainer_default
+    volumes:
+      - /opt/homepage/config:/app/config
 
   samsung-tvplus:
     image: matthuisman/samsung-tvplus-for-channels
