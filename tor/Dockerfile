@@ -1,23 +1,20 @@
-# Use Alpine as the base image
+# Use a specific Alpine version for stability
 FROM alpine:latest
 
-# Create a tor user (if not done already) and setup directories
-RUN adduser -D tor && \
-    mkdir -p /etc/tor && \
-    chown tor:tor /etc/tor
+# Set working directory
+WORKDIR /etc/tor
 
-# Install Tor
-RUN apk add --no-cache tor
+# Create a non-root tor user & install Tor in a single step
+RUN adduser -D -u 1000 tor \
+    && apk add --no-cache tor \
+    && chown -R tor:tor /etc/tor
 
-# Copy torrc from the build directory into the container
-COPY torrc /etc/tor/torrc
+# Copy the tor configuration file
+COPY --chown=tor:tor torrc torrc
 
-# Ensure the torrc file is owned by the Tor user
-RUN chown tor:tor /etc/tor/torrc
-
-# Switch to the Tor user
+# Switch to the tor user for security
 USER tor
 
-# Set the entrypoint and default command
+# Run Tor with the specified configuration
 ENTRYPOINT ["tor"]
 CMD ["-f", "/etc/tor/torrc"]
