@@ -13,13 +13,13 @@ services:
       - "8443:443/tcp"
     environment:
       - TZ=Africa/Nairobi
-    networks:
-      portainer_default:
-        ipv4_address: 172.30.0.53
     cap_add:
       - NET_ADMIN
       - NET_RAW
       - SYS_NICE
+    networks:
+      portainer_default:
+        ipv4_address: 172.30.0.53
     volumes:
       - /opt/adguardhome/work:/opt/adguardhome/work
       - /opt/adguardhome/conf:/opt/adguardhome/conf
