@@ -34,3 +34,6 @@ serveices:
         limits:
           cpus: "1.0"
           memory: "512M"
+networks:
+  portainer_default:
+    external: true
