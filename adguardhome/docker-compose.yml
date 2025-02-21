@@ -1,4 +1,4 @@
-serveices:
+services:
   adguardhome:
     image: adguard/adguardhome:latest
     container_name: adguardhome
