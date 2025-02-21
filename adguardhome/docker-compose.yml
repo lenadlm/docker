@@ -6,8 +6,6 @@ serveices:
     ports:
       - "53:53/tcp"
       - "53:53/udp"
-      - "853:853/tcp"
-      - "853:853/udp"
       - "8180:80/tcp"
       - "8443:443/tcp"
     environment:
