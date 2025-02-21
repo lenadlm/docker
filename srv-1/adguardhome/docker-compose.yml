@@ -7,18 +7,19 @@ services:
       - "53:53/tcp"
       - "53:53/udp"
       - "8180:80/tcp"
-      - "8443:443/tcp"
     environment:
       - TZ=Africa/Nairobi
-      - ADGUARD_LOG_LEVEL=trace
       - ADGUARD_VERBOSE=true
     cap_add:
       - NET_ADMIN
       - NET_RAW
-      - SYS_NICE
     networks:
       portainer_default:
         ipv4_address: 172.30.0.53
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+      - 9.9.9.9
     volumes:
       - /opt/adguardhome/work:/opt/adguardhome/work
       - /opt/adguardhome/conf:/opt/adguardhome/conf
@@ -31,7 +32,7 @@ services:
       resources:
         limits:
           cpus: "1.0"
-          memory: "512M"
+          memory: "1024M"
 networks:
   portainer_default:
     external: true
