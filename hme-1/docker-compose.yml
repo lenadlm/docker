@@ -91,8 +91,8 @@ services:
       - 45.90.30.166
     cap_add:
       - NET_ADMIN
-      - CAP_SYS_NICE
-      - CAP_SYS_TIME
+      - SYS_NICE
+      - SYS_TIME
     environment:
       - TZ=Africa/Nairobi
       - WEBPASSWORD=${WEBPASSWORD}
