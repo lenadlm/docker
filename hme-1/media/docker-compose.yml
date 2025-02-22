@@ -64,7 +64,7 @@ services:
       - /d/data/media:/data
 
   filebot:
-    image: jlesage/filebot:latest
+    image: rednoah/filebot:latest
     container_name: filebot
     restart: always
     networks:
@@ -82,7 +82,7 @@ services:
       - /d/data/downloads:/downloads
 
   tdarr:
-    image: haveagitgat/tdarr:latest
+    image: ghcr.io/haveagitgat/tdarr:latest
     container_name: tdarr
     restart: always
     networks:
@@ -102,7 +102,7 @@ services:
       - /d/data/downloads:/downloads
 
   tdarr_node:
-    image: haveagitgat/tdarr_node:latest
+    image: ghcr.io/haveagitgat/tdarr_node:latest
     container_name: tdarr_node
     restart: always
     networks:
