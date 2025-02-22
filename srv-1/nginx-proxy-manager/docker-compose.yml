@@ -1,1 +1,18 @@
-d
+services:
+ nginx-proxy-manager:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: nginx-proxy-manager
+    restart: always
+    ports:
+      - "80:80"
+      - "81:81"
+      - "443:443"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+    networks:
+      - portainer_default
+    volumes:
+      - /opt/nginx-proxy-manager/data:/data
+      - /opt/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
