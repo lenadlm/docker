@@ -94,18 +94,6 @@ services:
     volumes:
       - /opt/homepage/config:/app/config
 
-  samsung-tvplus:
-    image: matthuisman/samsung-tvplus-for-channels
-    container_name: samsung-tvplus
-    restart: unless-stopped
-    environment:
-      - REGIONS=all
-      - TZ=Africa/Nairobi
-    ports:
-      - "8182:80"
-    networks:
-      - portainer_default
-
   code-server:
     image: lscr.io/linuxserver/code-server:latest
     container_name: code-server
@@ -119,8 +107,22 @@ services:
       - PASSWORD=${PASSWORD}
       - SUDO_PASSWORD=${SUDO_PASSWORD}
       - DEFAULT_WORKSPACE=/config/workspace #optional
+    networks:
+      - portainer_default
     volumes:
       - /opt/code-server/config:/config
+
+  samsung-tvplus:
+    image: matthuisman/samsung-tvplus-for-channels
+    container_name: samsung-tvplus
+    restart: unless-stopped
+    environment:
+      - REGIONS=all
+      - TZ=Africa/Nairobi
+    ports:
+      - "8182:80"
+    networks:
+      - portainer_default
 
   watchtower:
     image: containrrr/watchtower
