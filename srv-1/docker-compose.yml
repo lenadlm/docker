@@ -114,8 +114,8 @@ services:
       - --interval=86400
       - --trace
     environment:
-      TZ: 'Africa/Nairobi'
-      DOCKER_HOST: tcp://docker-socket-proxy:2375
+      - DOCKER_HOST=tcp://docker-socket-proxy:2375
+      - TZ=Africa/Nairobi
     networks:
       - portainer_default
     volumes:
