@@ -77,8 +77,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Africa/Nairobi
-      - HASHED_PASSWORD=${HASHED_PASSWORD}
-      - SUDO_PASSWORD_HASH=${SUDO_PASSWORD_HASH}
+      - PASSWORD=${PASSWORD}
+      - SUDO_PASSWORD=${SUDO_PASSWORD}
       - DEFAULT_WORKSPACE=/config/workspace #optional
     networks:
       - portainer_default
