@@ -26,11 +26,6 @@ services:
         ipv4_address: 172.30.0.30
     ports:
       - "127.0.0.1:2375:2375"
-    resources:
-      limits:
-        cpus: "0.50"
-        memory: "256M"
-        pids: 50
     logging:
       driver: "json-file"
       options:
@@ -57,10 +52,6 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    resources:
-      limits:
-        cpus: "0.50"
-        memory: "256M"
 
   nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:latest
