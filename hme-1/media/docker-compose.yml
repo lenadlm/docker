@@ -63,24 +63,6 @@ services:
       - ${DATADIR}/jellyfin/library:/config
       - /d/data/media:/data
 
-  filebot:
-    image: rednoah/filebot:latest
-    container_name: filebot
-    restart: always
-    networks:
-      - portainer_default
-    ports:
-      - "5800:5800" # FileBot Web UI
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Africa/Nairobi
-      - FILEBOT_CMD=/config/scripts/filebot-postprocess.sh
-    volumes:
-      - ${DATADIR}/filebot/config:/config
-      - /d/data/media:/media
-      - /d/data/downloads:/downloads
-
   tdarr:
     image: ghcr.io/haveagitgat/tdarr:latest
     container_name: tdarr
