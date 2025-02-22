@@ -42,7 +42,8 @@ services:
     image: amir20/dozzle:latest
     restart: unless-stopped
     environment:
-      DOCKER_HOST: tcp://docker-socket-proxy:2375
+      - DOCKER_HOST=tcp://docker-socket-proxy:2375
+      - TZ=Africa/Nairobi
     ports:
       - "8880:8080"
     networks:
@@ -84,7 +85,8 @@ services:
     container_name: homepage
     restart: unless-stopped
     environment:
-      DOCKER_HOST: tcp://docker-socket-proxy:2375
+      - DOCKER_HOST=tcp://docker-socket-proxy:2375
+      - TZ=Africa/Nairobi
     ports:
       - "3001:3000"
     networks:
