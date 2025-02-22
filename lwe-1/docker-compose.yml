@@ -1,0 +1,3 @@
+    environment:
+      - DOCKER_HOST=tcp://docker-socket-proxy:2375
+      - TZ=Africa/Nairobi
