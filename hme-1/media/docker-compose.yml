@@ -111,11 +111,13 @@ services:
       - TZ=Africa/Nairobi
       - PUID=1000
       - PGID=1000
+      - serverIP=tdarr
+      - serverPort=8266
     volumes:
       - ${DATADIR}/tdarr/config:/app/config
       - ${DATADIR}/tdarr/server:/app/server
       - ${DATADIR}/tdarr/transcode:/temp
-      - /mnt/d/data/media:/media
+      - /d/data/media:/media
       - /d/data/downloads:/downloads
 
   samsung-tvplus:
