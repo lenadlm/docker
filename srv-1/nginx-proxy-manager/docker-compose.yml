@@ -16,3 +16,7 @@ services:
     volumes:
       - /opt/nginx-proxy-manager/data:/data
       - /opt/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
+
+networks:
+  portainer_default:
+    external: true
