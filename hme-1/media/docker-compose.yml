@@ -63,45 +63,6 @@ services:
       - ${DATADIR}/jellyfin/library:/config
       - /d/data/media:/data
 
-  tdarr:
-    image: ghcr.io/haveagitgat/tdarr:latest
-    container_name: tdarr
-    restart: always
-    networks:
-      - portainer_default
-    ports:
-      - "8265:8265" # Tdarr Web UI
-      - "8266:8266"
-    environment:
-      - TZ=Africa/Nairobi
-      - PUID=1000
-      - PGID=1000
-    volumes:
-      - ${DATADIR}/tdarr/config:/app/config
-      - ${DATADIR}/tdarr/server:/app/server
-      - ${DATADIR}/tdarr/transcode:/temp
-      - /d/data/media:/media
-      - /d/data/downloads:/downloads
-
-  tdarr_node:
-    image: ghcr.io/haveagitgat/tdarr_node:latest
-    container_name: tdarr_node
-    restart: always
-    networks:
-      - portainer_default
-    environment:
-      - TZ=Africa/Nairobi
-      - PUID=1000
-      - PGID=1000
-      - serverIP=tdarr
-      - serverPort=8266
-    volumes:
-      - ${DATADIR}/tdarr/config:/app/config
-      - ${DATADIR}/tdarr/server:/app/server
-      - ${DATADIR}/tdarr/transcode:/temp
-      - /d/data/media:/media
-      - /d/data/downloads:/downloads
-
   samsung-tvplus:
     image: matthuisman/samsung-tvplus-for-channels
     container_name: samsung-tvplus
