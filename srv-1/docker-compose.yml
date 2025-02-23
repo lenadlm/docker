@@ -68,21 +68,25 @@ services:
       - /opt/homepage/config:/app/config
 
   code-server:
-    image: lscr.io/linuxserver/code-server:latest
+    image: lscr.io/linuxserver/code-server:4.96.4-ls254
     container_name: code-server
     restart: unless-stopped
-    ports:
-      - "8443:8443"
     environment:
-      - PUID=1000
+      - PUID=1000 
       - PGID=1000
       - TZ=Africa/Nairobi
       - PASSWORD=${PASSWORD}
       - SUDO_PASSWORD=${SUDO_PASSWORD}
+      - DEFAULT_WORKSPACE=/config/workspace
+      - PROXY_DOMAIN=code.lenadlm.dev # Uncomment if using a reverse proxy
+    ports:
+      - "8580:8443"
     networks:
       - portainer_default
     volumes:
       - /opt/code-server/config:/config
+      - /opt:/array
+
 
   samsung-tvplus:
     image: matthuisman/samsung-tvplus-for-channels
