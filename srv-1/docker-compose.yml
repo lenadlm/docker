@@ -87,7 +87,20 @@ services:
     volumes:
       - /opt/code-server/config:/config
       - /opt:/config/workspace/array
-
+ 
+  gotify:
+    image: ghcr.io/gotify/server:latest
+    container_name: gotify
+    restart: unless-stopped
+    ports:
+      - "82:80"
+    environment:
+      - GOTIFY_ADMIN_USER=${GOTIFY_ADMIN_USER}
+      - GOTIFY_ADMIN_PASS=${GOTIFY_ADMIN_PASS}
+    volumes:
+      - /opt/gotify/data:/app/data
+    networks:
+      - portainer_default
 
   samsung-tvplus:
     image: matthuisman/samsung-tvplus-for-channels
