@@ -79,7 +79,6 @@ services:
       - TZ=Africa/Nairobi
       - PASSWORD=${PASSWORD}
       - SUDO_PASSWORD=${SUDO_PASSWORD}
-      - DEFAULT_WORKSPACE=/config/workspace #optional
     networks:
       - portainer_default
     volumes:
