@@ -85,8 +85,7 @@ services:
       - portainer_default
     volumes:
       - /opt/code-server/config:/config
-      - /opt/code-server/workspace:/workspace
-      - /opt:/workspace/array
+      - /opt:/config/workspace/array
 
 
   samsung-tvplus:
