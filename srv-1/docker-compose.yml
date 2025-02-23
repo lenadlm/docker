@@ -77,7 +77,7 @@ services:
       - TZ=Africa/Nairobi
       - PASSWORD=${PASSWORD}
       - SUDO_PASSWORD=${SUDO_PASSWORD}
-      - DEFAULT_WORKSPACE=/config/workspace
+      - DEFAULT_WORKSPACE=/workspace
       # - PROXY_DOMAIN=code.lenadlm.dev # Uncomment if using a reverse proxy
     ports:
       - "8443:8443"
@@ -85,7 +85,8 @@ services:
       - portainer_default
     volumes:
       - /opt/code-server/config:/config
-      - /opt:/array
+      - /opt/codeserver/workspace:/workspace
+      - /opt:/workspace/array
 
 
   samsung-tvplus:
