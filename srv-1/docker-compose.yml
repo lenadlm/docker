@@ -80,7 +80,7 @@ services:
       - DEFAULT_WORKSPACE=/config/workspace
       # - PROXY_DOMAIN=code.lenadlm.dev # Uncomment if using a reverse proxy
     ports:
-      - "8580:8443"
+      - "8443:8443"
     networks:
       - portainer_default
     volumes:
