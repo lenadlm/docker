@@ -78,7 +78,7 @@ services:
       - PASSWORD=${PASSWORD}
       - SUDO_PASSWORD=${SUDO_PASSWORD}
       - DEFAULT_WORKSPACE=/workspace
-      # - PROXY_DOMAIN=code.lenadlm.dev # Uncomment if using a reverse proxy
+      - PROXY_DOMAIN=code.lenadlm.dev # Uncomment if using a reverse proxy
     ports:
       - "8443:8443"
     networks:
