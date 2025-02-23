@@ -96,8 +96,6 @@ services:
       - "82:80"
     environment:
       - TZ=Africa/Nairobi
-      - GOTIFY_ADMIN_USER=${GOTIFY_ADMIN_USER}
-      - GOTIFY_ADMIN_PASS=${GOTIFY_ADMIN_PASS}
     networks:
       - portainer_default
     volumes:
