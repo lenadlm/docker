@@ -122,17 +122,15 @@ services:
     image: containrrr/watchtower
     container_name: watchtower
     restart: always
-    command:
-      - --cleanup=true
-      - --include-restarting
-      - --interval=86400
-      - --trace
     environment:
       - DOCKER_HOST=tcp://docker-socket-proxy:2375
       - TZ=Africa/Nairobi
-      - WATCHTOWER_CLEANUP=true                                        
+      - WATCHTOWER_TRACE=true
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_POLL_INTERVAL=86400
       - WATCHTOWER_INCLUDE_RESTARTING=true
-      - WATCHTOWER_POLL_INTERVAL=36000 
+      - WATCHTOWER_NOTIFICATION_SKIP_TITLE=True
+      - WATCHTOWER_NOTIFICATION_URL=${WATCHTOWER_NOTIFICATION_URL}
     networks:
       - portainer_default
     volumes:
