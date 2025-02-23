@@ -95,12 +95,13 @@ services:
     ports:
       - "82:80"
     environment:
+      - TZ=Africa/Nairobi
       - GOTIFY_ADMIN_USER=${GOTIFY_ADMIN_USER}
       - GOTIFY_ADMIN_PASS=${GOTIFY_ADMIN_PASS}
-    volumes:
-      - /opt/gotify/data:/app/data
     networks:
       - portainer_default
+    volumes:
+      - /opt/gotify/data:/app/data
 
   samsung-tvplus:
     image: matthuisman/samsung-tvplus-for-channels
