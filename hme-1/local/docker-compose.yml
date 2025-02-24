@@ -100,6 +100,19 @@ services:
       - ${DATADIR}/pihole/pihole:/etc/pihole
       - ${DATADIR}/pihole/dnsmasq.d:/etc/dnsmasq.d
 
+  gotify:
+    image: ghcr.io/gotify/server:latest
+    container_name: gotify
+    restart: unless-stopped
+    ports:
+      - "82:80"
+    environment:
+      - TZ=Africa/Nairobi
+    networks:
+      - portainer_default
+    volumes:
+      - /opt/gotify/data:/app/data
+
   #homeassistant:
   #  image: ghcr.io/home-assistant/home-assistant:stable
   #  container_name: homeassistant
