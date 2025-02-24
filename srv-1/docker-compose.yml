@@ -88,23 +88,18 @@ services:
       - /opt/code-server/config:/config
       - /opt:/config/workspace/array
  
-  ntfy:
-    image: binwiederhier/ntfy
-    container_name: ntfy
-    command:
-      - serve
+  gotify:
+    image: ghcr.io/gotify/server:latest
+    container_name: gotify
     restart: unless-stopped
-    environment:
-      - PUID=1000 
-      - PGID=1000
-      - TZ=Africa/Nairobi
     ports:
-      - 82:80
+      - "82:80"
+    environment:
+      - TZ=Africa/Nairobi
     networks:
       - portainer_default
     volumes:
-      - /opt/ntfy/var/cache:/var/cache
-      - /opt/ntfy/etc/ntfy:/etc/ntfy
+      - /opt/gotify/data:/app/data
 
   samsung-tvplus:
     image: matthuisman/samsung-tvplus-for-channels
