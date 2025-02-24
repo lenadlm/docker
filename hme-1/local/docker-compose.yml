@@ -124,18 +124,20 @@ services:
     image: containrrr/watchtower
     container_name: watchtower
     restart: always
-    command:
-      - --cleanup=true
-      - --include-restarting
-      - --interval=10800
-      - --trace
-    networks:
-      - portainer_default
-    dns:
-      - 172.30.0.53
     environment:
       - DOCKER_HOST=tcp://docker-socket-proxy:2375
       - TZ=Africa/Nairobi
+      - WATCHTOWER_TRACE=true
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_POLL_INTERVAL=10800
+      - WATCHTOWER_INCLUDE_RESTARTING=true
+      - WATCHTOWER_NOTIFICATIONS=gotify 
+      - WATCHTOWER_NOTIFICATION_GOTIFY_URL=${WATCHTOWER_NOTIFICATION_GOTIFY_URL}
+      - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=${WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN}
+    networks:
+      - portainer_default
+    volumes:
+      - /home/lenadlm/.docker/config.json:/config.json
 
 networks:
   portainer_default:
