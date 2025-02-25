@@ -167,8 +167,7 @@ services:
     image: containrrr/watchtower
     container_name: watchtower-gcp01
     restart: always
-    command: >
-      sh -c "watchtower --host $SERVER_URL"
+    entrypoint: ["/watchtower", "--host", "${SERVER_URL}"] 
     environment:
       - TZ=Africa/Nairobi
       - SERVER_URL=${SERVER_URL}
