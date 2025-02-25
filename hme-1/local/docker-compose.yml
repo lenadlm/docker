@@ -89,6 +89,27 @@ services:
       - ${DATADIR}/pihole/pihole:/etc/pihole
       - ${DATADIR}/pihole/dnsmasq.d:/etc/dnsmasq.d
 
+  code-server:
+    image: lscr.io/linuxserver/code-server:4.96.4-ls254
+    container_name: code-server
+    restart: unless-stopped
+    environment:
+      - PUID=1000 
+      - PGID=1000
+      - TZ=Africa/Nairobi
+      - PASSWORD=${PASSWORD}
+      - SUDO_PASSWORD=${SUDO_PASSWORD}
+      - DEFAULT_WORKSPACE=/config/workspace
+      # - PROXY_DOMAIN=code.yourdomain.com # Uncomment if using a reverse proxy
+    ports:
+      - "8443:8443"
+    networks:
+      - portainer_default
+    volumes:
+      - /d/data/docker/code-server/config:/config
+      - /d/data/docker:/array
+
+
   gotify:
     image: ghcr.io/gotify/server:latest
     container_name: gotify
