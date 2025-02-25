@@ -63,11 +63,6 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    deploy:
-      resources:
-        limits:
-          cpus: "1.0"
-          memory: 200M
 
   pihole:
     image: pihole/pihole:latest
