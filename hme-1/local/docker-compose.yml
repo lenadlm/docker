@@ -35,7 +35,7 @@ services:
       portainer_default:
         ipv4_address: 172.30.0.30
     ports:
-      - "127.0.0.1:2375:2375"
+      - "2375:2375"
     logging:
       driver: "json-file"
       options:
@@ -143,25 +143,25 @@ services:
   #    - /etc/localtime:/etc/localtime:ro
   #    - /run/user/1000/bus:/run/dbus:ro
 
-  watchtower:
-    image: containrrr/watchtower
-    container_name: watchtower
-    restart: always
-    environment:
-      - DOCKER_HOST=tcp://docker-socket-proxy:2375
-      - TZ=Africa/Nairobi
-      - WATCHTOWER_TRACE=true
-      - WATCHTOWER_CLEANUP=true
-      - WATCHTOWER_POLL_INTERVAL=10800
-      - WATCHTOWER_INCLUDE_RESTARTING=true
-      - WATCHTOWER_NOTIFICATIONS=gotify
-      - WATCHTOWER_NOTIFICATIONS_HOSTNAME=LENADLM-MPC01
-      - WATCHTOWER_NOTIFICATION_GOTIFY_URL=${WATCHTOWER_NOTIFICATION_GOTIFY_URL}
-      - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=${WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN}
-    networks:
-      - portainer_default
-    volumes:
-      - /home/lenadlm/.docker/config.json:/config.json
+  #watchtower:
+  #  image: containrrr/watchtower
+  #  container_name: watchtower
+  #  restart: always
+  #  environment:
+  #    - DOCKER_HOST=tcp://docker-socket-proxy:2375
+  #    - TZ=Africa/Nairobi
+  #    - WATCHTOWER_TRACE=true
+  #    - WATCHTOWER_CLEANUP=true
+  #    - WATCHTOWER_POLL_INTERVAL=10800
+  #    - WATCHTOWER_INCLUDE_RESTARTING=true
+  #    - WATCHTOWER_NOTIFICATIONS=gotify
+  #    - WATCHTOWER_NOTIFICATIONS_HOSTNAME=LENADLM-MPC01
+  #    - WATCHTOWER_NOTIFICATION_GOTIFY_URL=${WATCHTOWER_NOTIFICATION_GOTIFY_URL}
+  #    - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=${WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN}
+  #  networks:
+  #    - portainer_default
+  #  volumes:
+  #    - /home/lenadlm/.docker/config.json:/config.json
 
 networks:
   portainer_default:
