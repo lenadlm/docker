@@ -111,7 +111,7 @@ services:
     networks:
       - portainer_default
     volumes:
-      - /opt/gotify/data:/app/data
+      - ${DATADIR}/gotify/data:/app/data
 
   #homeassistant:
   #  image: ghcr.io/home-assistant/home-assistant:stable
