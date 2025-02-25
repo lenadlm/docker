@@ -143,25 +143,48 @@ services:
   #    - /etc/localtime:/etc/localtime:ro
   #    - /run/user/1000/bus:/run/dbus:ro
 
-  #watchtower:
-  #  image: containrrr/watchtower
-  #  container_name: watchtower
-  #  restart: always
-  #  environment:
-  #    - DOCKER_HOST=tcp://docker-socket-proxy:2375
-  #    - TZ=Africa/Nairobi
-  #    - WATCHTOWER_TRACE=true
-  #    - WATCHTOWER_CLEANUP=true
-  #    - WATCHTOWER_POLL_INTERVAL=10800
-  #    - WATCHTOWER_INCLUDE_RESTARTING=true
-  #    - WATCHTOWER_NOTIFICATIONS=gotify
-  #    - WATCHTOWER_NOTIFICATIONS_HOSTNAME=LENADLM-MPC01
-  #    - WATCHTOWER_NOTIFICATION_GOTIFY_URL=${WATCHTOWER_NOTIFICATION_GOTIFY_URL}
-  #    - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=${WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN}
-  #  networks:
-  #    - portainer_default
-  #  volumes:
-  #    - /home/lenadlm/.docker/config.json:/config.json
+  watchtower-local:
+    image: containrrr/watchtower
+    container_name: watchtower-local
+    restart: always
+    command: >
+      --host http://localhost:2375 
+    environment:
+      - DOCKER_HOST=tcp://docker-socket-proxy:2375
+      - TZ=Africa/Nairobi
+      - WATCHTOWER_TRACE=true
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_POLL_INTERVAL=10800
+      - WATCHTOWER_INCLUDE_RESTARTING=true
+      - WATCHTOWER_NOTIFICATIONS=gotify
+      - WATCHTOWER_NOTIFICATIONS_HOSTNAME=LOCAL
+      - WATCHTOWER_NOTIFICATION_GOTIFY_URL=${WATCHTOWER_NOTIFICATION_GOTIFY_URL}
+      - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=${WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN}
+    networks:
+      - portainer_default
+    volumes:
+      - ${DATADIR}/watchtower/config.json:/config.json
+
+  watchtower-server:
+    image: containrrr/watchtower
+    container_name: watchtower-server
+    restart: always
+    command: >
+      --host http://server_url:2375 
+    environment:
+      - TZ=Africa/Nairobi
+      - WATCHTOWER_TRACE=true
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_POLL_INTERVAL=10800
+      - WATCHTOWER_INCLUDE_RESTARTING=true
+      - WATCHTOWER_NOTIFICATIONS=gotify
+      - WATCHTOWER_NOTIFICATIONS_HOSTNAME=SERVER
+      - WATCHTOWER_NOTIFICATION_GOTIFY_URL=${WATCHTOWER_NOTIFICATION_GOTIFY_URL}
+      - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=${WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN}
+    networks:
+      - portainer_default
+    volumes:
+      - ${DATADIR}/watchtower/config.json:/config.json
 
 networks:
   portainer_default:
