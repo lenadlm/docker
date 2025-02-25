@@ -109,20 +109,6 @@ services:
       - /d/data/docker/code-server/config:/config
       - /d/data/docker:/array
 
-
-  gotify:
-    image: ghcr.io/gotify/server:latest
-    container_name: gotify
-    restart: unless-stopped
-    ports:
-      - "82:80"
-    environment:
-      - TZ=Africa/Nairobi
-    networks:
-      - portainer_default
-    volumes:
-      - ${DATADIR}/gotify/data:/app/data
-
   #homeassistant:
   #  image: ghcr.io/home-assistant/home-assistant:stable
   #  container_name: homeassistant
