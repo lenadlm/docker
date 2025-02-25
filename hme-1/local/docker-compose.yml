@@ -169,7 +169,7 @@ services:
     container_name: watchtower-server
     restart: always
     command: >
-      sh -c "watchtower --host http://$SERVER_URL:2375"
+      sh -c "watchtower --host $SERVER_URL"
     environment:
       - TZ=Africa/Nairobi
       - SERVER_URL=${SERVER_URL}
