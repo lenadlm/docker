@@ -147,9 +147,8 @@ services:
     image: containrrr/watchtower
     container_name: watchtower-mpc01
     restart: always
-    command: >
-      --host http://localhost:2375 
     environment:
+      - DOCKER_HOST=tcp://docker-socket-proxy:2375
       - TZ=Africa/Nairobi
       - WATCHTOWER_TRACE=true
       - WATCHTOWER_CLEANUP=true
