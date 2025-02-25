@@ -143,9 +143,9 @@ services:
   #    - /etc/localtime:/etc/localtime:ro
   #    - /run/user/1000/bus:/run/dbus:ro
 
-  watchtower-local:
+  watchtower-mpc01:
     image: containrrr/watchtower
-    container_name: watchtower-local
+    container_name: watchtower-mpc01
     restart: always
     command: >
       --host http://localhost:2375 
@@ -164,9 +164,9 @@ services:
     volumes:
       - ${DATADIR}/watchtower/config.json:/config.json
 
-  watchtower-server:
+  watchtower-gcp01:
     image: containrrr/watchtower
-    container_name: watchtower-server
+    container_name: watchtower-gcp01
     restart: always
     command: >
       sh -c "watchtower --host $SERVER_URL"
