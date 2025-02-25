@@ -169,9 +169,10 @@ services:
     container_name: watchtower-server
     restart: always
     command: >
-      --host http://server_url:2375 
+      sh -c "watchtower --host http://$SERVER_URL:2375"
     environment:
       - TZ=Africa/Nairobi
+      - SERVER_URL=${SERVER_URL}
       - WATCHTOWER_TRACE=true
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_POLL_INTERVAL=10800
