@@ -180,16 +180,14 @@ services:
       - WATCHTOWER_NOTIFICATION_GOTIFY_URL=${WATCHTOWER_NOTIFICATION_GOTIFY_URL}
       - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=${WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN}
     networks:
-      - watchtower_default
+      - watchtower_network
     volumes:
       - ${DATADIR}/watchtower/config.json:/config.json
 
 networks:
-  watchtower_default:
-    driver: bridge
-
-networks:
   portainer_default:
+    external: true
+  watchtower_network:
     external: true
 
     
