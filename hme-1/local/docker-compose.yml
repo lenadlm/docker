@@ -189,5 +189,3 @@ networks:
     external: true
   watchtower_network:
     external: true
-
-    
