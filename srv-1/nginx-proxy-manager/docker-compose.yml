@@ -12,11 +12,11 @@ services:
       - PGID=1000
       - TZ=Africa/Nairobi
     networks:
-      - portainer_default
+      - internal_network
     volumes:
       - /opt/nginx-proxy-manager/data:/data
       - /opt/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
 
 networks:
-  portainer_default:
+  internal_network:
     external: true
