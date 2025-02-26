@@ -8,7 +8,7 @@ services:
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     networks:
-      - portainer_default
+      - internal_network
 
   docker-socket-proxy:
     image: tecnativa/docker-socket-proxy:latest
@@ -32,7 +32,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
-      portainer_default:
+      internal_network:
         ipv4_address: 172.30.0.30
     ports:
       - "127.0.0.1:2375:2375" 
@@ -51,7 +51,7 @@ services:
     ports:
       - "8880:8080"
     networks:
-      - portainer_default
+      - internal_network
     dns:
       - 172.30.0.53
     cap_drop:
@@ -73,7 +73,7 @@ services:
       - "53:53/udp"
       - "80:80"
     networks:
-      portainer_default:
+      internal_network:
         ipv4_address: 172.30.0.53
     dns:
       - 45.90.28.166
@@ -104,7 +104,7 @@ services:
     ports:
       - "8443:8443"
     networks:
-      - portainer_default
+      - internal_network
     volumes:
       - ${DATADIR}/code-server/config:/config
       - ${DATADIR}:/array
@@ -145,7 +145,7 @@ services:
       - WATCHTOWER_NOTIFICATION_GOTIFY_URL=${WATCHTOWER_NOTIFICATION_GOTIFY_URL}
       - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=${WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN}
     networks:
-      - portainer_default
+      - internal_network
     volumes:
       - ${DATADIR}/watchtower/config.json:/config.json
 
@@ -171,7 +171,7 @@ services:
       - ${DATADIR}/watchtower/config.json:/config.json
 
 networks:
-  portainer_default:
+  internal_network:
     external: true
   watchtower_network:
     external: true
