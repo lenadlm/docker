@@ -15,7 +15,7 @@ services:
     devices:
       - "/dev/dri:/dev/dri"
     networks:
-      portainer_default:
+      internal_network:
         ipv4_address: 172.30.0.32
     dns:
       - 172.30.0.53
@@ -34,7 +34,7 @@ services:
       - KOMETA_CONFIG=/config/config.yml
       - KOMETA_TIME=20:00
     networks:
-      - portainer_default
+      - internal_network
     dns:
       - 172.30.0.53
     volumes:
@@ -57,7 +57,7 @@ services:
     devices:
       - "/dev/dri:/dev/dri"
     networks:
-      portainer_default:
+      internal_network:
         ipv4_address: 172.30.0.15
     volumes:
       - ${DATADIR}/jellyfin/library:/config
@@ -72,7 +72,7 @@ services:
     ports:
       - "8182:80"
     networks:
-      - portainer_default
+      - internal_network
     dns:
       - 172.30.0.53
 
@@ -84,7 +84,7 @@ services:
     environment:
       - TZ=Africa/Nairobi
     networks:
-      - portainer_default
+      - internal_network
     dns:
       - 172.30.0.53
     ports:
@@ -97,5 +97,5 @@ services:
         max-file: "5"
 
 networks:
-  portainer_default:
+  internal_network:
     external: true
