@@ -4,7 +4,7 @@
 # chmod +x docker.sh
 # sudo ./docker.sh
 
-# Script to set up the portainer_default network and deploy Portainer using Docker Compose
+# Script to set up internal and external Docker networks and deploy Portainer
 set -e
 
 # Ensure the script is being run as root
@@ -66,17 +66,36 @@ else
     echo "Docker Compose (plugin) is already installed. Skipping installation."
 fi
 
-# Create the portainer_default Docker network with a custom gateway
-if ! docker network inspect portainer_default >/dev/null 2>&1; then
-    echo "Creating the portainer_default Docker network..."
+# Remove existing portainer_default network if it exists
+#if docker network inspect portainer_default >/dev/null 2>&1; then
+#    echo "Removing old 'portainer_default' network..."
+#    docker network rm portainer_default
+#fi
+
+# Create the internal Docker network
+if ! docker network inspect internal_network >/dev/null 2>&1; then
+    echo "Creating the internal_network Docker network..."
     docker network create \
         --driver bridge \
         --subnet=172.30.0.0/24 \
         --gateway=172.30.0.1 \
         --attachable \
-        portainer_default
+        internal_network
 else
-    echo "Network 'portainer_default' already exists. Skipping creation."
+    echo "Network 'internal_network' already exists. Skipping creation."
+fi
+
+# Create the external Docker network
+if ! docker network inspect external_network >/dev/null 2>&1; then
+    echo "Creating the external_network Docker network..."
+    docker network create \
+        --driver bridge \
+        --subnet=172.20.0.0/24 \
+        --gateway=172.20.0.1 \
+        --attachable \
+        external_network
+else
+    echo "Network 'external_network' already exists. Skipping creation."
 fi
 
 # Define variables for deployment
@@ -94,6 +113,10 @@ fi
 echo "Downloading Docker Compose file..."
 mkdir -p $COMPOSE_DIR
 curl -fsSL $COMPOSE_FILE_URL -o $COMPOSE_DIR/docker-compose.yml
+
+# Update the compose file to use the new networks
+echo "Updating Docker Compose file to use internal_network..."
+sed -i 's/portainer_default/internal_network/g' $COMPOSE_DIR/docker-compose.yml
 
 # Navigate to the compose directory and deploy Portainer using Docker Compose
 echo "Deploying Portainer using Docker Compose..."
