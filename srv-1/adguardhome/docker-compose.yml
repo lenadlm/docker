@@ -14,7 +14,7 @@ services:
       - NET_ADMIN
       - NET_RAW
     networks:
-      portainer_default:
+      internal_network:
         ipv4_address: 172.30.0.53
     dns:
       - 1.1.1.1
