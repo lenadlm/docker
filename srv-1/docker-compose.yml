@@ -104,19 +104,7 @@ services:
       - internal_network
     volumes:
       - /opt/docker/gotify/data:/app/data
-
-  samsung-tvplus:
-    image: matthuisman/samsung-tvplus-for-channels
-    container_name: samsung-tvplus
-    restart: unless-stopped
-    environment:
-      - REGIONS=all
-      - TZ=Africa/Nairobi
-    ports:
-      - "8380:80"
-    networks:
-      - internal_network
-
+      
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
