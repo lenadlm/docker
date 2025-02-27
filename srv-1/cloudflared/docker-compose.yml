@@ -7,7 +7,7 @@ services:
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     networks:
-      - internal_network
+      - external_network
       
 networks:
   external_network:
