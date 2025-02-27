@@ -41,9 +41,6 @@ services:
       - TZ=Africa/Nairobi
     security_opt:
       - no-new-privileges:true
-    secrets:
-      - source: users
-        target: /data/users.yml
     ports:
       - "8880:8080"
     networks:
@@ -51,15 +48,12 @@ services:
     cap_drop:
       - ALL
     volumes:
-      - /opt/docker/dozzle/data:/data      
+      - /opt/docker/dozzle/data:/data
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
-secrets:
-  users:
-    file: /opt/docker/dozzle/data/users.yml 
 
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
