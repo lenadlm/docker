@@ -21,8 +21,8 @@ services:
       - 8.8.8.8
       - 9.9.9.9
     volumes:
-      - /opt/adguardhome/work:/opt/adguardhome/work
-      - /opt/adguardhome/conf:/opt/adguardhome/conf
+      - /opt/docker/adguardhome/work:/opt/adguardhome/work
+      - /opt/docker/adguardhome/conf:/opt/adguardhome/conf
     logging:
       driver: "json-file"
       options:
