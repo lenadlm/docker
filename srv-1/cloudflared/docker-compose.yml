@@ -1,15 +1,14 @@
 services:
   cloudflared:
     image: cloudflare/cloudflared:latest
-    container_name: cloudflared
+    container_name: cloudflared_tunnel
     restart: unless-stopped
-    command: tunnel --no-autoupdate --config /etc/cloudflared/config.yml run
+    command: tunnel --no-autoupdate run
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
-    volumes:
-      - /opt/docker/cloudflared:/etc/cloudflared
     networks:
-      - external_network
+      - internal_network
+      
 networks:
   external_network:
     external: true
