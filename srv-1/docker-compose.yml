@@ -39,6 +39,9 @@ services:
     environment:
       - DOCKER_HOST=tcp://docker-socket-proxy:2375
       - TZ=Africa/Nairobi
+    secrets:
+      - source: users
+        target: /data/users.yml
     ports:
       - "8880:8080"
     networks:
@@ -94,7 +97,7 @@ services:
     container_name: gotify
     restart: unless-stopped
     ports:
-      - "82:80"
+      - "8480:80"
     environment:
       - TZ=Africa/Nairobi
     networks:
