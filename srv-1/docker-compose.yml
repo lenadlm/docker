@@ -39,6 +39,8 @@ services:
     environment:
       - DOCKER_HOST=tcp://docker-socket-proxy:2375
       - TZ=Africa/Nairobi
+    security_opt:
+      - no-new-privileges:true
     secrets:
       - source: users
         target: /data/users.yml
@@ -48,8 +50,6 @@ services:
       - internal_network
     cap_drop:
       - ALL
-    security_opt:
-      - no-new-privileges:true
     volumes:
       - /opt/docker/dozzle/data:/data      
     logging:
