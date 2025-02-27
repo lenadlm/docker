@@ -30,5 +30,5 @@ services:
         max-size: "5m"
         
 networks:
-  portainer_default:
+  internal_network:
     external: true
