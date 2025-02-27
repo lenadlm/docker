@@ -65,13 +65,12 @@ services:
     networks:
       - internal_network
     volumes:
-      - /opt/homepage/config:/app/config
+      - /opt/docker/homepage/config:/app/config
 
   code-server:
     image: lscr.io/linuxserver/code-server:4.96.4-ls254
     container_name: code-server
     restart: unless-stopped
-    privileged: true
     environment:
       - PUID=1000 
       - PGID=1000
@@ -79,13 +78,13 @@ services:
       - PASSWORD=${PASSWORD}
       - SUDO_PASSWORD=${SUDO_PASSWORD}
       - DEFAULT_WORKSPACE=/config/workspace
-      - PROXY_DOMAIN=code.lenadlm.dev # Uncomment if using a reverse proxy
+      - PROXY_DOMAIN=code.lenadlm.dev
     ports:
       - "8443:8443"
     networks:
       - internal_network
     volumes:
-      - /opt/code-server/config:/config
+      - /opt/docker/code-server/config:/config
       - /opt:/config/workspace/array
  
   gotify:
@@ -99,7 +98,7 @@ services:
     networks:
       - internal_network
     volumes:
-      - /opt/gotify/data:/app/data
+      - /opt/docker/gotify/data:/app/data
 
   samsung-tvplus:
     image: matthuisman/samsung-tvplus-for-channels
@@ -109,29 +108,29 @@ services:
       - REGIONS=all
       - TZ=Africa/Nairobi
     ports:
-      - "8182:80"
+      - "8380:80"
     networks:
       - internal_network
 
-  #watchtower:
-  #  image: containrrr/watchtower
-  #  container_name: watchtower
-  #  restart: always
-  #  environment:
-  #    - DOCKER_HOST=tcp://docker-socket-proxy:2375
-  #    - TZ=Africa/Nairobi
-  #    - WATCHTOWER_TRACE=true
-  #    - WATCHTOWER_CLEANUP=true
-  #    - WATCHTOWER_POLL_INTERVAL=10800
-  #    - WATCHTOWER_INCLUDE_RESTARTING=true
-  #    - WATCHTOWER_NOTIFICATIONS=gotify
-  #    - WATCHTOWER_NOTIFICATIONS_HOSTNAME=UBUNTU-GCP01
-  #    - WATCHTOWER_NOTIFICATION_GOTIFY_URL=${WATCHTOWER_NOTIFICATION_GOTIFY_URL}
-  #    - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=${WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN}
-  #  networks:
-  #    - internal_network
-  #  volumes:
-  #    - /home/lenadlm/.docker/config.json:/config.json
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    environment:
+      - DOCKER_HOST=tcp://docker-socket-proxy:2375
+      - TZ=Africa/Nairobi
+      - WATCHTOWER_TRACE=true
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_POLL_INTERVAL=86400
+      - WATCHTOWER_INCLUDE_RESTARTING=true
+      - WATCHTOWER_NOTIFICATIONS=gotify
+      - WATCHTOWER_NOTIFICATIONS_HOSTNAME=MPC01
+      - WATCHTOWER_NOTIFICATION_GOTIFY_URL=${WATCHTOWER_NOTIFICATION_GOTIFY_URL}
+      - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=${WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN}
+    networks:
+      - internal_network
+    volumes:
+      - /opt/docker/watchtower/config.json:/config.json
 
 networks:
   internal_network:
