@@ -4,8 +4,8 @@ services:
     container_name: crowdsec
     restart: unless-stopped
     volumes:
-      - /opt/crowdsec/config:/etc/crowdsec
-      - /opt/crowdsec/data:/var/lib/crowdsec/data
+      - /opt/docker/crowdsec/config:/etc/crowdsec
+      - /opt/docker/crowdsec/data:/var/lib/crowdsec/data
       - /var/log:/var/log:ro  # Read-only access to logs
     environment:
       - COLLECTIONS=crowdsecurity/base-http-scenarios
