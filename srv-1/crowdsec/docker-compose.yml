@@ -1,0 +1,41 @@
+services:
+  crowdsec:
+    image: crowdsecurity/crowdsec
+    container_name: crowdsec
+    restart: unless-stopped
+    volumes:
+      - /opt/crowdsec/config:/etc/crowdsec
+      - /opt/crowdsec/data:/var/lib/crowdsec/data
+      - /var/log:/var/log:ro  # Read-only access to logs
+    environment:
+      - COLLECTIONS=crowdsecurity/base-http-scenarios
+    networks:
+      - external_network
+
+  crowdsec-cloudflare-bouncer:
+    image: fbonalair/crowdsec-cloudflare-bouncer
+    container_name: crowdsec-cloudflare-bouncer
+    restart: unless-stopped
+    environment:
+      - CF_API_TOKEN=your_cloudflare_api_token
+      - CF_ZONE_ID=your_cloudflare_zone_id
+      - CROWDSEC_LAPI_URL=http://crowdsec:8080/
+    depends_on:
+      - crowdsec
+    networks:
+      - external_network
+
+  crowdsec-firewall-bouncer:
+    image: crowdsecurity/crowdsec-firewall-bouncer:latest
+    container_name: crowdsec-firewall-bouncer
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+    environment:
+      - CROWDSEC_LAPI_URL=http://crowdsec:8080/
+    depends_on:
+      - crowdsec
+
+networks:
+  external_network:
+    external: true
