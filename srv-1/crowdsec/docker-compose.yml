@@ -1,10 +1,9 @@
+
 services:
   crowdsec:
     image: crowdsecurity/crowdsec
     container_name: crowdsec
     restart: unless-stopped
-    ports:
-      - "127.0.0.1:8080:8080"  # Expose LAPI only on localhost for internal access
     volumes:
       - /opt/docker/crowdsec/config:/etc/crowdsec
       - /opt/docker/crowdsec/data:/var/lib/crowdsec/data
@@ -26,17 +25,6 @@ services:
       - crowdsec
     networks:
       - external_network
-
-  crowdsec-firewall-bouncer:
-    image: crowdsecurity/crowdsec-firewall-bouncer:latest
-    container_name: crowdsec-firewall-bouncer
-    restart: unless-stopped
-    privileged: true
-    network_mode: host
-    environment:
-      - CROWDSEC_LAPI_URL=http://127.0.0.1:8080/
-    depends_on:
-      - crowdsec
 
 networks:
   external_network:
