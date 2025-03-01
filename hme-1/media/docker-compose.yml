@@ -17,8 +17,6 @@ services:
     networks:
       internal_network:
         ipv4_address: 172.30.0.32
-    dns:
-      - 172.30.0.53
     volumes:
       - ${DATADIR}/plex/config:/config
       - /d/data/media:/media
@@ -37,8 +35,6 @@ services:
       - KOMETA_TIME=20:00
     networks:
       - internal_network
-    dns:
-      - 172.30.0.53
     volumes:
       - ${DATADIR}/plex/kometa/config:/config
 
@@ -87,8 +83,6 @@ services:
       - TZ=Africa/Nairobi
     networks:
       - internal_network
-    dns:
-      - 172.30.0.53
     ports:
       - "34400:34400"
     volumes:
