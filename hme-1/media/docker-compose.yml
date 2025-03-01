@@ -27,6 +27,8 @@ services:
     image: lscr.io/linuxserver/kometa:latest
     container_name: kometa
     restart: unless-stopped
+    depends_on:
+      - plex
     environment:
       - PUID=1000
       - PGID=1000
@@ -95,7 +97,7 @@ services:
       options:
         max-size: "10m"
         max-file: "5"
-        
+
 networks:
   internal_network:
     external: true
