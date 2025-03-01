@@ -6,7 +6,7 @@ services:
     ports:
       - 9443:9443
     volumes:
-      - data:/data
+      - /d/data/docker/portainer/data:/data
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - PORTAINER_THEME=dark
