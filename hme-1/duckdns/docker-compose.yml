@@ -1,0 +1,21 @@
+services:
+  duckdns:
+    image: lscr.io/linuxserver/duckdns:latest
+    container_name: duckdns
+    networks:
+      - external_network
+    environment:
+      - PUID=1000  # Optional
+      - PGID=1000  # Optional
+      - TZ=Africa/Nairobi  # Optional
+      - SUBDOMAINS=${SUBDOMAINS}
+      - TOKEN=${TOKEN}
+      - UPDATE_IP=ipv4  # Optional
+      - LOG_FILE=false  # Optional
+    volumes:
+      - /opt/docker/duckdns/config:/config  # Adjust path as needed
+    restart: unless-stopped
+
+networks:
+  external_network:
+    external: true
