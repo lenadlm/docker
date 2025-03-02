@@ -6,8 +6,8 @@ services:
     restart: unless-stopped
     volumes:
       - /var/log:/var/log:ro
-      - /opt/crowdsec/data:/var/lib/crowdsec/data
-      - /opt/crowdsec/config:/etc/crowdsec
+      - /opt/docker/crowdsec/data:/var/lib/crowdsec/data
+      - /opt/docker/crowdsec/config:/etc/crowdsec
     networks:
       - external_network
 
