@@ -151,6 +151,7 @@ services:
 #      - ${DATADIR}/watchtower/config.json:/config.json
 
 
+
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
@@ -172,9 +173,8 @@ services:
       - ${DATADIR}/watchtower/config.json:/config.json
 
 
-
 networks:
   internal_network:
     external: true
-  watchtower_network:
+  external_network:
     external: true
