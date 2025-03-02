@@ -13,9 +13,9 @@ services:
     networks:
       - external_network
 
-  crowdsec-cloudflare-bouncer:
-    image: crowdsecurity/crowdsec-cloudflare-bouncer
-    container_name: crowdsec-cloudflare-bouncer
+  cloudflare-bouncer:
+    image: crowdsecurity/cloudflare-bouncer
+    container_name: cloudflare-bouncer
     restart: unless-stopped
     environment:
       - CF_API_TOKEN=your_cloudflare_api_token
