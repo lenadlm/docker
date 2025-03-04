@@ -1,0 +1,27 @@
+services:
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: homeassistant
+    restart: always
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    network_mode: host
+    environment:
+      - DOCKER_HOST=tcp://docker-socket-proxy:2375
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+    volumes:
+      - /opt/docker/homeassistant/config:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/user/1000/bus:/run/dbus:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8123"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    depends_on:
+      - docker-socket-proxy
