@@ -90,18 +90,19 @@ services:
       - /opt/docker/code-server/config:/config
       - /opt:/config/workspace/array
  
-  gotify:
-    image: ghcr.io/gotify/server:latest
-    container_name: gotify
-    restart: unless-stopped
-    ports:
-      - "8480:80"
-    environment:
-      - TZ=Africa/Nairobi
-    networks:
-      - internal_network
-    volumes:
-      - /opt/docker/gotify/data:/app/data
+# gotify:
+#   image: ghcr.io/gotify/server:latest
+#   container_name: gotify
+#   restart: unless-stopped
+#   ports:
+#     - "8480:80"
+#   environment:
+#     - TZ=Africa/Nairobi
+#   networks:
+#     - internal_network
+#   volumes:
+#     - /opt/docker/gotify/data:/app/data
+
       
   watchtower:
     image: containrrr/watchtower
