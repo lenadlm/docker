@@ -15,7 +15,7 @@ services:
     devices:
       - /dev/ttyUSB0:/dev/ttyUSB0
     volumes:
-      - /opt/docker/homeassistant/config:/config
+      - ${DATADIR}/homeassistant/config:/config
       - /etc/localtime:/etc/localtime:ro
       - /run/user/1000/bus:/run/dbus:ro
     healthcheck:
