@@ -9,8 +9,8 @@ services:
     networks:
       - external_network
     volumes:
-      - /opt/docker/cloudflared:/etc/cloudflared:ro
-      - /opt/docker/cloudflared:/home/nonroot/.cloudflared:ro
+      - /opt/docker/cloudflared/etc:/etc/cloudflared:ro
+      - /opt/docker/cloudflared/home:/home/nonroot/.cloudflared:ro
       
 networks:
   external_network:
