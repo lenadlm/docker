@@ -9,7 +9,6 @@ services:
     networks:
       - external_network
     volumes:
-    volumes:
       - /opt/docker/cloudflared:/etc/cloudflared:ro
       - /opt/docker/cloudflared/cert.pem:/etc/cloudflared/cert.pem:ro
       
