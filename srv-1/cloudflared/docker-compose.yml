@@ -8,6 +8,10 @@ services:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     networks:
       - external_network
+    volumes:
+    volumes:
+      - /opt/docker/cloudflared/config.yml:/etc/cloudflared/config.yml:ro
+      - /opt/docker/cloudflared/UUID.json:/etc/cloudflared/UUID.json:ro
       
 networks:
   external_network:
