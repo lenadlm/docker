@@ -10,8 +10,8 @@ services:
       - external_network
     volumes:
     volumes:
-      - /opt/docker/cloudflared/config.yml:/etc/cloudflared/config.yml:ro
-      - /opt/docker/cloudflared/UUID.json:/etc/cloudflared/UUID.json:ro
+      - /opt/docker/cloudflared:/etc/cloudflared:ro
+      - /opt/docker/cloudflared/cert.pem:/etc/cloudflared/cert.pem:ro
       
 networks:
   external_network:
