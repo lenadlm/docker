@@ -159,7 +159,7 @@ services:
       - internal_network
     volumes:
       - ${DATADIR}/syncthing/config:/config
-      - ${DATADIR}:/opt/docker
+      - ${DATADIR}:/opt/d/data/ddocker
       - /d/data:/opt/d/data
       - /f/data:/opt/f/data
 
