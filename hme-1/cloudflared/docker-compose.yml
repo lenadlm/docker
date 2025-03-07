@@ -8,10 +8,7 @@ services:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     networks:
       - external_network
-    volumes:
-      - ${DATADIR}/cloudflared:/etc/cloudflared:ro
-      - ${DATADIR}/cloudflared/cert.pem:/home/nonroot/.cloudflared/cert.pem
-      
+   
 networks:
   external_network:
     external: true
