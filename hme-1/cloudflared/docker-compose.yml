@@ -9,7 +9,6 @@ services:
     networks:
       - external_network
     volumes:
-    volumes:
       - ${DATADIR}/cloudflared:/etc/cloudflared:ro
       - ${DATADIR}/cloudflared/cert.pem:/home/nonroot/.cloudflared/cert.pem
       
