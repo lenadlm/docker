@@ -8,9 +8,6 @@ services:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     networks:
       - external_network
-    volumes:
-      - /opt/docker/cloudflared/etc:/etc/cloudflared:ro
-      - /opt/docker/cloudflared/home:/home/nonroot:ro
       
 networks:
   external_network:
