@@ -1,0 +1,18 @@
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    networks:
+      - external_network
+    volumes:
+    volumes:
+      - ${DATADIR}/cloudflared/config.yml:/etc/cloudflared/config.yml:ro
+      - ${DATADIR}/cloudflared/UUID.json:/etc/cloudflared/UUID.json:ro
+      
+networks:
+  external_network:
+    external: true
