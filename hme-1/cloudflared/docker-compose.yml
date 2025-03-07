@@ -10,8 +10,8 @@ services:
       - external_network
     volumes:
     volumes:
-      - ${DATADIR}/cloudflared/config.yml:/etc/cloudflared/config.yml:ro
-      - ${DATADIR}/cloudflared/UUID.json:/etc/cloudflared/UUID.json:ro
+      - ${DATADIR}/cloudflared:/etc/cloudflared:ro
+      - ${DATADIR}/cloudflared/cert.pem:/home/nonroot/.cloudflared/cert.pem
       
 networks:
   external_network:
