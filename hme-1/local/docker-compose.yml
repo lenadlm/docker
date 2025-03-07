@@ -144,9 +144,8 @@ services:
     image: lscr.io/linuxserver/syncthing:latest
     container_name: syncthing
     hostname: syncthing
+    privileged: true
     environment:
-      - PUID=1000
-      - PGID=1000
       - TZ=Africa/Nairobi
     ports:
       - 8384:8384
