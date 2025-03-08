@@ -9,8 +9,8 @@ services:
     volumes:
       - /d/data/docker/tor:/etc/tor
     networks:
-      - portainer_default
+      - external_network
   
 networks:
-  portainer_default:
+  external_network:
     external: true
