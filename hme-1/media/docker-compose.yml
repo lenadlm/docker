@@ -32,7 +32,7 @@ services:
       - PGID=1000
       - TZ=Africa/Nairobi
       - KOMETA_CONFIG=/config/config.yml
-      - KOMETA_TIME=20:00
+      - KOMETA_TIME=21:00
     networks:
       - internal_network
     volumes:
