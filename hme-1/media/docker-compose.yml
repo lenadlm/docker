@@ -41,13 +41,13 @@ services:
   tautulli:
     image: lscr.io/linuxserver/tautulli:latest
     container_name: tautulli
-    ports:
-      - 8181:8181
     restart: unless-stopped
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Africa/Nairobi
+    ports:
+      - 8181:8181
     networks:
       - internal_network
     volumes:
