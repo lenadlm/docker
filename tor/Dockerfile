@@ -1,20 +1,22 @@
-# Use a specific Alpine version
-FROM alpine:latest
+# Use Debian Bookworm Slim
+FROM debian:bookworm-slim
+
+# Install Tor and obfs4proxy
+RUN apt update && \
+    DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends tor obfs4proxy && \
+    useradd -m -u 1000 tor && \
+    mkdir -p /var/lib/tor /var/log/tor && \
+    chown -R tor:tor /etc/tor /var/lib/tor /var/log/tor && \
+    chmod 700 /var/lib/tor /var/log/tor && \
+    apt clean && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
 WORKDIR /etc/tor
 
-# Create a non-root tor user & install Tor with obfs4proxy
-RUN adduser -D -u 1000 tor \
-    && apk add --no-cache tor obfs4proxy \
-    && mkdir -p /var/lib/tor /var/log/tor \
-    && chown -R tor:tor /etc/tor /var/lib/tor /var/log/tor \
-    && chmod 700 /var/lib/tor /var/log/tor
-
-# Copy the tor configuration file
+# Copy torrc config with proper ownership
 COPY --chown=tor:tor torrc /etc/tor/torrc
 
-# Switch to the tor user for security
+# Switch to non-root user
 USER tor
 
 # Start Tor
