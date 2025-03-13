@@ -17,9 +17,10 @@
 ||1xbet.co.ke^
 ||ads.microsoft.com^$important
 ||data.microsoft.com^$important
-||gi.discusteleost.top^
-||hlag.com^$important
-||hl.lan^$important
+||discusteleost.top^
+||hlag.com^
+||hlag.org^
+||hl.lan^
 ||iqbroker.com^
 ||iqoption.com^
 ||iqtrading.asia^
