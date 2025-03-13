@@ -156,6 +156,19 @@ services:
       - /d/data:/opt/d/data
       - /f/data:/opt/f/data
 
+  tor:
+    image: dockurr/tor
+    container_name: tor
+    restart: always
+    ports:
+      - 9050:9050
+      - 9051:9051
+    networks:
+      - external_network
+    volumes:
+      - ${DATADIR}/tor/config:/etc/tor
+      - ${DATADIR}/tor/data:/var/lib/tor
+
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
