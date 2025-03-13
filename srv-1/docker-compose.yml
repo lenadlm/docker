@@ -8,15 +8,12 @@ services:
       - no-new-privileges:true
     environment:
       - CONTAINERS=1
-      - EXEC=1
-      - GET=1
       - IMAGES=1
       - INFO=1
       - NETWORKS=1
       - POST=1
       - SERVICES=1
       - SYSTEM=1
-      - TASKS=1
       - VERSION=1
       - TZ=Africa/Nairobi
     volumes:
@@ -49,6 +46,8 @@ services:
       - ALL
     volumes:
       - /opt/docker/dozzle/data:/data
+    depends_on:
+      - docker-socket-proxy
     logging:
       driver: "json-file"
       options:
@@ -73,7 +72,6 @@ services:
     image: lscr.io/linuxserver/code-server:4.96.4-ls254
     container_name: code-server
     restart: unless-stopped
-    privileged: true
     environment:
       - PUID=1000 
       - PGID=1000
@@ -81,7 +79,6 @@ services:
       - PASSWORD=${PASSWORD}
       - SUDO_PASSWORD=${SUDO_PASSWORD}
       - DEFAULT_WORKSPACE=/config/workspace
-      - PROXY_DOMAIN=code.lenadlm.dev
     ports:
       - "8443:8443"
     networks:
@@ -107,7 +104,6 @@ services:
     image: lscr.io/linuxserver/syncthing:latest
     container_name: syncthing
     hostname: syncthing
-    privileged: true
     environment:
       - PUID=1000 
       - PGID=1000
@@ -143,6 +139,8 @@ services:
       - internal_network
     volumes:
       - /opt/docker/watchtower/config.json:/config.json
+    depends_on:
+      - docker-socket-proxy
 
 networks:
   internal_network:
