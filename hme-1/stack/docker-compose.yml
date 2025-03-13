@@ -36,7 +36,7 @@ services:
     environment:
       - DOCKER_HOST=tcp://docker-socket-proxy:2375
     ports:
-      - "8880:8080"
+      - 8880:8080
     networks:
       - internal_network
     dns:
@@ -56,9 +56,9 @@ services:
     container_name: pihole
     restart: always
     ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "80:80"
+      - 53:53/tcp
+      - 53:53/udp
+      - 80:80
     networks:
       internal_network:
         ipv4_address: 172.30.0.53
@@ -86,7 +86,7 @@ services:
       - DEFAULT_WORKSPACE=/config/workspace
       # - PROXY_DOMAIN=code.yourdomain.com # Uncomment if using a reverse proxy
     ports:
-      - "8443:8443"
+      - 8443:8443
     networks:
       - internal_network
     volumes:
