@@ -97,8 +97,6 @@ services:
     image: lscr.io/linuxserver/syncthing:latest
     container_name: syncthing
     restart: unless-stopped
-    privileged: true
-    read_only: true
     environment:
       - TZ=Africa/Nairobi
       - PUID=911
