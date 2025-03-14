@@ -97,6 +97,7 @@ services:
     image: lscr.io/linuxserver/syncthing:latest
     container_name: syncthing
     restart: unless-stopped
+    privileged: true
     environment:
       - TZ=Africa/Nairobi
     ports:
@@ -108,8 +109,8 @@ services:
       - internal_network
     volumes:
       - /home/lenadlm/syncthing/config:/config
-      - /opt:/opt
-      - /opt/docker:/opt/docker
+      - /opt:/opt:rw
+      - /opt/docker:/opt/docker:rw
     
   watchtower:
     image: containrrr/watchtower
