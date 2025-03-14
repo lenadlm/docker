@@ -18,11 +18,24 @@ services:
       internal_network:
         ipv4_address: 172.30.0.53
     dns:
-      - 127.0.0.1
+      - 172.30.0.54
     volumes:
       - /opt/docker/adguardhome/work:/opt/adguardhome/work
       - /opt/docker/adguardhome/conf:/opt/adguardhome/conf
-        
+    tmpfs:
+      - /tmp
+      - /run
+
+  unbound:
+    image: mvance/unbound:latest
+    container_name: unbound
+    restart: always
+    networks:
+      internal_network:
+        ipv4_address: 172.30.0.54
+    volumes:
+      - /opt/docker/unbound/root.hints:/var/lib/unbound/root.hints
+      
 networks:
   internal_network:
     external: true
