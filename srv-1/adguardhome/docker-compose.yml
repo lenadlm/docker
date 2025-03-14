@@ -3,7 +3,6 @@ services:
     image: adguard/adguardhome:latest
     container_name: adguardhome
     restart: always
-    user: "1000:1000"
     ports:
       - "53:53/tcp"
       - "53:53/udp"
@@ -14,6 +13,7 @@ services:
     cap_add:
       - NET_ADMIN
       - NET_RAW
+    user: "1000:1000"
     networks:
       internal_network:
         ipv4_address: 172.30.0.53
