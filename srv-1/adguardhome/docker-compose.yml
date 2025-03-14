@@ -13,7 +13,6 @@ services:
     cap_add:
       - NET_ADMIN
       - NET_RAW
-    user: "1000:1000"
     networks:
       internal_network:
         ipv4_address: 172.30.0.53
