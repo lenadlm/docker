@@ -99,7 +99,7 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Africa/Nairobi
-    user: "1000:1000"
+    privileged: true
     ports:
       - 8384:8384
       - 22000:22000/tcp
