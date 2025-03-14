@@ -98,8 +98,6 @@ services:
     container_name: syncthing
     restart: unless-stopped
     environment:
-      - PUID=1000 
-      - PGID=1000
       - TZ=Africa/Nairobi
     ports:
       - 8384:8384
