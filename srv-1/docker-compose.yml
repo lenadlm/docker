@@ -17,18 +17,13 @@ services:
       - SYSTEM=1
       - VERSION=1
       - TZ=Africa/Nairobi
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
       internal_network:
         ipv4_address: 172.30.0.30
     ports:
       - "127.0.0.1:2375:2375" 
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "5m"
-        max-file: "3"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
 
   dozzle:
     container_name: dozzle
@@ -49,11 +44,6 @@ services:
       - /opt/docker/dozzle/data:/data
     depends_on:
       - docker-socket-proxy
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
 
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
@@ -68,6 +58,8 @@ services:
       - internal_network
     volumes:
       - /opt/docker/homepage/config:/app/config
+    depends_on:
+      - docker-socket-proxy
 
   code-server:
     image: lscr.io/linuxserver/code-server:4.96.4-ls254
@@ -132,7 +124,7 @@ services:
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_POLL_INTERVAL=86400
       - WATCHTOWER_INCLUDE_RESTARTING=true
-      - WATCHTOWER_NOTIFICATIONS=telegram
+      - WATCHTOWER_NOTIFICATIONS=shoutrrr
       - WATCHTOWER_NOTIFICATIONS_HOSTNAME=UBUNTU-GCP01
       - WATCHTOWER_NOTIFICATION_URL=${WATCHTOWER_NOTIFICATION_URL}
     networks:
