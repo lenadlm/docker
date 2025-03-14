@@ -97,7 +97,6 @@ services:
     image: lscr.io/linuxserver/syncthing:latest
     container_name: syncthing
     restart: unless-stopped
-    privileged: true 
     environment:
       - TZ=Africa/Nairobi
     ports:
@@ -108,7 +107,7 @@ services:
     networks:
       - internal_network
     volumes:
-      - /opt/docker/syncthing/config:/config
+      - /home/lenadlm/syncthing/config:/config
       - /opt:/opt
       - /opt/docker:/opt/docker
     
