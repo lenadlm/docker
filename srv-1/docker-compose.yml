@@ -97,9 +97,12 @@ services:
     image: lscr.io/linuxserver/syncthing:latest
     container_name: syncthing
     restart: unless-stopped
+    privileged: true
+    read_only: true
     environment:
       - TZ=Africa/Nairobi
-    user: "0:0"
+      - PUID=911
+      - PGID=911
     ports:
       - 8384:8384
       - 22000:22000/tcp
