@@ -1,5 +1,4 @@
 services:
-
   plex:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
@@ -102,10 +101,6 @@ services:
       - "34400:34400"
     volumes:
       - ${DATADIR}/xteve:/etc/xteve
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "5"
 
 networks:
   internal_network:
