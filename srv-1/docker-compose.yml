@@ -143,7 +143,5 @@ services:
 networks:
   internal_network:
     external: true
-
-networks:
   external_network:
     external: true
