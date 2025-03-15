@@ -37,6 +37,7 @@ services:
     volumes:
       - /opt/docker/unbound/unbound.conf:/etc/unbound/unbound.conf
       - /opt/docker/unbound/root.hints:/etc/unbound/root.hints
+      - /etc/timezone:/etc/timezone:ro
     tmpfs:
       - /tmp
       - /var/lib/unbound
