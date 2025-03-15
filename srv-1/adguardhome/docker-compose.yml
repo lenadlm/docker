@@ -29,6 +29,8 @@ services:
     image: alpinelinux/unbound:latest
     container_name: unbound
     restart: always
+    environment:
+      - TZ=Africa/Nairobi
     networks:
       internal_network:
         ipv4_address: 172.30.0.54
