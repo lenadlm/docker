@@ -93,8 +93,6 @@ services:
 #   volumes:
 #     - /opt/docker/gotify/data:/app/data
 
-
-services:
   syncthing:
     image: lscr.io/linuxserver/syncthing:latest
     container_name: syncthing
