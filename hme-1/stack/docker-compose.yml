@@ -15,18 +15,13 @@ services:
       - SYSTEM=1
       - POST=1
       - TZ=Africa/Nairobi
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
       internal_network:
         ipv4_address: 172.30.0.30
     ports:
-      - "127.0.0.1:2375:2375" 
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "5m"
-        max-file: "3"
+      - "127.0.0.1:2375:2375"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
 
   dozzle:
     container_name: dozzle
@@ -44,11 +39,6 @@ services:
       - ALL
     security_opt:
       - no-new-privileges:true
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
 
   pihole:
     image: pihole/pihole:latest
@@ -86,6 +76,8 @@ services:
       - 8443:8443
     networks:
       - internal_network
+    dns:
+      - 172.30.0.53
     volumes:
       - ${DATADIR}/code-server/config:/config
       - ${DATADIR}:/array
@@ -148,6 +140,8 @@ services:
       - 21027:21027/udp
     networks:
       - external_network
+    dns:
+      - 172.30.0.53
     cap_add:
       - CHOWN
       - FOWNER
