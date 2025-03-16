@@ -39,6 +39,8 @@ services:
       - ALL
     security_opt:
       - no-new-privileges:true
+    depends_on:
+      - docker-socket-proxy
 
   pihole:
     image: pihole/pihole:latest
@@ -182,6 +184,8 @@ services:
       - internal_network
     volumes:
       - ${DATADIR}/watchtower/config.json:/config.json
+    depends_on:
+      - docker-socket-proxy
 
 networks:
   internal_network:
