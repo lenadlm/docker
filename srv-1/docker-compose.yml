@@ -1,5 +1,4 @@
 services:
-
   docker-socket-proxy:
     image: tecnativa/docker-socket-proxy:latest
     container_name: docker-socket-proxy
