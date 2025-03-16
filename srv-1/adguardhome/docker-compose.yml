@@ -28,15 +28,15 @@ services:
       - /run
 
   unbound:
-    image: mvance/unbound:latest
+    image: alpinelinux/unbound:latest
     container_name: unbound
     restart: always
     networks:
       internal_network:
         ipv4_address: 172.30.0.54
     volumes:
-      - /opt/docker/unbound/conf:/opt/unbound/etc/unbound/
-      - /opt/docker/unbound/root.hints:/opt/unbound/etc/unbound/root.hints
+      - /opt/docker/unbound/unbound.conf:/etc/unbound/unbound.conf
+      - /opt/docker/unbound/root.hints:/etc/unbound/root.hints
       - /etc/timezone:/etc/timezone:ro
     tmpfs:
       - /tmp
