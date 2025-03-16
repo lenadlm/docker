@@ -60,38 +60,6 @@ services:
     depends_on:
       - docker-socket-proxy
 
-  code-server:
-    image: lscr.io/linuxserver/code-server:4.96.4-ls254
-    container_name: code-server
-    restart: unless-stopped
-    environment:
-      - PUID=1000 
-      - PGID=1000
-      - TZ=Africa/Nairobi
-      - PASSWORD=${PASSWORD}
-      - SUDO_PASSWORD=${SUDO_PASSWORD}
-      - DEFAULT_WORKSPACE=/config/workspace
-    ports:
-      - "8443:8443"
-    networks:
-      - internal_network
-    volumes:
-      - /opt/docker/code-server/config:/config
-      - /opt:/config/workspace/array
- 
-# gotify:
-#   image: ghcr.io/gotify/server:latest
-#   container_name: gotify
-#   restart: unless-stopped
-#   ports:
-#     - "8480:80"
-#   environment:
-#     - TZ=Africa/Nairobi
-#   networks:
-#     - internal_network
-#   volumes:
-#     - /opt/docker/gotify/data:/app/data
-
   syncthing:
     image: lscr.io/linuxserver/syncthing:latest
     container_name: syncthing
