@@ -14,6 +14,7 @@
 @@||docker.com^
 !
 ! -- BLOCKLIST --
+||*.xyz^
 ||1xbet.co.ke^
 ||ads.microsoft.com^$important
 ||data.microsoft.com^$important
