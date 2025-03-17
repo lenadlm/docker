@@ -12,6 +12,7 @@ services:
       - TZ=Africa/Nairobi
     cap_add:
       - NET_ADMIN
+      - SYS_NICE
       - NET_RAW
     networks:
       internal_network:
