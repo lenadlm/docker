@@ -1,0 +1,21 @@
+  pihole:
+    image: pihole/pihole:latest
+    container_name: pihole
+    restart: always
+    ports:
+      - 8080:80
+    networks:
+      internal_network:
+        ipv4_address: 172.30.0.53
+      external_network:
+        ipv4_address: 172.20.0.53
+    cap_add:
+      - NET_ADMIN
+      - SYS_NICE
+      - SYS_TIME
+    environment:
+      - TZ=Africa/Nairobi
+      - WEBPASSWORD=${WEBPASSWORD}
+    volumes:
+      - /opt/docker/pihole/pihole:/etc/pihole
+      - /opt/docker/pihole/dnsmasq.d:/etc/dnsmasq.d
