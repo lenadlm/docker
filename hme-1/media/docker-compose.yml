@@ -16,6 +16,9 @@ services:
     networks:
       internal_network:
         ipv4_address: 172.30.0.32
+    dns:
+      - 172.30.0.53
+      - 172.20.0.53
     volumes:
       - ${DATADIR}/plex/config:/config
       - /d/data/media:/media
@@ -34,6 +37,9 @@ services:
       - KOMETA_TIME=21:00
     networks:
       - internal_network
+    dns:
+      - 172.30.0.53
+      - 172.20.0.53
     volumes:
       - ${DATADIR}/plex/kometa/config:/config
 
@@ -49,6 +55,9 @@ services:
       - 8181:8181
     networks:
       - internal_network
+    dns:
+      - 172.30.0.53
+      - 172.20.0.53
     volumes:
       - ${DATADIR}/tautulli/config:/config
 
@@ -71,6 +80,9 @@ services:
     networks:
       internal_network:
         ipv4_address: 172.30.0.15
+    dns:
+      - 172.30.0.53
+      - 172.20.0.53
     volumes:
       - ${DATADIR}/jellyfin/library:/config
       - /d/data/media:/data
@@ -87,6 +99,7 @@ services:
       - internal_network
     dns:
       - 172.30.0.53
+      - 172.20.0.53
 
   xteve:
     image: tinyserve/xteve:latest
@@ -100,6 +113,9 @@ services:
       - TZ=Africa/Nairobi
     networks:
       - internal_network
+    dns:
+      - 172.30.0.53
+      - 172.20.0.53
     ports:
       - "34400:34400"
     volumes:
