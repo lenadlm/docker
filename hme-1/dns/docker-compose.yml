@@ -53,7 +53,6 @@ services:
     cap_add:
       - NET_ADMIN
       - SYS_NICE
-      - SYS_TIME
     environment:
       - TZ=Africa/Nairobi
       - WEBPASSWORD=${WEBPASSWORD}
