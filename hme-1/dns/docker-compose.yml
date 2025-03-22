@@ -78,7 +78,7 @@ services:
       internal_network:
         ipv4_address: 172.30.0.54
     volumes:
-      - ${DATADIR}/1/unbound:/etc/unbound
+      - ${DATADIR}/unbound/1:/etc/unbound
       - /etc/timezone:/etc/timezone:ro
     tmpfs:
       - /tmp
@@ -92,7 +92,7 @@ services:
       external_network:
         ipv4_address: 172.20.0.54
     volumes:
-      - ${DATADIR}/2/unbound:/etc/unbound
+      - ${DATADIR}/unbound/2:/etc/unbound
       - /etc/timezone:/etc/timezone:ro
     tmpfs:
       - /tmp
