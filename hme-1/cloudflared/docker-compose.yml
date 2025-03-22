@@ -10,19 +10,19 @@ services:
     networks:
       - external_network
 
-  cloudflare-ddns:
-    image: favonia/cloudflare-ddns:latest
-    restart: unless-stopped
-    user: "1000:1000"
-    read_only: true
-    cap_drop: [all]
-    security_opt: [no-new-privileges:true]
-    environment:
-      - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
-      - DOMAINS=${DOMAINS}
-      - PROXIED=true
-    networks:
-      - external_network
+  #cloudflare-ddns:
+  #  image: favonia/cloudflare-ddns:latest
+  #  restart: unless-stopped
+  #  user: "1000:1000"
+  #  read_only: true
+  #  cap_drop: [all]
+  #  security_opt: [no-new-privileges:true]
+  #  environment:
+  #    - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
+  #    - DOMAINS=${DOMAINS}
+  #    - PROXIED=true
+  #  networks:
+  #    - external_network
 
    
 networks:
