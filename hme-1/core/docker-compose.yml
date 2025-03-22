@@ -123,7 +123,7 @@ services:
     networks:
       - external_network
     dns:
-      - 172.30.0.53
+      - 172.20.0.53
     cap_add:
       - CHOWN
       - FOWNER
