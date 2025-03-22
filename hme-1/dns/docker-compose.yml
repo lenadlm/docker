@@ -47,6 +47,8 @@ services:
     ports:
       - 80:80
     networks:
+      internal_network:
+        ipv4_address: 172.30.0.53
       external_network:
         ipv4_address: 172.20.0.53
     dns:
@@ -60,7 +62,7 @@ services:
     environment:
       - TZ=Africa/Nairobi
       - WEBPASSWORD=${WEBPASSWORD}
-      - ServerIP=172.20.0.53
+      - ServerIP=172.20.0.53;172.30.0.53
       - PIHOLE_DNS_=127.30.0.54;127.20.0.54
       - DNSSEC=false 
     volumes:
