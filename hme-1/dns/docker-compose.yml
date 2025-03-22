@@ -50,6 +50,10 @@ services:
     networks:
       external_network:
         ipv4_address: 172.20.0.53
+    dns:
+      - 127.0.0.1
+      - 127.30.0.54
+      - 127.20.0.54
     cap_add:
       - NET_ADMIN
       - SYS_NICE
