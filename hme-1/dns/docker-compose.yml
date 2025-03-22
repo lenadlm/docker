@@ -30,15 +30,15 @@ services:
     networks:
       - external_network
     environment:
-      - PUID=1000  # Optional
-      - PGID=1000  # Optional
-      - TZ=Africa/Nairobi  # Optional
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
       - SUBDOMAINS=${SUBDOMAINS}
       - TOKEN=${TOKEN}
-      - UPDATE_IP=ipv4  # Optional
-      - LOG_FILE=false  # Optional
+      - UPDATE_IP=ipv4
+      - LOG_FILE=false
     volumes:
-      - ${DATADIR}/duckdns/config:/config  # Adjust path as needed
+      - ${DATADIR}/duckdns/config:/config
     restart: unless-stopped
 
   pihole:
