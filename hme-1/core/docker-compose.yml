@@ -35,6 +35,7 @@ services:
       - internal_network
     dns:
       - 172.30.0.53
+      - 172.20.0.53
     cap_drop:
       - ALL
     security_opt:
@@ -60,6 +61,7 @@ services:
       - internal_network
     dns:
       - 172.30.0.53
+      - 172.20.0.53
     volumes:
       - ${DATADIR}/code-server/config:/config
       - ${DATADIR}:/array
@@ -123,6 +125,7 @@ services:
     networks:
       - external_network
     dns:
+      - 172.30.0.53
       - 172.20.0.53
     cap_add:
       - CHOWN
