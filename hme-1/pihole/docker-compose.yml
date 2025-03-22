@@ -17,4 +17,6 @@
     volumes:
       - ${DATADIR}/pihole/pihole:/etc/pihole
       - ${DATADIR}/pihole/dnsmasq.d:/etc/dnsmasq.d
-      
+networks:
+  internal_network:
+    external: true
