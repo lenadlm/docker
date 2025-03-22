@@ -93,6 +93,8 @@ services:
     container_name: xteve
     restart: unless-stopped
     privileged: true
+    security_opt:
+      - no-new-privileges:true
     environment:
       - TZ=Africa/Nairobi
     networks:
