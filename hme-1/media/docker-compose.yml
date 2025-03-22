@@ -8,7 +8,7 @@ services:
       - PGID=1000
       - TZ=Africa/Nairobi
       - VERSION=docker
-      - PLEX_CLAIM=${PLEX_CLAIM}
+      # - PLEX_CLAIM=${PLEX_CLAIM}
     ports:
       - 32400:32400
     devices:
