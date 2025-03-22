@@ -13,7 +13,10 @@
       - 21027:21027/udp
     restart: unless-stopped
     networks:
-      - internal_network
+      - external_network
+    cap_add:
+      - CHOWN
+      - FOWNER
     volumes:
       - ${DATADIR}/syncthing/config:/config
       - ${DATADIR}:/opt/d/data/docker
