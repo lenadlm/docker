@@ -60,6 +60,9 @@ services:
     environment:
       - TZ=Africa/Nairobi
       - WEBPASSWORD=${WEBPASSWORD}
+      - ServerIP=172.20.0.53
+      - PIHOLE_DNS_=127.30.0.54;127.20.0.54
+      - DNSSEC=false 
     volumes:
       - ${DATADIR}/pihole/pihole:/etc/pihole
       - ${DATADIR}/pihole/dnsmasq.d:/etc/dnsmasq.d
