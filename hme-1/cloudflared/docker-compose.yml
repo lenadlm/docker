@@ -41,7 +41,26 @@ services:
       - ${DATADIR}/duckdns/config:/config  # Adjust path as needed
     restart: unless-stopped
 
-   
+  pihole:
+    image: pihole/pihole:latest
+    container_name: pihole
+    restart: always
+    ports:
+      - 80:80
+    networks:
+      external_network:
+        ipv4_address: 172.20.0.53
+    cap_add:
+      - NET_ADMIN
+      - SYS_NICE
+      - SYS_TIME
+    environment:
+      - TZ=Africa/Nairobi
+      - WEBPASSWORD=${WEBPASSWORD}
+    volumes:
+      - ${DATADIR}/pihole/pihole:/etc/pihole
+      - ${DATADIR}/pihole/dnsmasq.d:/etc/dnsmasq.d
+
 networks:
   external_network:
     external: true
