@@ -92,7 +92,9 @@ services:
     image: tinyserve/xteve:latest
     container_name: xteve
     restart: unless-stopped
-    privileged: true
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
     security_opt:
       - no-new-privileges:true
     environment:
