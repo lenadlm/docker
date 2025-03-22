@@ -93,7 +93,6 @@ services:
     container_name: xteve
     restart: unless-stopped
     cap_add:
-      - NET_ADMIN
       - SYS_ADMIN
     security_opt:
       - no-new-privileges:true
