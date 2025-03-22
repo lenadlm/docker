@@ -60,6 +60,7 @@ services:
     volumes:
       - ${DATADIR}/pihole/pihole:/etc/pihole
       - ${DATADIR}/pihole/dnsmasq.d:/etc/dnsmasq.d
+      - /etc/timezone:/etc/timezone:ro
 
   unbound1:
     image: alpinelinux/unbound:latest
