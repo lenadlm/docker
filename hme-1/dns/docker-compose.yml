@@ -70,29 +70,16 @@ services:
       - ${DATADIR}/pihole/dnsmasq.d:/etc/dnsmasq.d
       - /etc/timezone:/etc/timezone:ro
 
-  unbound1:
+  unbound:
     image: alpinelinux/unbound:latest
-    container_name: unbound1
-    restart: always
-    networks:
-      internal_network:
-        ipv4_address: 172.30.0.54
-    volumes:
-      - ${DATADIR}/unbound/1:/etc/unbound
-      - /etc/timezone:/etc/timezone:ro
-    tmpfs:
-      - /tmp
-      - /var/lib/unbound
-
-  unbound2:
-    image: alpinelinux/unbound:latest
-    container_name: unbound2
+    container_name: unbound
     restart: always
     networks:
       external_network:
         ipv4_address: 172.20.0.54
     volumes:
-      - ${DATADIR}/unbound/2:/etc/unbound
+      - ${DATADIR}/unbound/unbound.conf:/etc/unbound/unbound.conf
+      - ${DATADIR}/unbound/root.hints:/etc/unbound/root.hints
       - /etc/timezone:/etc/timezone:ro
     tmpfs:
       - /tmp
