@@ -37,8 +37,8 @@ services:
       internal_network:
         ipv4_address: 172.30.0.54
     volumes:
-      - /opt/docker/unbound/unbound1/unbound.conf:/etc/unbound/unbound.conf
-      - /opt/docker/unbound/unbound1/root.hints:/etc/unbound/root.hints
+      - /opt/docker/unbound/1/unbound.conf:/etc/unbound/unbound.conf
+      - /opt/docker/unbound/1/root.hints:/etc/unbound/root.hints
       - /etc/timezone:/etc/timezone:ro
     tmpfs:
       - /tmp
@@ -52,8 +52,8 @@ services:
       external_network:
         ipv4_address: 172.20.0.54
     volumes:
-      - /opt/docker/unbound/unbound2/unbound.conf:/etc/unbound/unbound.conf
-      - /opt/docker/unbound/unbound2/root.hints:/etc/unbound/root.hints
+      - /opt/docker/unbound/2/unbound.conf:/etc/unbound/unbound.conf
+      - /opt/docker/unbound/2/root.hints:/etc/unbound/root.hints
       - /etc/timezone:/etc/timezone:ro
     tmpfs:
       - /tmp
