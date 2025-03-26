@@ -5,14 +5,14 @@
 @@||docker.com^
 @@||facebook.com^
 @@||lg-app.dstv.com^
-@@||livescore.com^$important
+@@||livescore.com^
+@@||scdn.co^
+@@||spotifycdn.com^
+@@||spotify.com^$important
 @@||tiktok.com^$important
 @@||tiktokcdn.com^$important
 @@||ttwstatic.com^$important
 @@||truecaller.com^$important
-@@||scdn.co^
-@@||spotifycdn.com^
-@@||spotify.com^$important
 !
 ! -- BLOCKLIST --
 ||*.xyz^
