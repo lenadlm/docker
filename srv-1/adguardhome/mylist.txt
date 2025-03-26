@@ -9,6 +9,8 @@
 @@||livescore.com^$important
 @@||ttwstatic.com^$important
 @@||truecaller.com^$important
+@@||spotifycdn.com^
+@@||scdn.co^
 @@||spotify.com^$important
 @@||lg-app.dstv.com^
 @@||docker.com^
