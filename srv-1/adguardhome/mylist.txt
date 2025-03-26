@@ -2,18 +2,17 @@
 ! Last Modified : 2025-03-16
 !
 ! -- ALLOWLIST --
-@@||web.facebook.com^$important
-@@||facebook.com^$important
+@@||docker.com^
+@@||facebook.com^
+@@||lg-app.dstv.com^
+@@||livescore.com^$important
 @@||tiktok.com^$important
 @@||tiktokcdn.com^$important
-@@||livescore.com^$important
 @@||ttwstatic.com^$important
 @@||truecaller.com^$important
-@@||spotifycdn.com^
 @@||scdn.co^
+@@||spotifycdn.com^
 @@||spotify.com^$important
-@@||lg-app.dstv.com^
-@@||docker.com^
 !
 ! -- BLOCKLIST --
 ||*.xyz^
