@@ -145,6 +145,9 @@ services:
       - 9051:9051
     networks:
       - external_network
+    dns:
+      - 172.30.0.53
+      - 172.20.0.53
     volumes:
       - ${DATADIR}/tor/config:/etc/tor
       - ${DATADIR}/tor/data:/var/lib/tor
