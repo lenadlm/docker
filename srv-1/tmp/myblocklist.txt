@@ -22,6 +22,7 @@
 ||discusteleost.top^
 ||hlag.com^
 ||hlag.org^
+||hlag.*^
 ||hl.lan^
 ||iqbroker.com^
 ||iqoption.com^
@@ -35,8 +36,8 @@
 ||toptitaniumapp.monster^
 ||thesurferprotector.com^
 ||targetchain-flow.com^
-||zscaler.*^
 ||zscaler.com^
 ||zscaler.net^
-||zscalertwo.*^
+||zscaler.*^
 ||zscalertwo.net^
+||zscalertwo.*^
