@@ -26,6 +26,7 @@
 ||iqbroker.com^
 ||iqoption.com^
 ||iqtrading.asia^
+||iqtrading.*^
 ||ixyyijop.com^
 ||mbogibet.co.ke^
 ||mbogibet.com^
