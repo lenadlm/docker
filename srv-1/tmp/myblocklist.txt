@@ -18,7 +18,7 @@
 !https://adguardteam.github.io/HostlistsRegistry/assets/filter_27.txt--------------------------!
 !----------------------------------------------------------------------------------------------!
 !----------------------------------------------------------------------------------------------!
-! -- ALLOWLIST --
+!! --- ALLOWLIST --- !!
 @@||docker.com^
 @@||facebook.com^
 @@||lg-app.dstv.com^
@@ -31,7 +31,7 @@
 @@||ttwstatic.com^
 @@||truecaller.com^
 !
-! -- BLOCKLIST --
+!! --- BLOCKLIST --- !!
 ||*.xyz^
 ||1xbet.co.ke^
 ||1xbet.*^
