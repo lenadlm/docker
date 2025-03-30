@@ -8,17 +8,17 @@
 @@||livescore.com^
 @@||scdn.co^
 @@||spotifycdn.com^
-@@||spotify.com^$important
-@@||tiktok.com^$important
-@@||tiktokcdn.com^$important
-@@||ttwstatic.com^$important
-@@||truecaller.com^$important
+@@||spotify.com^
+@@||tiktok.com^
+@@||tiktokcdn.com^
+@@||ttwstatic.com^
+@@||truecaller.com^
 !
 ! -- BLOCKLIST --
 ||*.xyz^
 ||1xbet.co.ke^
-||ads.microsoft.com^$important
-||data.microsoft.com^$important
+||ads.microsoft.com^
+||data.microsoft.com^
 ||discusteleost.top^
 ||hlag.com^
 ||hlag.org^
@@ -34,6 +34,6 @@
 ||toptitaniumapp.monster^
 ||thesurferprotector.com^
 ||targetchain-flow.com^
-||zscaler.com^$important
-||zscaler.net^$important
-||zscalertwo.net^$important
+||zscaler.com^
+||zscaler.net^
+||zscalertwo.net^
