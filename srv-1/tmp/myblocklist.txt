@@ -9,7 +9,7 @@
 !https://adguardteam.github.io/HostlistsRegistry/assets/filter_49.txt--------------------------!
 !----------------------------------------------------------------------------------------------!
 !MyBlocklist-----------------------------------------------------------------------------------!
-!https://raw.githubusercontent.com/lenadlm/docker/refs/heads/main/srv-1/tmp/myblocklist.txt----!
+!https://raw.githubusercontent.com/lenadlm/docker/main/srv-1/tmp/myblocklist.txt----!
 !----------------------------------------------------------------------------------------------!
 !ph00lt0---------------------------------------------------------------------------------------!
 !https://raw.githubusercontent.com/ph00lt0/blocklist/master/blocklist.txt----------------------!
