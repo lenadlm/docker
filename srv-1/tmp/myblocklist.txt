@@ -1,4 +1,4 @@
-! Name : mylist
+! Name : myblocklist
 ! Last Modified : 2025-03-30
 !
 ! -- ALLOWLIST --
