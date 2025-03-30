@@ -7,8 +7,8 @@
 @@||lg-app.dstv.com^
 @@||livescore.com^
 @@||scdn.co^
-@@||spotifycdn.com^
 @@||spotify.com^
+@@||spotifycdn.com^
 @@||tiktok.com^
 @@||tiktokcdn.com^
 @@||ttwstatic.com^
