@@ -38,4 +38,5 @@
 ||zscaler.*^
 ||zscaler.com^
 ||zscaler.net^
+||zscalertwo.*^
 ||zscalertwo.net^
