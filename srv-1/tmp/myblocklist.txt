@@ -24,6 +24,7 @@
 ||hlag.org^
 ||hlag.*^
 ||hl.lan^
+||hl.*^
 ||iqbroker.com^
 ||iqoption.com^
 ||iqtrading.asia^
