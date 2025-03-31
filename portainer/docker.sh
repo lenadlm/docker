@@ -20,7 +20,6 @@ INTERNAL_SUBNET="172.30.0.0/24"
 INTERNAL_GATEWAY="172.30.0.1"
 EXTERNAL_SUBNET="172.20.0.0/24"
 EXTERNAL_GATEWAY="172.20.0.1"
-DOCKER_COMPOSE_VERSION="2.25.0"
 PORTAINER_DIR="/opt/portainer"
 PORTAINER_COMPOSE_URL="https://raw.githubusercontent.com/lenadlm/docker/main/portainer/docker-compose.yml"
 
@@ -90,18 +89,6 @@ else
     echo "External Docker network $EXTERNAL_NETWORK already exists."
 fi
 
-# Install Docker Compose if not already installed
-if ! command -v docker compose &>/dev/null; then
-    echo "Installing Docker Compose..."
-    curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    chmod +x /usr/local/bin/docker-compose
-else
-    echo "Docker Compose is already installed. Skipping installation."
-fi
-
-# Verify Docker Compose installation
-docker compose version
-
 # Setup Portainer using Docker Compose
 if [ ! -d "$PORTAINER_DIR" ] || [ -z "$(docker ps -aq -f name=portainer)" ]; then
     echo "Setting up Portainer using Docker Compose..."
@@ -109,6 +96,9 @@ if [ ! -d "$PORTAINER_DIR" ] || [ -z "$(docker ps -aq -f name=portainer)" ]; the
     curl -fsSL "$PORTAINER_COMPOSE_URL" -o "$PORTAINER_DIR/docker-compose.yml"
     cd "$PORTAINER_DIR"
     docker compose up -d
+    SERVER_IP=$(hostname -I | awk '{print $1}')
+    echo "Portainer has been successfully installed and deployed using Docker Compose"
+    echo "Access Portainer at: https://$SERVER_IP:9443"
 else
     echo "Portainer is already installed and running. Skipping setup."
 fi
