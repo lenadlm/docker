@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # Run the script using:
+# 
+# curl -fsSL "https://raw.githubusercontent.com/lenadlm/docker/main/portainer/docker.sh" -o "docker.sh"
 # chmod +x docker.sh
 # sudo ./docker.sh
 
