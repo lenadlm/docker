@@ -99,7 +99,7 @@ else
 fi
 
 # Define variables for deployment
-COMPOSE_FILE_URL="https://raw.githubusercontent.com/lenadlm/docker/main/portainer/docker-compose.yml"
+COMPOSE_FILE_URL="https://raw.githubusercontent.com/lenadlm/docker/main/srv-1/portainer/docker-compose.yml"
 COMPOSE_DIR="/opt/docker/portainer"
 
 # Check if the URL is accessible
