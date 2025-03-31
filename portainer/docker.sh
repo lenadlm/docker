@@ -4,131 +4,111 @@
 # chmod +x docker.sh
 # sudo ./docker.sh
 
-# Script to set up internal and external Docker networks and deploy Portainer
+# Exit immediately if a command exits with a non-zero status
 set -e
 
-# Ensure the script is being run as root
-if [ "$EUID" -ne 0 ]; then
-    echo "Please run as root."
+# Define log file
+LOG_FILE="/var/log/docker_setup.log"
+exec > >(tee -a $LOG_FILE) 2>&1
+
+# Variables
+INTERNAL_NETWORK="internal_network"
+EXTERNAL_NETWORK="external_network"
+INTERNAL_SUBNET="172.30.0.0/24"
+INTERNAL_GATEWAY="172.30.0.1"
+EXTERNAL_SUBNET="172.20.0.0/24"
+EXTERNAL_GATEWAY="172.20.0.1"
+DOCKER_COMPOSE_VERSION="2.25.0"
+PORTAINER_DIR="/opt/portainer"
+PORTAINER_COMPOSE_URL="https://raw.githubusercontent.com/lenadlm/docker/main/portainer/docker-compose.yml"
+
+# Function to handle errors
+error_exit() {
+    echo "Error on line $1"
+    exit 1
+}
+trap 'error_exit $LINENO' ERR
+
+# Check OS compatibility
+OS=$(lsb_release -si 2>/dev/null || cat /etc/*release 2>/dev/null | grep -oP '(?<=^ID=).+')
+if [[ "$OS" != "Ubuntu" && "$OS" != "Debian" ]]; then
+    echo "Unsupported OS: $OS. This script supports only Ubuntu and Debian."
     exit 1
 fi
 
-# Detect the operating system and adjust for Raspbian
-OS=$(lsb_release -is 2>/dev/null | tr '[:upper:]' '[:lower:]' || echo "unknown")
-if [[ $OS == "raspbian" ]]; then
-    OS="debian"  # Treat Raspbian as Debian for compatibility
-fi
+echo "Running on supported OS: $OS"
 
-if [[ ! $OS =~ ^(debian|ubuntu)$ ]]; then
-    echo "This script only supports Debian, Ubuntu, or Raspbian."
-    exit 1
-fi
-
-# Update and install prerequisites
-echo "Updating system and installing prerequisites..."
+# Update and install dependencies
+echo "Updating and installing dependencies..."
 apt update && apt upgrade -y
-apt install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
+apt install -y curl gnupg lsb-release ca-certificates software-properties-common
+apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install Docker if not installed
+# Install Docker if not already installed
 if ! command -v docker &>/dev/null; then
-    echo "Docker not found. Installing..."
-
-    # Add Docker GPG key
-    echo "Adding Docker GPG key..."
-    curl -fsSL https://download.docker.com/linux/$OS/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg || {
-        echo "Failed to fetch Docker GPG key. Exiting."; exit 1; }
-
-    # Add Docker repository
-    echo "Adding Docker repository..."
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \
-https://download.docker.com/linux/$OS $(lsb_release -cs) stable" | \
-    tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-    # Update package list and install Docker
-    apt update
-    apt install -y docker-ce docker-ce-cli containerd.io
-    systemctl enable docker
-    systemctl start docker
+    echo "Installing Docker..."
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sh get-docker.sh
+    rm get-docker.sh
 else
     echo "Docker is already installed. Skipping installation."
 fi
 
-# Install Docker Compose plugin if not installed
-if ! docker compose version &>/dev/null; then
-    echo "Docker Compose (plugin) not found. Installing..."
-    apt install -y docker-compose-plugin
+# Ensure Docker service is running
+echo "Enabling and starting Docker service..."
+systemctl enable --now docker
+
+# Add user 'lenadlm' to Docker group if it exists
+if id "lenadlm" &>/dev/null; then
+    echo "Adding user 'lenadlm' to Docker group..."
+    usermod -aG docker lenadlm
 else
-    echo "Docker Compose (plugin) is already installed. Skipping installation."
+    echo "User 'lenadlm' does not exist. Skipping user modification."
 fi
 
-# Remove existing portainer_default network if it exists
-#if docker network inspect portainer_default >/dev/null 2>&1; then
-#    echo "Removing old 'portainer_default' network..."
-#    docker network rm portainer_default
-#fi
-
-# Create the internal Docker network
-if ! docker network inspect internal_network >/dev/null 2>&1; then
-    echo "Creating the internal_network Docker network..."
+# Check and create internal network
+if ! docker network inspect "$INTERNAL_NETWORK" &>/dev/null; then
+    echo "Creating internal Docker network: $INTERNAL_NETWORK"
     docker network create \
-        --driver bridge \
-        --subnet=172.30.0.0/24 \
-        --gateway=172.30.0.1 \
-        --attachable \
-        internal_network
+        --subnet=$INTERNAL_SUBNET \
+        --gateway=$INTERNAL_GATEWAY \
+        $INTERNAL_NETWORK
 else
-    echo "Network 'internal_network' already exists. Skipping creation."
+    echo "Internal Docker network $INTERNAL_NETWORK already exists."
 fi
 
-# Create the external Docker network
-if ! docker network inspect external_network >/dev/null 2>&1; then
-    echo "Creating the external_network Docker network..."
+# Check and create external network
+if ! docker network inspect "$EXTERNAL_NETWORK" &>/dev/null; then
+    echo "Creating external Docker network: $EXTERNAL_NETWORK"
     docker network create \
-        --driver bridge \
-        --subnet=172.20.0.0/24 \
-        --gateway=172.20.0.1 \
-        --attachable \
-        external_network
+        --subnet=$EXTERNAL_SUBNET \
+        --gateway=$EXTERNAL_GATEWAY \
+        $EXTERNAL_NETWORK
 else
-    echo "Network 'external_network' already exists. Skipping creation."
+    echo "External Docker network $EXTERNAL_NETWORK already exists."
 fi
 
-# Define variables for deployment
-COMPOSE_FILE_URL="https://raw.githubusercontent.com/lenadlm/docker/main/portainer/docker-compose.yml"
-COMPOSE_DIR="/opt/docker/portainer"
-
-# Check if the URL is accessible
-echo "Validating Docker Compose file URL..."
-if ! curl -Isf $COMPOSE_FILE_URL; then
-    echo "The specified URL is not accessible: $COMPOSE_FILE_URL"
-    exit 1
+# Install Docker Compose if not already installed
+if ! command -v docker compose &>/dev/null; then
+    echo "Installing Docker Compose..."
+    curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
+else
+    echo "Docker Compose is already installed. Skipping installation."
 fi
 
-# Download the docker-compose file to the target directory
-echo "Downloading Docker Compose file..."
-mkdir -p $COMPOSE_DIR
-curl -fsSL $COMPOSE_FILE_URL -o $COMPOSE_DIR/docker-compose.yml
+# Verify Docker Compose installation
+docker compose version
 
-# Update the compose file to use the new networks
-echo "Updating Docker Compose file to use internal_network..."
-sed -i 's/portainer_default/internal_network/g' $COMPOSE_DIR/docker-compose.yml
+# Setup Portainer using Docker Compose
+if [ ! -d "$PORTAINER_DIR" ] || [ -z "$(docker ps -aq -f name=portainer)" ]; then
+    echo "Setting up Portainer using Docker Compose..."
+    mkdir -p "$PORTAINER_DIR"
+    curl -fsSL "$PORTAINER_COMPOSE_URL" -o "$PORTAINER_DIR/docker-compose.yml"
+    cd "$PORTAINER_DIR"
+    docker compose up -d
+else
+    echo "Portainer is already installed and running. Skipping setup."
+fi
 
-# Navigate to the compose directory and deploy Portainer using Docker Compose
-echo "Deploying Portainer using Docker Compose..."
-cd $COMPOSE_DIR
-docker compose up -d
-
-# Print success message
-SERVER_IP=$(hostname -I | awk '{print $1}')
-cat <<EOF
-Portainer has been successfully installed and deployed using Docker Compose (plugin version).
-The Docker Compose file is located at: $COMPOSE_DIR/docker-compose.yml
-Access Portainer at: https://$SERVER_IP:9443
-
-Please configure Portainer via the web interface.
-EOF
+echo "Docker setup completed successfully."
