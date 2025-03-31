@@ -69,24 +69,24 @@ fi
 
 # Check and create internal network
 if ! docker network inspect "$INTERNAL_NETWORK" &>/dev/null; then
-    echo "Creating internal Docker network: $INTERNAL_NETWORK"
+    echo "Creating docker network: $INTERNAL_NETWORK"
     docker network create \
         --subnet=$INTERNAL_SUBNET \
         --gateway=$INTERNAL_GATEWAY \
         $INTERNAL_NETWORK
 else
-    echo "Internal Docker network $INTERNAL_NETWORK already exists."
+    echo "Docker network $INTERNAL_NETWORK already exists."
 fi
 
 # Check and create external network
 if ! docker network inspect "$EXTERNAL_NETWORK" &>/dev/null; then
-    echo "Creating external Docker network: $EXTERNAL_NETWORK"
+    echo "Creating docker network: $EXTERNAL_NETWORK"
     docker network create \
         --subnet=$EXTERNAL_SUBNET \
         --gateway=$EXTERNAL_GATEWAY \
         $EXTERNAL_NETWORK
 else
-    echo "External Docker network $EXTERNAL_NETWORK already exists."
+    echo "Docker network $EXTERNAL_NETWORK already exists."
 fi
 
 # Setup Portainer using Docker Compose
