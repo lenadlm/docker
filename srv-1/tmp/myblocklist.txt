@@ -33,6 +33,8 @@
 @@||truecaller.com^
 !
 !----- BLOCKLIST -----!
+||*.ru^
+||*.top^
 ||*.xyz^
 ||1xbet.co.ke^
 ||1xbet.*^
