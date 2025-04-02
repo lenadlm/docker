@@ -1,0 +1,29 @@
+[DEFAULT]
+backend = auto
+port = ssh
+protocol = all
+chain = INPUT
+banaction = iptables-allports
+action = %(banaction)s[name=%(__name__)s, chain="%(chain)s"]
+
+maxretry = 3
+findtime = 1d
+bantime = 2d
+bantime.increment = true
+bantime.factor = 2  
+bantime.maxtime = 52w
+
+loglevel = INFO
+logtarget = /var/log/fail2ban.log
+
+[sshd]
+enabled = true
+filter = sshd
+logpath = /var/log/auth.log
+
+[recidive]
+enabled = true
+filter = recidive
+logpath = /var/log/fail2ban.log
+findtime = 6w
+bantime = 12w
