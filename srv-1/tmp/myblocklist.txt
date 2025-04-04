@@ -41,7 +41,7 @@
 ||ads.microsoft.com^
 ||data.microsoft.com^
 ||discusteleost.top^
-||*goddess.com^
+||*goddess.*^
 ||hlag.com^
 ||hlag.org^
 ||hlag.*^
