@@ -39,7 +39,6 @@ services:
     volumes:
       - /opt/docker/unbound/1/unbound.conf:/etc/unbound/unbound.conf
       - /opt/docker/unbound/1/root.hints:/etc/unbound/root.hints
-      - /opt/docker/unbound/1/root.key:/var/lib/unbound/root.key
       - /etc/timezone:/etc/timezone:ro
     tmpfs:
       - /tmp
@@ -55,7 +54,6 @@ services:
     volumes:
       - /opt/docker/unbound/2/unbound.conf:/etc/unbound/unbound.conf
       - /opt/docker/unbound/2/root.hints:/etc/unbound/root.hints
-      - /opt/docker/unbound/2/root.key:/var/lib/unbound/root.key
       - /etc/timezone:/etc/timezone:ro
     tmpfs:
       - /tmp
