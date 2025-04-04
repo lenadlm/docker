@@ -41,6 +41,7 @@
 ||ads.microsoft.com^
 ||data.microsoft.com^
 ||discusteleost.top^
+||*goddess.*^
 ||hlag.com^
 ||hlag.org^
 ||hlag.*^
@@ -55,6 +56,7 @@
 ||mbogibet.*^
 ||onenote.com^
 ||pukabolomen.shop^
+||redirect12.*^
 ||toptitaniumapp.*^
 ||thesurferprotector.*^
 ||targetchain-flow.*^
