@@ -60,6 +60,7 @@
 ||toptitaniumapp.*^
 ||thesurferprotector.*^
 ||targetchain-flow.*^
+||wpad.dlink^
 ||zscaler.net^
 ||zscaler.*^
 ||zscalertwo.net^
