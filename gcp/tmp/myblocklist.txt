@@ -55,6 +55,7 @@
 ||mbogibet.co.ke^
 ||mbogibet.*^
 ||onenote.com^
+||play-lg.*^
 ||pukabolomen.shop^
 ||redirect12.*^
 ||toptitaniumapp.*^
