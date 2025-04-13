@@ -10,7 +10,8 @@ maxretry = 3
 findtime = 1d
 bantime = 2d
 bantime.increment = true
-bantime.factor = 2  
+bantime.factor = 2
+bantime.rndtime = 1d
 bantime.maxtime = 52w
 
 loglevel = INFO
@@ -19,6 +20,7 @@ logtarget = /var/log/fail2ban.log
 [sshd]
 enabled = true
 filter = sshd
+mode = aggressive
 logpath = /var/log/auth.log
 
 [recidive]
