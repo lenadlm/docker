@@ -66,6 +66,27 @@ services:
       - ${DATADIR}/code-server/config:/config
       - ${DATADIR}:/array
 
+  nzbget:
+    image: lscr.io/linuxserver/nzbget:latest
+    container_name: nzbget
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+      - NZBGET_USER=leo
+      - NZBGET_PASS=leo
+    ports:
+      - 6789:6789
+    networks:
+      - internal_network
+    dns:
+      - 172.30.0.53
+      - 172.20.0.53
+    volumes:
+      - ${DATADIR}/nzbget/data:/config
+      - /d/data/downloads:/downloads
+
 #  homeassistant:
 #    image: ghcr.io/home-assistant/home-assistant:stable
 #    container_name: homeassistant
