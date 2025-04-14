@@ -40,7 +40,7 @@
 ||1xbet.*^
 ||ads.microsoft.com^
 ||data.microsoft.com^
-||discusteleost.top^
+||discusteleost.*^
 ||goddess.*^
 ||hlag.com^
 ||hlag.org^
