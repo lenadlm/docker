@@ -17,6 +17,20 @@ services:
     volumes:
       - /opt/docker/dnsdist:/etc/dnsdist
 
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    networks:
+      internal_network:
+        ipv4_address: 172.30.0.80
+      external_network:
+        ipv4_address: 172.20.0.80
+    ports:
+      - "9090:9090"
+    volumes:
+      - /opt/docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
 networks:
   internal_network:
     external: true
