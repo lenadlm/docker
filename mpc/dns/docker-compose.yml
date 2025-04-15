@@ -1,45 +1,21 @@
 services:
-  cloudflared:
-    image: cloudflare/cloudflared:latest
-    container_name: cloudflared
+  dnsdist:
+    image: powerdns/dnsdist-20:latest
+    container_name: dnsdist
     restart: unless-stopped
-    command: tunnel --no-autoupdate run
-    environment:
-      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
     networks:
-      - external_network
-
-  #cloudflare-ddns:
-  #  image: favonia/cloudflare-ddns:latest
-  #  restart: unless-stopped
-  #  user: "1000:1000"
-  #  read_only: true
-  #  cap_drop: [all]
-  #  security_opt: [no-new-privileges:true]
-  #  environment:
-  #    - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
-  #    - DOMAINS=${DOMAINS}
-  #    - PROXIED=true
-  #  networks:
-  #    - external_network
-
-  duckdns:
-    image: lscr.io/linuxserver/duckdns:latest
-    container_name: duckdns
-    restart: unless-stopped
-    networks:
-      - external_network
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Africa/Nairobi
-      - SUBDOMAINS=${SUBDOMAINS}
-      - TOKEN=${TOKEN}
-      - UPDATE_IP=ipv4
-      - LOG_FILE=false
+      internal_network:
+        ipv4_address: 172.30.0.53
+      external_network:
+        ipv4_address: 172.20.0.53
+    cap_add:
+      - NET_BIND_SERVICE
+      - NET_ADMIN
     volumes:
-      - ${DATADIR}/duckdns/config:/config
-
+      - ${DATADIR}/dnsdist:/etc/dnsdist
 
   pihole:
     image: pihole/pihole:latest
