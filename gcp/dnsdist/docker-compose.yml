@@ -1,5 +1,4 @@
 services:
-
   dnsdist:
     image: powerdns/dnsdist-20:latest
     container_name: dnsdist
@@ -17,3 +16,9 @@ services:
       - NET_ADMIN
     volumes:
       - /opt/docker/dnsdist:/etc/dnsdist
+
+networks:
+  internal_network:
+    external: true
+  external_network:
+    external: true
