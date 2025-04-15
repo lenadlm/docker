@@ -1,5 +1,4 @@
-services:
-    
+services: 
   adguardhome:
     image: adguard/adguardhome:latest
     container_name: adguardhome
@@ -29,21 +28,6 @@ services:
     tmpfs:
       - /tmp
       - /run
-
-  unbound1:
-    image: alpinelinux/unbound:latest
-    container_name: unbound1
-    restart: always
-    networks:
-      internal_network:
-        ipv4_address: 172.30.0.54
-    volumes:
-      - /opt/docker/unbound/1/unbound.conf:/etc/unbound/unbound.conf
-      - /opt/docker/unbound/1/root.hints:/etc/unbound/root.hints
-      - /etc/timezone:/etc/timezone:ro
-    tmpfs:
-      - /tmp
-      - /var/lib/unbound
 
   unbound2:
     image: alpinelinux/unbound:latest
