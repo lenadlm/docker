@@ -16,12 +16,12 @@ services:
       - NET_RAW
     networks:
       internal_network:
-        ipv4_address: 172.30.0.35
+        ipv4_address: 172.30.0.53
       external_network:
-        ipv4_address: 172.20.0.35
+        ipv4_address: 172.20.0.53
     dns:
-      - 172.30.0.54
-      - 172.20.0.54
+      - 172.30.0.35
+      - 172.20.0.35
     volumes:
       - /opt/docker/adguardhome/work:/opt/adguardhome/work
       - /opt/docker/adguardhome/conf:/opt/adguardhome/conf
@@ -35,7 +35,7 @@ services:
     restart: always
     networks:
       internal_network:
-        ipv4_address: 172.30.0.54
+        ipv4_address: 172.30.0.35
     volumes:
       - /opt/docker/unbound/1/unbound.conf:/etc/unbound/unbound.conf
       - /opt/docker/unbound/1/root.hints:/etc/unbound/root.hints
@@ -50,7 +50,7 @@ services:
     restart: always
     networks:
       external_network:
-        ipv4_address: 172.20.0.54
+        ipv4_address: 172.20.0.35
     volumes:
       - /opt/docker/unbound/2/unbound.conf:/etc/unbound/unbound.conf
       - /opt/docker/unbound/2/root.hints:/etc/unbound/root.hints
