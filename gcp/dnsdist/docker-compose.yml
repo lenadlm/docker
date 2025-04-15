@@ -10,6 +10,8 @@ services:
     networks:
       external_network:
         ipv4_address: 172.20.0.53
+      external_network:
+        ipv4_address: 172.30.0.53
     cap_add:
       - NET_BIND_SERVICE
       - NET_ADMIN
