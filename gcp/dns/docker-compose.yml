@@ -1,23 +1,5 @@
 services:
-
-  dnsdist:
-    image: powerdns/dnsdist-20:latest
-    container_name: dnsdist
-    restart: unless-stopped
-    ports:
-      - "53:53/udp"
-      - "53:53/tcp"
-    networks:
-      internal_network:
-        ipv4_address: 172.30.0.53
-      external_network:
-        ipv4_address: 172.20.0.53
-    cap_add:
-      - NET_BIND_SERVICE
-      - NET_ADMIN
-    volumes:
-      - /opt/docker/dnsdist:/etc/dnsdist
-      
+    
   adguardhome:
     image: adguard/adguardhome:latest
     container_name: adguardhome
