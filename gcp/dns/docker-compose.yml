@@ -23,8 +23,8 @@ services:
     container_name: adguardhome
     restart: always
     ports:
-      - "53:53/tcp"
-      - "53:53/udp"
+      #- "53:53/tcp"
+      #- "53:53/udp"
       - "8080:80/tcp"
       # - "3000:3000/tcp"
     environment:
