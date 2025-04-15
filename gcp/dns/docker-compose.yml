@@ -35,9 +35,9 @@ services:
       - NET_RAW
     networks:
       internal_network:
-        ipv4_address: 172.30.0.53
+        ipv4_address: 172.30.0.35
       external_network:
-        ipv4_address: 172.20.0.53
+        ipv4_address: 172.20.0.35
     dns:
       - 172.30.0.54
       - 172.20.0.54
