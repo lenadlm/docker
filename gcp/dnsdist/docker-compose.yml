@@ -17,16 +17,16 @@ services:
     volumes:
       - /opt/docker/dnsdist:/etc/dnsdist
 
-  unbound2:
+  unbound1:
     image: alpinelinux/unbound:latest
-    container_name: unbound2
+    container_name: unbound1
     restart: always
     networks:
-      external_network:
-        ipv4_address: 172.20.0.54
+      internal_network:
+        ipv4_address: 172.30.0.54
     volumes:
-      - /opt/docker/unbound/2/unbound.conf:/etc/unbound/unbound.conf
-      - /opt/docker/unbound/2/root.hints:/etc/unbound/root.hints
+      - /opt/docker/unbound/1/unbound.conf:/etc/unbound/unbound.conf
+      - /opt/docker/unbound/1/root.hints:/etc/unbound/root.hints
       - /etc/timezone:/etc/timezone:ro
     tmpfs:
       - /tmp
