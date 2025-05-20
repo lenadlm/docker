@@ -62,7 +62,7 @@ systemctl enable --now docker
 # Add user 'lenadlm' to Docker group if it exists
 if id "leo" &>/dev/null; then
     echo "Adding user 'leo' to Docker group..."
-    usermod -aG docker lenadlm
+    usermod -aG docker leo
 else
     echo "User 'leo' does not exist. Skipping user modification."
 fi
