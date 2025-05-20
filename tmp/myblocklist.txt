@@ -55,6 +55,7 @@
 ||ixyyijop.com^
 ||mbogibet.co.ke^
 ||mbogibet.*^
+||mozzartbet.*^
 ||onenote.com^
 ||play-lg.*^
 ||pukabolomen.shop^
