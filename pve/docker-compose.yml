@@ -1,1 +1,66 @@
-r
+services: 
+  adguardhome:
+    image: adguard/adguardhome:latest
+    container_name: adguardhome
+    restart: always
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "8080:80/tcp"
+      - "3000:3000/tcp"
+    environment:
+      - TZ=Africa/Nairobi
+    cap_add:
+      - NET_ADMIN
+      - SYS_NICE
+      - NET_RAW
+    networks:
+      internal_network:
+        ipv4_address: 172.30.0.53
+      external_network:
+        ipv4_address: 172.20.0.53
+    dns:
+      - 172.30.0.35
+      - 172.20.0.35
+    volumes:
+      - /docker/adguardhome/work:/opt/adguardhome/work
+      - /docker/adguardhome/conf:/opt/adguardhome/conf
+    tmpfs:
+      - /tmp
+      - /run
+
+  unbound1:
+    image: alpinelinux/unbound:latest
+    container_name: unbound1
+    restart: always
+    networks:
+      internal_network:
+        ipv4_address: 172.30.0.35
+    volumes:
+      - /docker/unbound/1/unbound.conf:/etc/unbound/unbound.conf
+      - /docker/unbound/1/root.hints:/etc/unbound/root.hints
+      - /etc/timezone:/etc/timezone:ro
+    tmpfs:
+      - /tmp
+      - /var/lib/unbound
+  
+  unbound2:
+    image: alpinelinux/unbound:latest
+    container_name: unbound2
+    restart: always
+    networks:
+      external_network:
+        ipv4_address: 172.20.0.35
+    volumes:
+      - /docker/unbound/2/unbound.conf:/etc/unbound/unbound.conf
+      - /docker/unbound/2/root.hints:/etc/unbound/root.hints
+      - /etc/timezone:/etc/timezone:ro
+    tmpfs:
+      - /tmp
+      - /var/lib/unbound
+
+networks:
+  internal_network:
+    external: true
+  external_network:
+    external: true
