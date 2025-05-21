@@ -48,3 +48,5 @@ services:
 networks:
   internal_network:
     external: true
+  external_network:
+    external: true
