@@ -40,6 +40,7 @@ services:
       - WATCHTOWER_NOTIFICATION_URL=${WATCHTOWER_NOTIFICATION_URL}
     networks:
       - internal_network
+      - external_network
     volumes:
       - /docker/watchtower/config.json:/config.json
     depends_on:
