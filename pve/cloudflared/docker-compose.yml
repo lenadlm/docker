@@ -8,6 +8,23 @@ services:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     networks:
       - external_network
+
+  duckdns:
+    image: lscr.io/linuxserver/duckdns:latest
+    container_name: duckdns
+    restart: unless-stopped
+    networks:
+      - external_network
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+      - SUBDOMAINS=${SUBDOMAINS}
+      - TOKEN=${TOKEN}
+      - UPDATE_IP=ipv4
+      - LOG_FILE=false
+    volumes:
+      - /docker/duckdns/config:/config
       
 networks:
   external_network:
