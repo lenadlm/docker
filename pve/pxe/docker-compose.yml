@@ -23,26 +23,6 @@ services:
       - "127.0.0.1:2375:2375" 
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-
-  dozzle:
-    container_name: dozzle
-    image: amir20/dozzle:latest
-    restart: unless-stopped
-    environment:
-      - DOCKER_HOST=tcp://docker-socket-proxy:2375
-      - TZ=Africa/Nairobi
-    security_opt:
-      - no-new-privileges:true
-    ports:
-      - "8880:8080"
-    networks:
-      - internal_network
-    cap_drop:
-      - ALL
-    volumes:
-      - /docker/dozzle/data:/data
-    depends_on:
-      - docker-socket-proxy
  
   watchtower:
     image: containrrr/watchtower
