@@ -17,8 +17,8 @@ services:
       - VERSION=1
       - TZ=Africa/Nairobi
     networks:
-      internal_network:
-        ipv4_address: 172.30.0.30
+      - internal_network
+      - external_network
     ports:
       - "127.0.0.1:2375:2375" 
     volumes:
