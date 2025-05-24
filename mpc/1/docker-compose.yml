@@ -112,11 +112,8 @@ services:
     networks:
       - internal_network
       - external_network
-    dns:
-      - 172.30.0.53
-      - 172.20.0.53
     volumes:
-      - ${DATADIR}/watchtower/config.json:/config.json
+      - /docker/watchtower/config.json:/config.json
     depends_on:
       - docker-socket-proxy
 
