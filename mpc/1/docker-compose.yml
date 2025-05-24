@@ -77,7 +77,7 @@ services:
     volumes:
       - /docker/syncthing/config:/config
       - /docker:/docker
-      - /mnt/d/data:/mnt/d/data
+      - /mnt/d:/mnt/d
 
   tor:
     image: dockurr/tor
@@ -88,9 +88,6 @@ services:
       - 9051:9051
     networks:
       - external_network
-    dns:
-      - 172.30.0.53
-      - 172.20.0.53
     volumes:
       - /docker/tor/config:/etc/tor
       - /docker/tor/data:/var/lib/tor
