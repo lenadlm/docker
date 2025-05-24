@@ -1,4 +1,14 @@
 services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    networks:
+      - external_network
+      
   plex:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
@@ -16,12 +26,9 @@ services:
     networks:
       internal_network:
         ipv4_address: 172.30.0.32
-    dns:
-      - 172.30.0.53
-      - 172.20.0.53
     volumes:
-      - ${DATADIR}/plex/config:/config
-      - /d/data/media:/media
+      - /docker/plex/config:/config
+      - /mnt/d/data/media:/media
 
   kometa:
     image: lscr.io/linuxserver/kometa:latest
@@ -37,11 +44,8 @@ services:
       - KOMETA_TIME=21:00
     networks:
       - internal_network
-    dns:
-      - 172.30.0.53
-      - 172.20.0.53
     volumes:
-      - ${DATADIR}/plex/kometa/config:/config
+      - /mnt/plex/kometa/config:/config
 
   tautulli:
     image: lscr.io/linuxserver/tautulli:latest
@@ -55,11 +59,8 @@ services:
       - 8181:8181
     networks:
       - internal_network
-    dns:
-      - 172.30.0.53
-      - 172.20.0.53
     volumes:
-      - ${DATADIR}/tautulli/config:/config
+      - /docker/plex/tautulli/config:/config
 
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
@@ -80,26 +81,10 @@ services:
     networks:
       internal_network:
         ipv4_address: 172.30.0.15
-    dns:
-      - 172.30.0.53
-      - 172.20.0.53
     volumes:
       - ${DATADIR}/jellyfin/library:/config
       - /d/data/media:/data
 
-  samsung-tvplus:
-    image: matthuisman/samsung-tvplus-for-channels
-    container_name: samsung-tvplus
-    restart: unless-stopped
-    environment:
-      - TZ=Africa/Nairobi
-    ports:
-      - "8182:80"
-    networks:
-      - internal_network
-    dns:
-      - 172.30.0.53
-      - 172.20.0.53
 
   xteve:
     image: tinyserve/xteve:latest
