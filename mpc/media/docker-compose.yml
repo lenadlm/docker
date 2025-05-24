@@ -1,5 +1,4 @@
-services:
-     
+services: 
   plex:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
@@ -97,9 +96,9 @@ services:
       - CHOWN
       - FOWNER
     volumes:
-      - /docker/syncthing/config:/config
-      - /docker:/docker
-      - /mnt/d/data:/mnt/d/data
+      - /docker/syncthing/config:/config:rw
+      - /docker:/docker:rw
+      - /mnt/d:/mnt/d:rw
 
 
 networks:
