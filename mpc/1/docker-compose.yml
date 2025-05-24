@@ -23,49 +23,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
-  dozzle:
-    container_name: dozzle
-    image: amir20/dozzle:latest
-    restart: unless-stopped
-    environment:
-      - DOCKER_HOST=tcp://docker-socket-proxy:2375
-    ports:
-      - 8880:8080
-    networks:
-      - internal_network
-    dns:
-      - 172.30.0.53
-      - 172.20.0.53
-    cap_drop:
-      - ALL
-    security_opt:
-      - no-new-privileges:true
-    depends_on:
-      - docker-socket-proxy
-
-  code-server:
-    image: lscr.io/linuxserver/code-server:4.96.4-ls254
-    container_name: code-server
-    restart: unless-stopped
-    environment:
-      - PUID=1000 
-      - PGID=1000
-      - TZ=Africa/Nairobi
-      - PASSWORD=${PASSWORD}
-      - SUDO_PASSWORD=${SUDO_PASSWORD}
-      - DEFAULT_WORKSPACE=/config/workspace
-      # - PROXY_DOMAIN=code.yourdomain.com # Uncomment if using a reverse proxy
-    ports:
-      - 8443:8443
-    networks:
-      - internal_network
-    dns:
-      - 172.30.0.53
-      - 172.20.0.53
-    volumes:
-      - ${DATADIR}/code-server/config:/config
-      - ${DATADIR}:/array
-
   nzbget:
     image: lscr.io/linuxserver/nzbget:latest
     container_name: nzbget
@@ -85,7 +42,7 @@ services:
       - 172.20.0.53
     volumes:
       - ${DATADIR}/nzbget/data:/config
-      - /d/data/downloads:/downloads
+      - /mnt/d/downloads:/downloads
 
 #  homeassistant:
 #    image: ghcr.io/home-assistant/home-assistant:stable
@@ -152,10 +109,9 @@ services:
       - CHOWN
       - FOWNER
     volumes:
-      - ${DATADIR}/syncthing/config:/config
-      - ${DATADIR}:/opt/d/data/docker
-      - /d/data:/opt/d/data
-      - /f/data:/opt/f/data
+      - /docker/syncthing/config:/config
+      - /docker:/docker
+      - /mnt/d/data:/mnt/d/data
 
   tor:
     image: dockurr/tor
@@ -170,8 +126,8 @@ services:
       - 172.30.0.53
       - 172.20.0.53
     volumes:
-      - ${DATADIR}/tor/config:/etc/tor
-      - ${DATADIR}/tor/data:/var/lib/tor
+      - /docker/tor/config:/etc/tor
+      - /docker/tor/data:/var/lib/tor
 
   watchtower:
     image: containrrr/watchtower
