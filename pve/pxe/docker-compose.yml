@@ -58,6 +58,23 @@ services:
       - "8182:80"
     networks:
       - internal_network
+
+  xteve:
+    image: tinyserve/xteve:latest
+    container_name: xteve
+    restart: unless-stopped
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - TZ=Africa/Nairobi
+    networks:
+      - internal_network
+    ports:
+      - "34400:34400"
+    volumes:
+      - /docker/xteve:/etc/xteve
  
   watchtower:
     image: containrrr/watchtower
