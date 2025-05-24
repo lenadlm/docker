@@ -14,8 +14,7 @@ services:
     devices:
       - "/dev/dri:/dev/dri"
     networks:
-      internal_network:
-        ipv4_address: 172.30.0.32
+      - internal_network
     volumes:
       - /docker/plex/config:/config
       - /mnt/d/data/media:/media
@@ -69,11 +68,10 @@ services:
     devices:
       - "/dev/dri:/dev/dri"
     networks:
-      internal_network:
-        ipv4_address: 172.30.0.15
+      - internal_network
     volumes:
-      - ${DATADIR}/jellyfin/library:/config
-      - /d/data/media:/data
+      - /docker/jellyfin/library:/config
+      - /mnt/d/data/media:/data
 
   syncthing:
     image: lscr.io/linuxserver/syncthing:latest
@@ -91,7 +89,7 @@ services:
       - 22000:22000/udp
       - 21027:21027/udp
     networks:
-      - external_network
+      - internal_network
     cap_add:
       - CHOWN
       - FOWNER
