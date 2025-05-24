@@ -38,7 +38,7 @@ services:
       - UPDATE_IP=ipv4
       - LOG_FILE=false
     volumes:
-      - ${DATADIR}/duckdns/config:/config
+      - /docker/duckdns/config:/config
 
 networks:
   external_network:
