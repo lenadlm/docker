@@ -23,7 +23,17 @@ services:
       - "127.0.0.1:2375:2375" 
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-
+      
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    networks:
+      - external_network
+      
   syncthing:
     image: lscr.io/linuxserver/syncthing:latest
     container_name: syncthing
@@ -57,7 +67,7 @@ services:
     ports:
       - "8182:80"
     networks:
-      - internal_network
+      - external_network
 
   xteve:
     image: tinyserve/xteve:latest
@@ -70,7 +80,7 @@ services:
     environment:
       - TZ=Africa/Nairobi
     networks:
-      - internal_network
+      - external_network
     ports:
       - "34400:34400"
     volumes:
