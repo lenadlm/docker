@@ -98,7 +98,6 @@ services:
       - /docker:/docker:rw
       - /mnt/d:/mnt/d:rw
 
-services:
   transmission:
     image: lscr.io/linuxserver/transmission:latest
     container_name: transmission
