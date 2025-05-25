@@ -17,7 +17,7 @@ services:
       - internal_network
     volumes:
       - /docker/plex/config:/config
-      - /docker/plex/kometa/data/media:/media
+      - /mnt/d/data/media:/media
 
   kometa:
     image: lscr.io/linuxserver/kometa:latest
@@ -34,7 +34,7 @@ services:
     networks:
       - internal_network
     volumes:
-      - /mnt/plex/kometa/config:/config
+      - /docker/plex/kometa/config:/config
 
   tautulli:
     image: lscr.io/linuxserver/tautulli:latest
