@@ -98,7 +98,30 @@ services:
       - /docker:/docker:rw
       - /mnt/d:/mnt/d:rw
 
-
+services:
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+      - TRANSMISSION_WEB_HOME= #optional
+      - USER=leo
+      - PASS=leo
+      - WHITELIST= #optional
+      - PEERPORT= #optional
+      - HOST_WHITELIST= #optional
+    volumes:
+      - /docker/transmission/data:/config
+      - /mnt/d/downloads:/downloads
+      - /mnt/d/tmp:/watch
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped
+    
 networks:
   internal_network:
     external: true
