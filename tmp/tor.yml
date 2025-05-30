@@ -1,3 +1,4 @@
+service:
   tor:
     image: dockurr/tor
     container_name: tor
@@ -10,3 +11,6 @@
     volumes:
       - /docker/tor/config:/etc/tor
       - /docker/tor/data:/var/lib/tor
+networks:
+  external_network:
+    external: true
