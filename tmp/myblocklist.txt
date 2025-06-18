@@ -23,6 +23,7 @@
 @@||aliexpress.com^
 @@||docker.com^
 @@||facebook.com^
+@@||ipinfo.io^
 @@||lg-app.dstv.com^
 @@||livescore.com^
 @@||scdn.co^
