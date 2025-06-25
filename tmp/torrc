@@ -1,0 +1,14 @@
+SocksPort 0.0.0.0:9050
+ControlPort 127.0.0.1:9051
+HashedControlPassword 16:B81CD144AD434FD360007650B5DC022E42CDDF038E1FAFCD8C8B732292
+Log notice stdout
+
+CircuitBuildTimeout 4
+KeepalivePeriod 60
+NewCircuitPeriod 15
+MaxCircuitDirtiness 10
+
+ExitNodes {de}, {fr}, {gb}, {us}, {za}
+StrictNodes 1
+
+UseBridges 0
