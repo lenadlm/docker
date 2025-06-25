@@ -7,6 +7,7 @@ CircuitBuildTimeout 4
 KeepalivePeriod 60
 NewCircuitPeriod 15
 MaxCircuitDirtiness 10
+DataDirectory /var/lib/tor
 
 ExitNodes {de}, {fr}, {gb}, {us}, {za}
 StrictNodes 1
