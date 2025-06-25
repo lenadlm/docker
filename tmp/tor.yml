@@ -3,7 +3,7 @@ services:
     image: dockurr/tor
     container_name: tor
     restart: always
-    user: "1001:1001"
+    user: "1000:1000"
     ports:
       - 9050:9050
     networks:
