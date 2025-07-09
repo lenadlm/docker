@@ -25,7 +25,7 @@
 @@||ipinfo.io^
 @@||lg-app.dstv.com^
 @@||livescore.com^
-@@||web.netflix.com^
+@@||*web.netflix.com^
 @@||scdn.co^
 @@||spotify.com^
 @@||spotifycdn.com^
