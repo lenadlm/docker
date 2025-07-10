@@ -4,7 +4,9 @@ services:
     container_name: pihole
     restart: always
     ports:
-      - "8080:80"
+      - 53:53/tcp
+      - 53:53/udp
+      - 8080:80/tcp
     networks:
       internal_network:
         ipv4_address: 172.30.0.53
