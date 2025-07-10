@@ -1,9 +1,10 @@
+services:
   pihole:
     image: pihole/pihole:latest
     container_name: pihole
     restart: always
     ports:
-      - 8080:80
+      - "8080:80"
     networks:
       internal_network:
         ipv4_address: 172.30.0.53
@@ -19,21 +20,6 @@
     volumes:
       - /opt/docker/pihole/pihole:/etc/pihole
       - /opt/docker/pihole/dnsmasq.d:/etc/dnsmasq.d
-
-  unbound:
-    image: alpinelinux/unbound:latest
-    container_name: unbound
-    restart: always
-    networks:
-      external_network:
-        ipv4_address: 172.20.0.54
-    volumes:
-      - /opt/docker/unbound/unbound.conf:/etc/unbound/unbound.conf
-      - /opt/docker/unbound/root.hints:/etc/unbound/root.hints
-      - /etc/timezone:/etc/timezone:ro
-    tmpfs:
-      - /tmp
-      - /var/lib/unbound
 
 networks:
   internal_network:
