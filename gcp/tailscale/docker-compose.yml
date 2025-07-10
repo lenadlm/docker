@@ -19,8 +19,8 @@ services:
     image: nginx
     depends_on:
       - tailscale
-    networks:
-      - external_network
+    network_mode: service:tailscale
+    
 networks:
   external_network:
     external: true
