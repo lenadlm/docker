@@ -19,9 +19,6 @@ services:
         ipv4_address: 172.30.0.53
       external_network:
         ipv4_address: 172.20.0.53
-    dns:
-      - 172.30.0.35
-      - 172.20.0.35
     volumes:
       - /docker/adguardhome/work:/opt/adguardhome/work
       - /docker/adguardhome/conf:/opt/adguardhome/conf
