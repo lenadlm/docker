@@ -5,6 +5,7 @@ services:
     environment:
       - TS_AUTHKEY=${TS_AUTHKEY}
       - TS_STATE_DIR=/var/lib/tailscale
+      - TAILSCALE_UP_ARGS=--advertise-tags=tag:container
     volumes:
       - /docker/tailscale-nginx/state:/var/lib/tailscale
     devices:
