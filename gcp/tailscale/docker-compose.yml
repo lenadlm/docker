@@ -3,7 +3,7 @@ services:
     image: tailscale/tailscale:latest
     hostname: ts-gcp
     environment:
-      - TS_AUTHKEY=tskey-client-notAReal-OAuthClientSecret1Atawk
+      - TS_AUTHKEY=${TS_AUTHKEY}
       - TS_STATE_DIR=/var/lib/tailscale
     volumes:
       - /docker/tailscale-nginx/state:/var/lib/tailscale
