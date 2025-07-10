@@ -18,8 +18,8 @@ services:
       - TZ=Africa/Nairobi
       - WEBPASSWORD=${WEBPASSWORD}
     volumes:
-      - /opt/docker/pihole/pihole:/etc/pihole
-      - /opt/docker/pihole/dnsmasq.d:/etc/dnsmasq.d
+      - /docker/pihole/pihole:/etc/pihole
+      - /docker/pihole/dnsmasq.d:/etc/dnsmasq.d
 
 networks:
   internal_network:
