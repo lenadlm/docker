@@ -21,7 +21,7 @@ INTERNAL_GATEWAY="172.30.0.1"
 EXTERNAL_SUBNET="172.20.0.0/24"
 EXTERNAL_GATEWAY="172.20.0.1"
 PORTAINER_DIR="/docker/portainer"
-PORTAINER_COMPOSE_URL="https://raw.githubusercontent.com/lenadlm/docker/main/pve/portainer/docker-compose.yml"
+PORTAINER_COMPOSE_URL="https://raw.githubusercontent.com/lenadlm/docker/main/tmp/docker-compose.yml"
 
 # Function to handle errors
 error_exit() {
