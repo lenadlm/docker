@@ -3,31 +3,16 @@ services:
     image: adguard/adguardhome:latest
     container_name: adguardhome
     restart: always
-    ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "8080:80/tcp"
-      - "3000:3000/tcp"
+    network_mode: host
     environment:
       - TZ=Africa/Nairobi
     cap_add:
       - NET_ADMIN
       - SYS_NICE
       - NET_RAW
-    networks:
-      internal_network:
-        ipv4_address: 172.30.0.53
-      external_network:
-        ipv4_address: 172.20.0.53
     volumes:
       - /docker/adguardhome/work:/opt/adguardhome/work
       - /docker/adguardhome/conf:/opt/adguardhome/conf
     tmpfs:
       - /tmp
       - /run
-
-networks:
-  internal_network:
-    external: true
-  external_network:
-    external: true
