@@ -1,0 +1,15 @@
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    environment:
+      - GENERIC_TIMEZONE=Africa/Nairobi
+      - NODE_ENV=production
+      - N8N_SECURE_COOKIE=false
+    ports:
+      - "5678:5678"
+    networks:
+      - "internal_network"
+    volumes:
+      - /docker/n8n:/home/node/.n8n
+    restart: unless-stopped
