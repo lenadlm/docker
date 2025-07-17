@@ -13,3 +13,7 @@ services:
     volumes:
       - /docker/n8n:/home/node/.n8n
     restart: unless-stopped
+    
+networks:
+  internal_network:
+    external: true
