@@ -4,6 +4,7 @@ services:
     container_name: n8n
     environment:
       - GENERIC_TIMEZONE=Africa/Nairobi
+      - TZ=Africa/Nairobi
       - NODE_ENV=production
       - N8N_SECURE_COOKIE=false
     ports:
