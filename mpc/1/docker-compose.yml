@@ -23,6 +23,17 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
+  dozzle:
+    image: amir20/dozzle:latest
+    environment:
+      - DOCKER_HOST=tcp://docker-socket-proxy:2375
+    ports:
+      - 8380:8080
+    networks:
+      - external_network
+    depends_on:
+      - docker-socket-proxy
+
   cloudflared:
     image: cloudflare/cloudflared:latest
     container_name: cloudflared
