@@ -80,7 +80,7 @@ services:
       - 3301:3001
     networks:
       - external_network
-    device:
+    devices:
       - /dev/dri:/dev/dri
     restart: unless-stopped
 
