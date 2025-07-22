@@ -1,0 +1,12 @@
+  tor:
+    image: dockurr/tor
+    container_name: tor
+    restart: always
+    ports:
+      - 9050:9050
+      - 9051:9051
+    networks:
+      - external_network
+    volumes:
+      - /docker/tor/config:/etc/tor
+      - /docker/tor/data:/var/lib/tor
