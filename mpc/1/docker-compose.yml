@@ -66,7 +66,7 @@ services:
     restart: unless-stopped
 
   n8n:
-    IMAGE: crazymax/n8n:latest
+    image: crazymax/n8n:latest
     container_name: n8n
     ports:
       - "5678:5678"
