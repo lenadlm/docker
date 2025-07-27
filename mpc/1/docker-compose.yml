@@ -25,6 +25,7 @@ services:
 
   dozzle:
     image: amir20/dozzle:latest
+    container_name: dozzle
     environment:
       - DOCKER_HOST=tcp://docker-socket-proxy:2375
     ports:
@@ -33,6 +34,7 @@ services:
       - external_network
     depends_on:
       - docker-socket-proxy
+    restart: unless-stopped
 
   cloudflared:
     image: cloudflare/cloudflared:latest
@@ -65,34 +67,18 @@ services:
 
   n8n:
     image: docker.n8n.io/n8nio/n8n
+    container_name: n8n
     ports:
       - "5678:5678"
     environment:
       - GENERIC_TIMEZONE=Africa/Nairobi
       - TZ=Africa/Nairobi
+      - PUID=1000
+      - PGID=1000
     volumes:
       - /docker/n8n:/home/node/.n8n
     networks:
       - external_network
-    restart: unless-stopped
-
-  remmina:
-    image: lscr.io/linuxserver/remmina:latest
-    container_name: remmina
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Africa/Nairobi
-      - CUSTOM_USER=leo
-    volumes:
-      - /docker/remmina/config:/config
-    ports:
-      - 3300:3000
-      - 3301:3001
-    networks:
-      - external_network
-    devices:
-      - /dev/dri:/dev/dri
     restart: unless-stopped
 
   watchtower:
