@@ -80,7 +80,8 @@ services:
     networks:
       - external_network
     restart: unless-stopped
-
+    user: "1000:1000"
+    
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
