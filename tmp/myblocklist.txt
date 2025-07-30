@@ -52,6 +52,7 @@
 ||ixyyijop.*^
 ||mbogibet.*^
 ||mozzartbet.*^
+||nexthink.*^
 ||onenote.com^
 ||play-lg.*^
 ||pukabolomen.shop^
