@@ -1,0 +1,15 @@
+services:
+  copyparty:
+    image: copyparty/ac:latest
+    container_name: copyparty
+    user: "1000:1000"
+    ports:
+      - 3923:3923
+    volumes:
+      - /docker/copyparty/cfg:/cfg:z
+      - /docker/copyparty/folder:/w:z
+    environment:
+      LD_PRELOAD: /usr/lib/libmimalloc-secure.so.NOPE
+      PYTHONUNBUFFERED: 1
+      
+    stop_grace_period: 15s
