@@ -10,6 +10,10 @@ services:
       - /docker/copyparty/folder:/w:z
     environment:
       LD_PRELOAD: /usr/lib/libmimalloc-secure.so.NOPE
-      PYTHONUNBUFFERED: 1
-      
+      PYTHONUNBUFFERED: 1    
+    networks:
+      - external_network
     stop_grace_period: 15s
+networks:
+  external_network:
+    external: true
