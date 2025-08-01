@@ -7,9 +7,8 @@ services:
       - 3923:3923
     volumes:
       - /docker/copyparty/cfg:/cfg:rw
-      - /docker:/w:rw
-      - /mnt/d:/w:rw
-      - /home/leo:/w:rw
+      - /home/leo:/home/leo:rw
+      - /mnt/d:/mnt/d:rw
     environment:
       LD_PRELOAD: /usr/lib/libmimalloc-secure.so.NOPE
       PYTHONUNBUFFERED: 1    
