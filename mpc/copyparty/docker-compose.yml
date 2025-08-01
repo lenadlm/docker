@@ -6,8 +6,8 @@ services:
     ports:
       - 3923:3923
     volumes:
-      - /docker/copyparty/cfg:/cfg:z
-      - /docker/copyparty/folder:/w:z
+      - /docker/copyparty/cfg:/cfg:rw
+      - /docker/copyparty/folder:/w:rw
     environment:
       LD_PRELOAD: /usr/lib/libmimalloc-secure.so.NOPE
       PYTHONUNBUFFERED: 1    
