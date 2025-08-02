@@ -60,6 +60,8 @@ services:
     volumes:
       - /docker/code-server/config:/config
       - /docker:/config/workspace/docker
+      - /home/leo:/config/workspace/home
+      - /mnt/d:/config/workspace/mntd
     ports:
       - 8443:8443
     networks:
