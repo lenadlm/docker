@@ -59,9 +59,9 @@ services:
       - PWA_APPNAME=code-server
     volumes:
       - /docker/code-server/config:/config
-      - /docker:/config/workspace/docker
-      - /home/leo:/config/workspace/home
-      - /mnt/d:/config/workspace/mntd
+      - /docker:/config/workspace/docker:rw
+      - /home/leo:/config/workspace/home:rw
+      - /mnt/d:/config/workspace/mntd:rw
     ports:
       - 8443:8443
     networks:
