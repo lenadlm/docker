@@ -1,25 +1,26 @@
 services:
   n8n:
     image: n8nio/n8n:latest
-    restart: always
     container_name: n8n
     ports:
-      - "5678:5678"
+      - "5679:5678"
     environment:
-      - N8N_HOST=${SUBDOMAIN}.${DOMAIN_NAME}
+      - N8N_HOST=IP
       - N8N_PORT=5678
-      # - N8N_PROTOCOL=https
-      - NODE_ENV=production
-      # - WEBHOOK_URL=https://${SUBDOMAIN}.${DOMAIN_NAME}/
-      - GENERIC_TIMEZONE=${GENERIC_TIMEZONE}
+      - N8N_PROTOCOL=https
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=sth
+      - N8N_BASIC_AUTH_PASSWORD=pwd
+      - N8N_RUNNERS_ENABLED=true
+      - N8N_RUNNERS_MODE=internal
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
     volumes:
-      - n8n_data:/home/node/.n8n
+      - /docker/n8n/data:/home/node/.n8n
       - /docker/n8n/files:/files
     networks:
       - external_network
-
-volumes:
-  n8n_data:
+    restart: unless-stopped
+    stop_grace_period: 60s
 
 networks:
   external_network:
