@@ -1,0 +1,40 @@
+services:
+  calibre:
+    image: lscr.io/linuxserver/calibre:latest
+    container_name: calibre
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+    volumes:
+      - /docker/ebooks/calibre-config:/config
+      - /docker/ebooks/library:/books
+    ports:
+      - "8580:8080"
+      - "8581:8181"
+    networks:
+      - external_network
+    restart: unless-stopped
+
+  lazylibrarian:
+    image: thraxis/docker-lazylibrarian-calibre:latest
+    container_name: lazylibrarian
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+    volumes:
+      - /docker/ebooks/lazylibrarian-config:/config
+      - /docker/ebooks/library:/books
+      - /docker/ebooks/downloads:/downloads
+    ports:
+      - "5299:5299"
+    networks:
+      - external_network
+    restart: unless-stopped
+    depends_on:
+      - calibre
+
+networks:
+  external_network:
+    external: true
