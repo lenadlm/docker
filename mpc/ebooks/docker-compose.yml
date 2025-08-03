@@ -7,7 +7,7 @@ services:
       - PGID=1000
       - TZ=Africa/Nairobi
     volumes:
-      - /docker/ebooks/calibre-config:/config
+      - /docker/ebooks/calibre/config:/config
       - /docker/ebooks/library:/books
     ports:
       - "8580:8080"
@@ -24,9 +24,10 @@ services:
       - PGID=1000
       - TZ=Africa/Nairobi
     volumes:
-      - /docker/ebooks/lazylibrarian-config:/config
+      - /docker/ebooks/lazylibrarian/config:/config
       - /docker/ebooks/library:/books
       - /docker/ebooks/downloads:/downloads
+      - /docker/ebooks/calibre/config:/calibre-bin:ro
     ports:
       - "5299:5299"
     networks:
