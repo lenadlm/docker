@@ -8,6 +8,7 @@ services:
       - TZ=Africa/Nairobi
     volumes:
       - /docker/ebooks/calibre/config:/config
+      - /docker/ebooks/downloads:/downloads
       - /docker/ebooks/library:/books
     ports:
       - "8580:8080"
