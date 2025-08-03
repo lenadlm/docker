@@ -10,10 +10,25 @@ services:
       - NET_RAW
     environment:
       - TZ=Africa/Nairobi
+
     volumes:
       - /docker/homeassistant/config:/config
       - /var/run/dbus:/var/run/dbus:ro
+      - /run/user/1000/pulse:/run/user/1000/pulse
       - /etc/localtime:/etc/localtime:ro
-   # devices:
+   devices:
+      - /dev/snd:/dev/snd
    #   - /dev/ttyUSB0:/dev/ttyUSB0  # adjust based on your device
    #   - /dev/ttyACM0:/dev/ttyACM0  # for Z-Wave/Zigbee USB sticks
+
+mosquitto:
+  image: eclipse-mosquitto
+  container_name: mosquitto
+  restart: unless-stopped
+  volumes:
+    - /docker/mosquitto/config:/mosquitto/config
+    - /docker/mosquitto/data:/mosquitto/data
+    - /docker/mosquitto/log:/mosquitto/log
+  ports:
+    - 1883:1883
+    - 9001:9001
