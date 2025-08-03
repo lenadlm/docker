@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
 
   lazylibrarian:
-    image: thraxis/docker-lazylibrarian-calibre:latest
+    image: lscr.io/linuxserver/lazylibrarian:latest
     container_name: lazylibrarian
     environment:
       - PUID=1000
