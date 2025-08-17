@@ -6,7 +6,7 @@ services:
     ports:
       - 3923:3923
     volumes:
-      - /docker/copyparty/cfg:/cfg:rw
+      - /docker/copyparty/cfg:/cfg
       - /docker:/docker:rw
       - /home/leo:/home/leo:rw
       - /mnt/d:/mnt/d:rw
