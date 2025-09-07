@@ -20,23 +20,6 @@ services:
       - /docker/plex/config:/config
       - /mnt/d/data/media:/media
 
-  kometa:
-    image: lscr.io/linuxserver/kometa:latest
-    container_name: kometa
-    restart: unless-stopped
-    depends_on:
-      - plex
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Africa/Nairobi
-      - KOMETA_CONFIG=/config/config.yml
-      - KOMETA_TIME=21:00
-    networks:
-      - internal_network
-    volumes:
-      - /docker/plex/kometa/config:/config
-
   tautulli:
     image: lscr.io/linuxserver/tautulli:latest
     container_name: tautulli
