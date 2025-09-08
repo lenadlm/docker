@@ -2,7 +2,6 @@ services:
   docker-socket-proxy:
     image: tecnativa/docker-socket-proxy:latest
     container_name: docker-socket-proxy
-    restart: unless-stopped
     security_opt:
       - no-new-privileges:true
     environment:
@@ -22,6 +21,7 @@ services:
       - "127.0.0.1:2375:2375"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: always
 
   dozzle:
     image: amir20/dozzle:latest
@@ -39,12 +39,12 @@ services:
   cloudflared:
     image: cloudflare/cloudflared:latest
     container_name: cloudflared
-    restart: unless-stopped
     command: tunnel --no-autoupdate run
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     networks:
       - external_network
+    restart: unless-stopped
 
   code-server:
     image: lscr.io/linuxserver/code-server:latest
@@ -71,7 +71,6 @@ services:
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
-    restart: always
     environment:
       - DOCKER_HOST=tcp://docker-socket-proxy:2375
       - TZ=Africa/Nairobi
@@ -89,6 +88,7 @@ services:
       - /docker/watchtower/config.json:/config.json
     depends_on:
       - docker-socket-proxy
+    restart: always
 
 networks:
   internal_network:
