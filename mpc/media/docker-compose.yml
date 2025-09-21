@@ -15,7 +15,7 @@ services:
       - "/dev/dri:/dev/dri"
     networks:
       internal_network:
-        ipv4_address: 172.30.0.2
+        ipv4_address: 172.30.0.32
     volumes:
       - /docker/plex/config:/config
       - /mnt/d/data/media:/media
