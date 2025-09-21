@@ -57,6 +57,36 @@ services:
       - /docker/jellyfin/library:/config
       - /mnt/d/data/media:/data
 
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+    volumes:
+      - /docker/sonarr/config:/config
+      - /mnt/d/data/media:/data
+      - /mnt/d/downloads/complete:/downloads
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+    volumes:
+      - /docker/radarr/config:/config
+      - /mnt/d/data/media:/data
+      - /mnt/d/downloads/complete:/downloads
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+
   syncthing:
     image: lscr.io/linuxserver/syncthing:latest
     container_name: syncthing
