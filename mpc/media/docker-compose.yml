@@ -68,6 +68,8 @@ services:
       - /docker/sonarr/config:/config
       - /mnt/d/data/media:/data
       - /mnt/d/downloads/complete:/downloads
+    networks:
+      - internal_network
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -83,6 +85,8 @@ services:
       - /docker/radarr/config:/config
       - /mnt/d/data/media:/data
       - /mnt/d/downloads/complete:/downloads
+    networks:
+      - internal_network
     ports:
       - 7878:7878
     restart: unless-stopped
