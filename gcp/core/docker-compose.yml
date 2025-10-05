@@ -23,6 +23,26 @@ services:
       - "127.0.0.1:2375:2375" 
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  firefox:
+    image: lscr.io/linuxserver/firefox:latest
+    container_name: firefox
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - CUSTOM_USER=leo
+      - PASSWORD=${PASSWORD}
+      - TZ=Africa/Nairobi
+      - FIREFOX_CLI=${FIREFOX_CLI}
+    volumes:
+      - /docker/firefox/config:/config
+    ports:
+      - 3300:3000
+      - 3301:3001
+    networks:
+      - internal_network
+    shm_size: "1gb"
+    restart: unless-stopped
  
   watchtower:
     image: containrrr/watchtower
