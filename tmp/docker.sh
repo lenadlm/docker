@@ -2,7 +2,7 @@
 
 # Run the script using:
 # 
-# curl -fsSL "https://raw.githubusercontent.com/lenadlm/docker/edit/main/tmp/docker.sh"
+# curl -fsSL "curl -fsSL "https://raw.githubusercontent.com/lenadlm/docker/main/tmp/docker.sh" -o "docker.sh""
 # chmod +x docker.sh
 # sudo ./docker.sh
 
