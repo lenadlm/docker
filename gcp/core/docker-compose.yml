@@ -61,7 +61,7 @@ services:
     networks:
       - internal_network
     volumes:
-      - /opt/docker/watchtower/config.json:/config.json
+      - /docker/watchtower/config.json:/config.json
     depends_on:
       - docker-socket-proxy
 
