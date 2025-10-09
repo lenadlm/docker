@@ -32,8 +32,8 @@ services:
       - no-new-privileges:true
     environment:
       - TZ=Africa/Nairobi
-      - PUID=1000
-      - PGID=1000
+      - PUID=1001
+      - PGID=1001
     ports:
       - 8384:8384
       - 22000:22000/tcp
