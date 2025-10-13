@@ -26,29 +26,29 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
-  syncthing:
-    image: lscr.io/linuxserver/syncthing:latest
-    container_name: syncthing
-    restart: unless-stopped
-    security_opt:
-      - no-new-privileges:true
-    environment:
-      - TZ=Africa/Nairobi
-      - PUID=1001
-      - PGID=1001
-    ports:
-      - 8384:8384
-      - 22000:22000/tcp
-      - 22000:22000/udp
-      - 21027:21027/udp
-    networks:
-      - external_network
-    cap_add:
-      - CHOWN
-      - FOWNER
-    volumes:
-      - /docker/syncthing/config:/config:rw
-      - /docker:/docker:rw
+#  syncthing:
+#    image: lscr.io/linuxserver/syncthing:latest
+#    container_name: syncthing
+#    restart: unless-stopped
+#    security_opt:
+#      - no-new-privileges:true
+#    environment:
+#      - TZ=Africa/Nairobi
+#      - PUID=1001
+#      - PGID=1001
+#    ports:
+#      - 8384:8384
+#      - 22000:22000/tcp
+#      - 22000:22000/udp
+#      - 21027:21027/udp
+#    networks:
+#      - external_network
+#    cap_add:
+#      - CHOWN
+#      - FOWNER
+#    volumes:
+#      - /docker/syncthing/config:/config:rw
+#      - /docker:/docker:rw
  
   watchtower:
     image: containrrr/watchtower
