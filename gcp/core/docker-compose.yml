@@ -58,6 +58,8 @@ services:
       - "6080:6080"
     environment:
       - VNC_PASSWORD=${VNC_PASSWORD}
+    networks:
+      - internal_network
     restart: unless-stopped
  
   watchtower:
