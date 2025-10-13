@@ -43,7 +43,6 @@
 @@||tiktokcdn.com^
 @@||ttwstatic.com^
 @@||truecaller.com^
-!
 !----- BLOCKLIST -----!
 ||*.ru^
 ||*.top^
@@ -63,6 +62,7 @@
 ||ixyyijop.*^
 ||mbogibet.*^
 ||mozzartbet.*^
+||mygamesthebest.com^
 ||nexthink.*^
 ||onenote.com^
 ||play-lg.*^
