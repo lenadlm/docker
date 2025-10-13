@@ -49,11 +49,20 @@ services:
 #    volumes:
 #      - /docker/syncthing/config:/config:rw
 #      - /docker:/docker:rw
+
+  vnc-browser:
+    container_name: vnc-browser
+    image: mrcolorrain/vnc-browser:debian
+    ports:
+      - "5900:5900"
+      - "6080:6080"
+    environment:
+      - VNC_PASSWORD=${VNC_PASSWORD}
+    restart: unless-stopped
  
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
-    restart: always
     environment:
       - DOCKER_HOST=tcp://docker-socket-proxy:2375
       - TZ=Africa/Nairobi
@@ -71,6 +80,7 @@ services:
       - /docker/watchtower/config.json:/config.json
     depends_on:
       - docker-socket-proxy
+    restart: always
 
 networks:
   internal_network:
