@@ -16,6 +16,8 @@ services:
       - SYSTEM=1
       - VERSION=1
       - TZ=Africa/Nairobi
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true" 
     networks:
       internal_network:
         ipv4_address: 172.30.0.30
