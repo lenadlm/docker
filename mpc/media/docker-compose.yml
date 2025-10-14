@@ -92,30 +92,45 @@ services:
       - 7878:7878
     restart: unless-stopped
 
-  syncthing:
-    image: lscr.io/linuxserver/syncthing:latest
-    container_name: syncthing
-    restart: unless-stopped
-    security_opt:
-      - no-new-privileges:true
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
     environment:
-      - TZ=Africa/Nairobi
       - PUID=1000
-      - PGID=1000   
-    ports:
-      - 8384:8384
-      - 22000:22000/tcp
-      - 22000:22000/udp
-      - 21027:21027/udp
+      - PGID=1000
+      - TZ=Africa/Nairobi
+    volumes:
+      - /docker/prowlarr/data:/config
     networks:
       - internal_network
-    cap_add:
-      - CHOWN
-      - FOWNER
-    volumes:
-      - /docker/syncthing/config:/config:rw
-      - /docker:/docker:rw
-      - /mnt/d:/mnt/d:rw
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+
+#  syncthing:
+#    image: lscr.io/linuxserver/syncthing:latest
+#    container_name: syncthing
+#    security_opt:
+#      - no-new-privileges:true
+#    environment:
+#      - TZ=Africa/Nairobi
+#      - PUID=1001
+#      - PGID=1001
+#    ports:
+#      - 8384:8384
+#      - 22000:22000/tcp
+#      - 22000:22000/udp
+#      - 21027:21027/udp
+#    networks:
+#      - external_network
+#    cap_add:
+#      - CHOWN
+#      - FOWNER
+#    volumes:
+#      - /docker/syncthing/config:/config:rw
+#      - /docker:/docker:rw
+#    restart: unless-stopped
+
 
   transmission:
     image: lscr.io/linuxserver/transmission:latest
