@@ -27,6 +27,7 @@
 !https://raw.githubusercontent.com/lenadlm/docker/main/tmp/myblocklist.txt---------------------!
 !----------------------------------------------------------------------------------------------!
 !----- ALLOWLIST -----!
+@@||1337x.*^
 @@||aliexpress.com^
 @@||amazon.com^
 @@||bnbstatic.com^
