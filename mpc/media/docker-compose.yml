@@ -58,21 +58,34 @@ services:
       - /docker/jellyfin/library:/config
       - /mnt/d/data/media:/data
 
-  sonarr:
-    image: lscr.io/linuxserver/sonarr:latest
-    container_name: sonarr
+  overseerr:
+    image: lscr.io/linuxserver/overseerr:latest
+    container_name: overseerr
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Africa/Nairobi
     volumes:
-      - /docker/sonarr/config:/config
-      - /mnt/d/data/media:/data
-      - /mnt/d/downloads/complete:/downloads
+      - /docker/overseerr/config:/config
     networks:
       - internal_network
     ports:
-      - 8989:8989
+      - 5055:5055
+    restart: unless-stopped
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+    volumes:
+      - /docker/prowlarr/data:/config
+    networks:
+      - internal_network
+    ports:
+      - 9696:9696
     restart: unless-stopped
 
   radarr:
@@ -92,20 +105,23 @@ services:
       - 7878:7878
     restart: unless-stopped
 
-  prowlarr:
-    image: lscr.io/linuxserver/prowlarr:latest
-    container_name: prowlarr
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Africa/Nairobi
     volumes:
-      - /docker/prowlarr/data:/config
+      - /docker/sonarr/config:/config
+      - /mnt/d/data/media:/data
+      - /mnt/d/downloads/complete:/downloads
     networks:
       - internal_network
     ports:
-      - 9696:9696
+      - 8989:8989
     restart: unless-stopped
+
 
 #  syncthing:
 #    image: lscr.io/linuxserver/syncthing:latest
