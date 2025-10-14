@@ -74,6 +74,7 @@
 ||thesurferprotector.*^
 ||targetchain-flow.*^
 ||wpad.*^
+||votravis.*^
 ||zdxcloud.*^
 ||zscaler.*^
 ||zscalertwo.*^
