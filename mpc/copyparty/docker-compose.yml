@@ -10,6 +10,7 @@ services:
       - /docker:/docker:rw
       - /home/leo:/home/leo:rw
       - /mnt/d:/mnt/d:rw
+      - /run/media/leo/f:/mnt/f:rw
     environment:
       LD_PRELOAD: /usr/lib/libmimalloc-secure.so.NOPE
       PYTHONUNBUFFERED: 1    
