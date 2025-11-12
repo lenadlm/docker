@@ -49,18 +49,6 @@ services:
 #    volumes:
 #      - /docker/syncthing/config:/config:rw
 #      - /docker:/docker:rw
-
-  vnc-browser:
-    container_name: vnc-browser
-    image: mrcolorrain/vnc-browser:debian
-    ports:
-      - "5900:5900"
-      - "6080:6080"
-    environment:
-      - VNC_PASSWORD=${VNC_PASSWORD}
-    networks:
-      - internal_network
-    restart: unless-stopped
  
   watchtower:
     image: containrrr/watchtower
