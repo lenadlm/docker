@@ -17,8 +17,6 @@ services:
     volumes:
       - /docker/watchtower/config.json:/config.json
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    depends_on:
-      - docker-socket-proxy
     restart: always
 
 networks:
