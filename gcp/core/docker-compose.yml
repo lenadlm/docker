@@ -1,54 +1,4 @@
-services:
-  docker-socket-proxy:
-    image: tecnativa/docker-socket-proxy:latest
-    container_name: docker-socket-proxy
-    restart: unless-stopped
-    security_opt:
-      - no-new-privileges:true
-    environment:
-      - CONTAINERS=1
-      - GET=1
-      - IMAGES=1
-      - INFO=1
-      - NETWORKS=1
-      - POST=1
-      - SERVICES=1
-      - SYSTEM=1
-      - VERSION=1
-      - TZ=Africa/Nairobi
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true" 
-    networks:
-      internal_network:
-        ipv4_address: 172.30.0.30
-    ports:
-      - "127.0.0.1:2375:2375" 
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
 
-#  syncthing:
-#    image: lscr.io/linuxserver/syncthing:latest
-#    container_name: syncthing
-#    restart: unless-stopped
-#    security_opt:
-#      - no-new-privileges:true
-#    environment:
-#      - TZ=Africa/Nairobi
-#      - PUID=1001
-#      - PGID=1001
-#    ports:
-#      - 8384:8384
-#      - 22000:22000/tcp
-#      - 22000:22000/udp
-#      - 21027:21027/udp
-#    networks:
-#      - external_network
-#    cap_add:
-#      - CHOWN
-#      - FOWNER
-#    volumes:
-#      - /docker/syncthing/config:/config:rw
-#      - /docker:/docker:rw
  
   watchtower:
     image: containrrr/watchtower
@@ -68,6 +18,7 @@ services:
       - internal_network
     volumes:
       - /docker/watchtower/config.json:/config.json
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     depends_on:
       - docker-socket-proxy
     restart: always
