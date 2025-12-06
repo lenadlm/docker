@@ -89,7 +89,7 @@ services:
     restart: unless-stopped
     
   watchtower:
-    image: containrrr/watchtower
+    image: nickfedor/watchtower
     container_name: watchtower
     environment:
       - DOCKER_HOST=tcp://docker-socket-proxy:2375
