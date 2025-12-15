@@ -54,14 +54,12 @@ services:
   dozzle:
     image: amir20/dozzle:latest
     container_name: dozzle
-    environment:
-      - DOCKER_HOST=tcp://docker-socket-proxy:2375
     ports:
       - 8380:8080
     networks:
       - external_network
-    depends_on:
-      - docker-socket-proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: unless-stopped
     
   filewizard:
@@ -101,6 +99,7 @@ services:
       - external_network
     volumes:
       - /docker/watchtower/config.json:/config.json
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: always
 
 networks:
