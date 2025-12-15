@@ -1,41 +1,4 @@
 services:
-  docker-socket-proxy:
-    image: tecnativa/docker-socket-proxy:latest
-    container_name: docker-socket-proxy
-    security_opt:
-      - no-new-privileges:true
-    environment:
-      - CONTAINERS=1
-      - IMAGES=1
-      - NETWORKS=1
-      - SERVICES=1
-      - INFO=1
-      - VERSION=1
-      - SYSTEM=1
-      - POST=1
-      - TZ=Africa/Nairobi
-    networks:
-      - internal_network
-      - external_network
-    ports:
-      - "127.0.0.1:2375:2375"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    restart: always
-
-  dozzle:
-    image: amir20/dozzle:latest
-    container_name: dozzle
-    environment:
-      - DOCKER_HOST=tcp://docker-socket-proxy:2375
-    ports:
-      - 8380:8080
-    networks:
-      - external_network
-    depends_on:
-      - docker-socket-proxy
-    restart: unless-stopped
-
   cloudflared:
     image: cloudflare/cloudflared:latest
     container_name: cloudflared
@@ -87,12 +50,44 @@ services:
       - external_network
     stop_grace_period: 15s
     restart: unless-stopped
+
+  dozzle:
+    image: amir20/dozzle:latest
+    container_name: dozzle
+    environment:
+      - DOCKER_HOST=tcp://docker-socket-proxy:2375
+    ports:
+      - 8380:8080
+    networks:
+      - external_network
+    depends_on:
+      - docker-socket-proxy
+    restart: unless-stopped
+    
+  filewizard:
+    image: loredcast/filewizard:latest
+    container_name: filewizard
+    environment:
+      - LOCAL_ONLY=True # False for Auth
+      - SECRET_KEY= # set if using auth
+      - UPLOADS_DIR=/app/uploads # inside the container
+      - PROCESSED_DIR=/app/processed # inside the container
+      - OMP_NUM_THREADS=1
+      - DOWNLOAD_KOKORO_ON_STARTUP=true
+    ports:
+      - "6969:8000"
+    networks:
+      - internal_network
+    volumes:
+      - /docker/filewizard/config:/app/config # settings.yml will be here
+      - /docker/filewizard/data/uploads:/app/uploads
+      - /docker/filewizard/data/processed:/app/processed
+    restart: unless-stopped
     
   watchtower:
     image: nickfedor/watchtower
     container_name: watchtower
     environment:
-      - DOCKER_HOST=tcp://docker-socket-proxy:2375
       - TZ=Africa/Nairobi
       - WATCHTOWER_TRACE=true
       - WATCHTOWER_CLEANUP=true
@@ -106,8 +101,6 @@ services:
       - external_network
     volumes:
       - /docker/watchtower/config.json:/config.json
-    depends_on:
-      - docker-socket-proxy
     restart: always
 
 networks:
