@@ -81,29 +81,6 @@ services:
       - /docker/filewizard/data/uploads:/app/uploads
       - /docker/filewizard/data/processed:/app/processed
     restart: unless-stopped
-
-  hbbs:
-    container_name: hbbs
-    image: rustdesk/rustdesk-server:latest
-    environment:
-      #- ALWAYS_USE_RELAY=Y
-    command: hbbs
-    volumes:
-      - /docker/rust/data:/root
-    network_mode: "host"
-
-    depends_on:
-      - hbbr
-    restart: unless-stopped
-
-  hbbr:
-    container_name: hbbr
-    image: rustdesk/rustdesk-server:latest
-    command: hbbr
-    volumes:
-      - /docker/rust/data:/root
-    network_mode: "host"
-    restart: unless-stopped
     
   watchtower:
     image: nickfedor/watchtower
