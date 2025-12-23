@@ -6,7 +6,7 @@ services:
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     networks:
-      - external_network
+      - internal_network
     restart: unless-stopped
     
   hbbs:
