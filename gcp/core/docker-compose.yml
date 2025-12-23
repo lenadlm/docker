@@ -1,4 +1,14 @@
 services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    networks:
+      - external_network
+    restart: unless-stopped
+    
   hbbs:
     container_name: hbbs
     image: rustdesk/rustdesk-server:latest
