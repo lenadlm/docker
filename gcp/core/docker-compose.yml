@@ -7,6 +7,8 @@ services:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
     networks:
       - internal_network
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     restart: unless-stopped
 
 #  tailscale:
@@ -69,7 +71,9 @@ services:
     volumes:
       - /docker/watchtower/config.json:/config.json
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    restart: always
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    restart: unless-stopped
 
 networks:
   internal_network:
