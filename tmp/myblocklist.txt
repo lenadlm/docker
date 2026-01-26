@@ -40,6 +40,7 @@
 @@||scdn.co^
 @@||spotify.com^
 @@||spotifycdn.com^
+@@||tailscale.com^
 @@||tiktok.com^
 @@||tiktokcdn.com^
 @@||ttwstatic.com^
