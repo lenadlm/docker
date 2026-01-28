@@ -46,9 +46,6 @@
 @@||ttwstatic.com^
 @@||truecaller.com^
 !----- BLOCKLIST -----!
-||*.ru^
-||*.top^
-||*.xyz^
 ||1xbet.*^
 ||ads.microsoft.com^
 ||data.microsoft.com^
