@@ -53,7 +53,7 @@ services:
 
 
   watchtower:
-    image: ghcr.io/nicholas-fedor/watchtower:latest
+    image: containrrr/watchtower:latest
     container_name: watchtower
     environment:
       #- DOCKER_API_VERSION=1.52
