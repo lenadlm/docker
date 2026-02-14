@@ -51,15 +51,20 @@ services:
     stop_grace_period: 15s
     restart: unless-stopped
 
-  dozzle:
-    image: amir20/dozzle:latest
-    container_name: dozzle
+  dockpeek:
+    image: dockpeek/dockpeek:latest
+    container_name: dockpeek
+    environment:
+      - SECRET_KEY=your_secure_secret_key
+      - USERNAME=leo
+      - PASSWORD=2024P!thag0ras
+    #  - DOCKER_HOST_NAME=
     ports:
-      - 8380:8080
+      - "3420:8000"
     networks:
-      - external_network
+      - internal_network
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
     
   filewizard:
@@ -81,26 +86,6 @@ services:
       - /docker/filewizard/data/uploads:/app/uploads
       - /docker/filewizard/data/processed:/app/processed
     restart: unless-stopped
-    
-  watchtower:
-    image: nickfedor/watchtower
-    container_name: watchtower
-    environment:
-      - TZ=Africa/Nairobi
-      - WATCHTOWER_TRACE=true
-      - WATCHTOWER_CLEANUP=true
-      - WATCHTOWER_POLL_INTERVAL=10800
-      - WATCHTOWER_INCLUDE_RESTARTING=true
-      - WATCHTOWER_NOTIFICATIONS=shoutrrr
-      - WATCHTOWER_NOTIFICATIONS_HOSTNAME=LEO-MPC01
-      - WATCHTOWER_NOTIFICATION_URL=${WATCHTOWER_NOTIFICATION_URL}
-    networks:
-      - internal_network
-      - external_network
-    volumes:
-      - /docker/watchtower/config.json:/config.json
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    restart: always
 
 networks:
   internal_network:
