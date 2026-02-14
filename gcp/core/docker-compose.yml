@@ -11,6 +11,23 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
     restart: unless-stopped
 
+  dockpeek:
+    image: dockpeek/dockpeek:latest
+    container_name: dockpeek
+    environment:
+      - SECRET_KEY=your_secure_secret_key
+      - USERNAME=leo
+      - PASSWORD=2024P!thag0ras
+    # Server name for UI (optional, auto-detected from Docker API if not set)
+    #  - DOCKER_HOST_NAME=
+    ports:
+      - "3420:8000"
+    networks:
+      - internal_network
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+
 #  tailscale:
 #    image: tailscale/tailscale:latest
 #    container_name: tailscale-exit
