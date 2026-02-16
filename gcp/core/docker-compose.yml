@@ -16,9 +16,8 @@ services:
     container_name: dockpeek
     environment:
       - SECRET_KEY=your_secure_secret_key
-      - USERNAME=leo
-      - PASSWORD=2024P!thag0ras
-    # Server name for UI (optional, auto-detected from Docker API if not set)
+      - USERNAME=${USERNAME}
+      - PASSWORD=${PASSWORD}
     #  - DOCKER_HOST_NAME=
     ports:
       - "3420:8000"
@@ -27,24 +26,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
-
-#  tailscale:
-#    image: tailscale/tailscale:latest
-#    container_name: tailscale-exit
-#    hostname: ubuntu-exit-node
-#    network_mode: host
-#    command: tailscaled
-#    cap_add:
-#      - NET_ADMIN
-#      - SYS_MODULE
-#    devices:
-#      - /dev/net/tun:/dev/net/tun
-#    volumes:
-#      - /docker/tailscale:/var/lib/tailscale
-#    environment:
-#      - TS_STATE_DIR=/var/lib/tailscale
-#      - TS_USERSPACE=false
-#    restart: unless-stopped
 
 #  hbbs:
 #    container_name: hbbs
@@ -68,21 +49,23 @@ services:
 #    network_mode: "host"
 #    restart: unless-stopped
 
-  dockpeek:
-    image: dockpeek/dockpeek:latest
-    container_name: dockpeek
-    environment:
-      - SECRET_KEY=your_secure_secret_key
-      - USERNAME=${USERNAME}
-      - PASSWORD=${PASSWORD}
-    #  - DOCKER_HOST_NAME=
-    ports:
-      - "3420:8000"
-    networks:
-      - internal_network
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    restart: unless-stopped
+#  tailscale:
+#    image: tailscale/tailscale:latest
+#    container_name: tailscale-exit
+#    hostname: ubuntu-exit-node
+#    network_mode: host
+#    command: tailscaled
+#    cap_add:
+#      - NET_ADMIN
+#      - SYS_MODULE
+#    devices:
+#      - /dev/net/tun:/dev/net/tun
+#    volumes:
+#      - /docker/tailscale:/var/lib/tailscale
+#    environment:
+#      - TS_STATE_DIR=/var/lib/tailscale
+#      - TS_USERSPACE=false
+#    restart: unless-stopped
 
 
 networks:
