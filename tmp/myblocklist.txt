@@ -91,6 +91,6 @@
 ||zdxgov.net
 ||zdxbeta.net
 ||zdxten.net
-||ZIdentity
+||ZIdentity.*^
 ||zslogin.net
 ||zsloginbeta.net
