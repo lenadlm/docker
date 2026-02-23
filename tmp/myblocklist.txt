@@ -68,7 +68,6 @@
 ||play-lg.*^
 ||pukabolomen.shop^
 ||redirect12.*^
-||remotedesktop.google.com*^
 ||toptitaniumapp.*^
 ||thesurferprotector.*^
 ||targetchain-flow.*^
