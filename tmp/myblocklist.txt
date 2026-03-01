@@ -43,6 +43,7 @@
 @@||tailscale.com^
 @@||tiktok.com^
 @@||tiktokcdn.com^
+@@||truenas.com^
 @@||ttwstatic.com^
 @@||truecaller.com^
 !----- BLOCKLIST -----!
