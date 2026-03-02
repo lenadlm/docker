@@ -21,7 +21,7 @@ services:
     devices:
       - /dev/net/tun
     environment:
-      - TS_AUTHKEY=tskey-xxxxxxxxxxxxxxxx
+      - TS_AUTHKEY=${TS_AUTHKEY}
       - TS_USERSPACE=false
     volumes:
       - /docker/tailscale:/var/lib/tailscale
