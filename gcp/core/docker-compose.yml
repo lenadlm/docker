@@ -40,10 +40,10 @@ services:
     image: dockpeek/dockpeek:latest
     container_name: dockpeek
     environment:
-      - SECRET_KEY=${SECRET_KEY}
+      #- SECRET_KEY=${SECRET_KEY}
       - USERNAME=${USERNAME}
       - PASSWORD=${PASSWORD}
-    #  - DOCKER_HOST_NAME=
+      #- DOCKER_HOST_NAME=
     ports:
       - "3420:8000"
     networks:
