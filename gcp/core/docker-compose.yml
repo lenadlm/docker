@@ -22,7 +22,7 @@ services:
       - TS_AUTHKEY=${TS_AUTHKEY}
       - TS_USERSPACE=false
     volumes:
-      - /docker/tailscale:/var/lib/tailscale
+      - /docker/dockhand/tailscale:/var/lib/tailscale
     restart: unless-stopped
 
   dockhand:
