@@ -30,10 +30,20 @@ error_exit() {
 }
 trap 'error_exit $LINENO' ERR
 
-# Check OS compatibility
-OS=$(lsb_release -si 2>/dev/null || cat /etc/*release 2>/dev/null | grep -oP '(?<=^ID=).+')
-if [[ "$OS" != "Ubuntu" && "$OS" != "Debian" ]]; then
-    echo "Unsupported OS: $OS. This script supports only Ubuntu and Debian."
+# Check OS compatibility - Improved detection
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    OS=$ID
+    VERSION=$VERSION_CODENAME
+elif [ -f /etc/debian_version ]; then
+    OS="debian"
+    VERSION=$(cat /etc/debian_version)
+elif [ -f /etc/lsb-release ]; then
+    . /etc/lsb-release
+    OS=$DISTRIB_ID
+    VERSION=$DISTRIB_CODENAME
+else
+    echo "Cannot determine OS. This script supports only Ubuntu and Debian."
     exit 1
 fi
 
