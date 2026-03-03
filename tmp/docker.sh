@@ -47,12 +47,33 @@ else
     exit 1
 fi
 
-echo "Running on supported OS: $OS"
+# Convert to lowercase for comparison
+OS=$(echo "$OS" | tr '[:upper:]' '[:lower:]')
 
-# Update and install dependencies
+if [[ "$OS" != "ubuntu" && "$OS" != "debian" ]]; then
+    echo "Unsupported OS: $OS. This script supports only Ubuntu and Debian."
+    exit 1
+fi
+
+echo "Running on supported OS: $OS $VERSION"
+
+# Update and install dependencies - Conditional package installation
 echo "Updating and installing dependencies..."
 apt update && apt upgrade -y
-apt install -y curl gnupg lsb-release ca-certificates software-properties-common
+
+# Install common packages
+COMMON_PACKAGES="curl gnupg lsb-release ca-certificates"
+
+# Add Ubuntu-specific packages
+if [[ "$OS" == "ubuntu" ]]; then
+    echo "Ubuntu detected: Installing Ubuntu-specific packages..."
+    apt install -y $COMMON_PACKAGES software-properties-common
+else
+    echo "Debian detected: Installing Debian-specific packages..."
+    # On Debian, we need different packages for repository management
+    apt install -y $COMMON_PACKAGES apt-transport-https
+fi
+
 apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Docker if not already installed
@@ -69,12 +90,23 @@ fi
 echo "Enabling and starting Docker service..."
 systemctl enable --now docker
 
-# Add user 'lenadlm' to Docker group if it exists
+# Wait a moment for Docker to be fully ready
+sleep 3
+
+# Add user 'leo' to Docker group if it exists
 if id "leo" &>/dev/null; then
     echo "Adding user 'leo' to Docker group..."
     usermod -aG docker leo
+    echo "User 'leo' added to docker group. You may need to log out and back in for changes to take effect."
 else
     echo "User 'leo' does not exist. Skipping user modification."
+fi
+
+# Install Docker Compose plugin if not present
+if ! docker compose version &>/dev/null; then
+    echo "Installing Docker Compose plugin..."
+    apt update
+    apt install -y docker-compose-plugin
 fi
 
 # Check and create internal network
@@ -100,17 +132,31 @@ else
 fi
 
 # Setup Portainer using Docker Compose
-if [ ! -d "$PORTAINER_DIR" ] || [ -z "$(docker ps -aq -f name=portainer)" ]; then
+# Check if portainer directory exists and if portainer container is running
+if [ ! -d "$PORTAINER_DIR" ] || ! docker ps --format '{{.Names}}' | grep -q "^portainer$"; then
     echo "Setting up Portainer using Docker Compose..."
     mkdir -p "$PORTAINER_DIR"
-    curl -fsSL "$PORTAINER_COMPOSE_URL" -o "$PORTAINER_DIR/docker-compose.yml"
+    
+    # Download docker-compose.yml if it doesn't exist
+    if [ ! -f "$PORTAINER_DIR/docker-compose.yml" ]; then
+        curl -fsSL "$PORTAINER_COMPOSE_URL" -o "$PORTAINER_DIR/docker-compose.yml"
+    fi
+    
     cd "$PORTAINER_DIR"
     docker compose up -d
+    
+    # Get server IP
     SERVER_IP=$(hostname -I | awk '{print $1}')
+    if [ -z "$SERVER_IP" ]; then
+        SERVER_IP="localhost"
+    fi
+    
     echo "Portainer has been successfully installed and deployed using Docker Compose"
     echo "Access Portainer at: https://$SERVER_IP:9443"
+    echo "First-time setup: Create an admin user when you first access Portainer"
 else
     echo "Portainer is already installed and running. Skipping setup."
 fi
 
-echo "Docker setup completed successfully."
+echo "Docker setup completed successfully on $OS $VERSION"
+echo "Log file saved at: $LOG_FILE"
