@@ -30,7 +30,7 @@ error_exit() {
 }
 trap 'error_exit $LINENO' ERR
 
-# Check OS compatibility - Improved detection
+# Check OS compatibility
 if [ -f /etc/os-release ]; then
     . /etc/os-release
     OS=$ID
@@ -47,7 +47,7 @@ else
     exit 1
 fi
 
-# Convert to lowercase for comparison
+# Convert to lowercase
 OS=$(echo "$OS" | tr '[:upper:]' '[:lower:]')
 
 if [[ "$OS" != "ubuntu" && "$OS" != "debian" ]]; then
@@ -57,24 +57,23 @@ fi
 
 echo "Running on supported OS: $OS $VERSION"
 
-# Update and install dependencies - Conditional package installation
+# Update and install dependencies
 echo "Updating and installing dependencies..."
 apt update && apt upgrade -y
 
-# Install common packages
 COMMON_PACKAGES="curl gnupg lsb-release ca-certificates"
 
-# Add Ubuntu-specific packages
+# ✅ FIXED SECTION (Debian-safe)
 if [[ "$OS" == "ubuntu" ]]; then
     echo "Ubuntu detected: Installing Ubuntu-specific packages..."
-    apt install -y $COMMON_PACKAGES software-properties-common
+    if ! apt install -y $COMMON_PACKAGES software-properties-common; then
+        echo "software-properties-common not available, continuing without it..."
+        apt install -y $COMMON_PACKAGES
+    fi
 else
     echo "Debian detected: Installing Debian-specific packages..."
-    # On Debian, we need different packages for repository management
-    apt install -y $COMMON_PACKAGES apt-transport-https
+    apt install -y $COMMON_PACKAGES
 fi
-
-apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Docker if not already installed
 if ! command -v docker &>/dev/null; then
@@ -90,7 +89,6 @@ fi
 echo "Enabling and starting Docker service..."
 systemctl enable --now docker
 
-# Wait a moment for Docker to be fully ready
 sleep 3
 
 # Add user 'leo' to Docker group if it exists
@@ -132,12 +130,10 @@ else
 fi
 
 # Setup Portainer using Docker Compose
-# Check if portainer directory exists and if portainer container is running
 if [ ! -d "$PORTAINER_DIR" ] || ! docker ps --format '{{.Names}}' | grep -q "^portainer$"; then
     echo "Setting up Portainer using Docker Compose..."
     mkdir -p "$PORTAINER_DIR"
     
-    # Download docker-compose.yml if it doesn't exist
     if [ ! -f "$PORTAINER_DIR/docker-compose.yml" ]; then
         curl -fsSL "$PORTAINER_COMPOSE_URL" -o "$PORTAINER_DIR/docker-compose.yml"
     fi
@@ -145,7 +141,6 @@ if [ ! -d "$PORTAINER_DIR" ] || ! docker ps --format '{{.Names}}' | grep -q "^po
     cd "$PORTAINER_DIR"
     docker compose up -d
     
-    # Get server IP
     SERVER_IP=$(hostname -I | awk '{print $1}')
     if [ -z "$SERVER_IP" ]; then
         SERVER_IP="localhost"
@@ -157,6 +152,10 @@ if [ ! -d "$PORTAINER_DIR" ] || ! docker ps --format '{{.Names}}' | grep -q "^po
 else
     echo "Portainer is already installed and running. Skipping setup."
 fi
+
+# ✅ Moved cleanup to end (prevents Debian apt issues)
+apt-get clean
+rm -rf /var/lib/apt/lists/*
 
 echo "Docker setup completed successfully on $OS $VERSION"
 echo "Log file saved at: $LOG_FILE"
