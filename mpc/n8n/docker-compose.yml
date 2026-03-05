@@ -1,48 +1,107 @@
 services:
-  n8n:
-    image: n8nio/n8n:latest
-    container_name: n8n
-    restart: always
-    ports:
-      - "5678:5678"
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: n8n_postgres
+    restart: unless-stopped
     environment:
-      - DB_TYPE=postgresdb
-      - DB_POSTGRESDB_HOST=db
-      - DB_POSTGRESDB_PORT=5432
-      - DB_POSTGRESDB_DATABASE=n8n
-      - DB_POSTGRESDB_USER=n8n
-      - DB_POSTGRESDB_PASSWORD=1212
-      - N8N_BASIC_AUTH_ACTIVE=true
-      - N8N_BASIC_AUTH_USER=admin
-      - N8N_BASIC_AUTH_PASSWORD=${N8N_BASIC_AUTH_PASSWORD}
-      - N8N_HOST=192.168.1.55
-      - N8N_PORT=5678
-      - N8N_SECURE_COOKIE=false
-      - WEBHOOK_URL=http://192.168.1.55:5678/
+      POSTGRES_USER: n8n
+      POSTGRES_PASSWORD: 1212
+      POSTGRES_DB: n8n
     volumes:
-      - n8n_data:/home/node/.n8n
-    depends_on:
-      - db
+      - /docker/n8n/postgres:/var/lib/postgresql/data
     networks:
       - internal_network
 
-  db:
-    image: postgres:15
-    container_name: n8n_db
-    restart: always
-    environment:
-      - POSTGRES_USER=n8n
-      - POSTGRES_PASSWORD=1212
-      - POSTGRES_DB=n8n
+
+  redis:
+    image: redis:7-alpine
+    container_name: n8n_redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - /docker/n8n/redis:/data
+    networks:
+      - internal_network
+
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - 5678:5678
+    environment:
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_PORT: 5432
+      DB_POSTGRESDB_DATABASE: n8n
+      DB_POSTGRESDB_USER: n8n
+      DB_POSTGRESDB_PASSWORD: 1212
+      EXECUTIONS_MODE: queue
+      QUEUE_BULL_REDIS_HOST: redis
+      QUEUE_BULL_REDIS_PORT: 6379
+      N8N_ENCRYPTION_KEY: replace-with-long-random-key
+      N8N_BASIC_AUTH_ACTIVE: "true"
+      N8N_BASIC_AUTH_USER: admin
+      N8N_BASIC_AUTH_PASSWORD: ${N8N_BASIC_AUTH_PASSWORD}
+      N8N_HOST: 192.168.1.55
+      N8N_PORT: 5678
+      WEBHOOK_URL: http://192.168.1.55:5678/
+      N8N_SECURE_COOKIE: "false"
+      GENERIC_TIMEZONE: Africa/Nairobi
+      TZ: Africa/Nairobi
+    volumes:
+      - /docker/n8n/n8n:/home/node/.n8n
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - internal_network
+
+
+  worker1:
+    image: n8nio/n8n:latest
+    container_name: n8n_worker1
+    restart: unless-stopped
+    command: worker
+    environment:
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_PORT: 5432
+      DB_POSTGRESDB_DATABASE: n8n
+      DB_POSTGRESDB_USER: n8n
+      DB_POSTGRESDB_PASSWORD: 1212
+      EXECUTIONS_MODE: queue
+      QUEUE_BULL_REDIS_HOST: redis
+      QUEUE_BULL_REDIS_PORT: 6379
+      N8N_ENCRYPTION_KEY: replace-with-long-random-key
+      GENERIC_TIMEZONE: Africa/Nairobi
+      TZ: Africa/Nairobi
+    volumes:
+      - /docker/n8n/n8n:/home/node/.n8n
+    networks:
+      - internal_network
+
+
+  postgres-backup:
+    image: prodrigestivill/postgres-backup-local
+    container_name: n8n_db_backup
+    restart: unless-stopped
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: n8n
+      POSTGRES_USER: n8n
+      POSTGRES_PASSWORD: 1212
+      SCHEDULE: "@daily"
+      BACKUP_KEEP_DAYS: 7
+      BACKUP_KEEP_WEEKS: 4
+      BACKUP_KEEP_MONTHS: 6
+    volumes:
+      - /docker/n8n/backups:/backups
     networks:
       - internal_network
 
 networks:
   internal_network:
     external: true
-
-volumes:
-  n8n_data:
-  postgres_data:
