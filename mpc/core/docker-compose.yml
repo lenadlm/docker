@@ -20,15 +20,15 @@ services:
       - SUDO_PASSWORD=${SUDO_PASSWORD}
       - DEFAULT_WORKSPACE=/config/workspace
       - PWA_APPNAME=code-server
+    networks:
+      - external_network
+    ports:
+      - 8443:8443
     volumes:
       - /docker/code-server/config:/config
       - /docker:/config/workspace/docker:rw
       - /home/leo:/config/workspace/home:rw
       - /mnt/d:/config/workspace/mntd:rw
-    ports:
-      - 8443:8443
-    networks:
-      - external_network
     restart: unless-stopped
 
   copyparty:
@@ -51,20 +51,16 @@ services:
     stop_grace_period: 15s
     restart: unless-stopped
 
-  dockpeek:
-    image: dockpeek/dockpeek:latest
-    container_name: dockpeek
-    environment:
-      - SECRET_KEY=your_secure_secret_key
-      - USERNAME=${USERNAME}
-      - PASSWORD=${PASSWORD}
-    #  - DOCKER_HOST_NAME=
-    ports:
-      - "3420:8000"
+  dockhand:
+    image: fnsys/dockhand:latest
+    container_name: dockhand
     networks:
-      - internal_network
+      - external_network
+    ports:
+      - 3000:3000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - /docker/dockhand/data:/app/data
     restart: unless-stopped
     
   filewizard:
@@ -80,7 +76,7 @@ services:
     ports:
       - "6969:8000"
     networks:
-      - internal_network
+      - external_network
     volumes:
       - /docker/filewizard/config:/app/config # settings.yml will be here
       - /docker/filewizard/data/uploads:/app/uploads
