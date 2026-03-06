@@ -1,27 +1,14 @@
-services:
+version: "3.9"
 
+services:
   cloudflared:
     image: cloudflare/cloudflared:latest
     container_name: cloudflared
     command: tunnel --no-autoupdate run
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
-    restart: unless-stopped
-
-  tailscale:
-    image: tailscale/tailscale:latest
-    container_name: tailscale
-    hostname: mpc
-    cap_add:
-      - NET_ADMIN
-      - SYS_MODULE
-    devices:
-      - /dev/net/tun
-    environment:
-      - TS_AUTHKEY=${TS_AUTHKEY}
-      - TS_USERSPACE=false
-    volumes:
-      - /docker/tailscale:/var/lib/tailscale
+    networks:
+      - external_network
     restart: unless-stopped
 
   code-server:
@@ -35,14 +22,14 @@ services:
       - SUDO_PASSWORD=${SUDO_PASSWORD}
       - DEFAULT_WORKSPACE=/config/workspace
       - PWA_APPNAME=code-server
-    ports:
-      - 8443:8443
-    volumes:
-      - /docker/code-server/config:/config
-      - /docker:/config/workspace/docker
-      - /mnt/shared:/config/workspace/shared
     networks:
       - external_network
+    ports:
+      - "8443:8443"
+    volumes:
+      - /docker/code-server/config:/config
+      - /docker:/config/workspace/docker:rw
+      - /mnt/shared:/config/workspace/shared:rw
     restart: unless-stopped
 
   copyparty:
@@ -50,15 +37,16 @@ services:
     container_name: copyparty
     user: "1000:1000"
     ports:
-      - 3923:3923
+      - "3923:3923"
     volumes:
       - /docker/copyparty/cfg:/cfg
-      - /docker:/docker
-      - /home/leo:/home/leo
-      - /mnt/shared:/mnt/shared
-      - /mnt/media:/mnt/media
+      - /docker:/docker:rw
+      - /home/leo:/home/leo:rw
+      - /mnt/shared:/mnt/shared:rw
+      - /mnt/media:/mnt/media:rw
     environment:
-      - PYTHONUNBUFFERED=1
+      LD_PRELOAD: /usr/lib/libmimalloc-secure.so.NOPE
+      PYTHONUNBUFFERED: 1    
     networks:
       - external_network
     stop_grace_period: 15s
@@ -67,43 +55,48 @@ services:
   dockhand:
     image: fnsys/dockhand:latest
     container_name: dockhand
-    network_mode: service:tailscale
+    networks:
+      - external_network
+    ports:
+      - "3000:3000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /docker/dockhand/data:/app/data
     restart: unless-stopped
-    depends_on:
-      - tailscale
 
   dozzle:
     image: amir20/dozzle:latest
     container_name: dozzle
-    network_mode: service:tailscale
+    networks:
+      - external_network
+    ports:
+      - "8888:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: unless-stopped
-    depends_on:
-      - tailscale
 
   filewizard:
     image: loredcast/filewizard:latest
     container_name: filewizard
     environment:
-      - LOCAL_ONLY=True
-      - UPLOADS_DIR=/app/uploads
-      - PROCESSED_DIR=/app/processed
+      - LOCAL_ONLY=True # False for Auth
+      - SECRET_KEY= # set if using auth
+      - UPLOADS_DIR=/app/uploads # inside the container
+      - PROCESSED_DIR=/app/processed # inside the container
       - OMP_NUM_THREADS=1
       - DOWNLOAD_KOKORO_ON_STARTUP=true
     ports:
-      - 6969:8000
-    volumes:
-      - /docker/filewizard/config:/app/config
-      - /docker/filewizard/data/uploads:/app/uploads
-      - /docker/filewizard/data/processed:/app/processed
+      - "6969:8000"
     networks:
       - external_network
+    volumes:
+      - /docker/filewizard/config:/app/config # settings.yml will be here
+      - /docker/filewizard/data/uploads:/app/uploads
+      - /docker/filewizard/data/processed:/app/processed
     restart: unless-stopped
 
 networks:
+  internal_network:
+    external: true
   external_network:
     external: true
