@@ -9,44 +9,24 @@ services:
       - internal_network
     restart: unless-stopped
 
-  tailscale:
-    image: tailscale/tailscale:latest
-    container_name: tailscale
-    hostname: dockhand
-    cap_add:
-      - NET_ADMIN
-      - SYS_MODULE
-    devices:
-      - /dev/net/tun
-    environment:
-      - TS_AUTHKEY=${TS_AUTHKEY}
-      - TS_USERSPACE=false
-    volumes:
-      - /docker/tailscale:/var/lib/tailscale
-    restart: unless-stopped
-
   dockhand:
     image: fnsys/dockhand:latest
     container_name: dockhand
-    network_mode: service:tailscale
+    ports:
+      - 100.70.60.70:3000:3000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /docker/dockhand/data:/app/data
     restart: unless-stopped
-    depends_on:
-      - tailscale
 
   dozzle:
     image: amir20/dozzle:latest
     container_name: dozzle
-    network_mode: service:tailscale
-    #ports:
-    #  - 8080:8080
+    ports:
+      - 100.70.60.70:8080:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
-    depends_on:
-      - tailscale
 
 #  hbbs:
 #    container_name: hbbs
