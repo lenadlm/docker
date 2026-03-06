@@ -27,8 +27,7 @@ services:
     volumes:
       - /docker/code-server/config:/config
       - /docker:/config/workspace/docker:rw
-      - /home/leo:/config/workspace/home:rw
-      - /mnt/d:/config/workspace/mntd:rw
+      - /mnt/shared:/config/workspace/shared:rw
     restart: unless-stopped
 
   copyparty:
@@ -41,8 +40,8 @@ services:
       - /docker/copyparty/cfg:/cfg
       - /docker:/docker:rw
       - /home/leo:/home/leo:rw
-      - /mnt/d:/mnt/d:rw
-      - /run/media/leo/f:/mnt/f:rw
+      - /mnt/shared:/mnt/shared:rw
+      - /mnt/media/leo/f:/mnt/media:rw
     environment:
       LD_PRELOAD: /usr/lib/libmimalloc-secure.so.NOPE
       PYTHONUNBUFFERED: 1    
