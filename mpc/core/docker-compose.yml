@@ -41,7 +41,7 @@ services:
       - /docker:/docker:rw
       - /home/leo:/home/leo:rw
       - /mnt/shared:/mnt/shared:rw
-      - /mnt/media/leo/f:/mnt/media:rw
+      - /mnt/media:/mnt/media:rw
     environment:
       LD_PRELOAD: /usr/lib/libmimalloc-secure.so.NOPE
       PYTHONUNBUFFERED: 1    
@@ -53,25 +53,31 @@ services:
   dockhand:
     image: fnsys/dockhand:latest
     container_name: dockhand
-    networks:
-      - external_network
-    ports:
-      - 3000:3000
+    network_mode: service:tailscale
+    #networks:
+    #  - external_network
+    #ports:
+    #  - 3000:3000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /docker/dockhand/data:/app/data
     restart: unless-stopped
+    depends_on:
+      - tailscale
 
   dozzle:
     image: amir20/dozzle:latest
     container_name: dozzle
-    networks:
-      - external_network
-    ports:
-      - 8888:8080
+    network_mode: service:tailscale
+    #networks:
+    #  - external_network
+    #ports:
+    #  - 8888:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: unless-stopped
+    depends_on:
+      - tailscale
     
   filewizard:
     image: loredcast/filewizard:latest
