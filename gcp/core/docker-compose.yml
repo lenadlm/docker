@@ -29,26 +29,24 @@ services:
     image: fnsys/dockhand:latest
     container_name: dockhand
     network_mode: service:tailscale
-    depends_on:
-      - tailscale
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /docker/dockhand/data:/app/data
     restart: unless-stopped
+    depends_on:
+      - tailscale
 
-  dockpeek:
-    image: dockpeek/dockpeek:latest
-    container_name: dockpeek
-    environment:
-      - USERNAME=${USERNAME}
-      - PASSWORD=${PASSWORD}
-    ports:
-      - "3420:8000"
-    networks:
-      - internal_network
+  dozzle:
+    image: amir20/dozzle:latest
+    container_name: dozzle
+    network_mode: service:tailscale
+    #ports:
+    #  - 8080:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
+    depends_on:
+      - tailscale
 
 #  hbbs:
 #    container_name: hbbs
