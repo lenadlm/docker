@@ -98,28 +98,12 @@ services:
       - TZ=Africa/Nairobi
     volumes:
       - /docker/radarr/config:/config
-      - /mnt/media:/data
+      - /mnt/media/movies:/movies
       - /mnt/shared/transmission/downloads:/downloads
     networks:
       - internal_network
     ports:
       - 7878:7878
-    restart: unless-stopped
-
-  sonarr:
-    image: lscr.io/linuxserver/sonarr:latest
-    container_name: sonarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Africa/Nairobi
-    volumes:
-      - /docker/sonarr/config:/config
-      - /mnt/media:/data
-    networks:
-      - internal_network
-    ports:
-      - 8989:8989
     restart: unless-stopped
     
   transmission:
