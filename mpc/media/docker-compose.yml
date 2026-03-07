@@ -58,6 +58,7 @@ services:
       - /docker/jellyfin/library:/config
       - /mnt/media:/data
 
+
   overseerr:
     image: lscr.io/linuxserver/overseerr:latest
     container_name: overseerr
@@ -97,7 +98,8 @@ services:
       - TZ=Africa/Nairobi
     volumes:
       - /docker/radarr/config:/config
-      - /docker/radarr/data:/data
+      - /mnt/media:/data
+      - /mnt/shared/transmission/downloads:/downloads
     networks:
       - internal_network
     ports:
@@ -113,7 +115,7 @@ services:
       - TZ=Africa/Nairobi
     volumes:
       - /docker/sonarr/config:/config
-      - /docker/sonarr/data:/data
+      - /mnt/media:/data
     networks:
       - internal_network
     ports:
