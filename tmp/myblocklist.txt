@@ -49,6 +49,7 @@
 !----- BLOCKLIST -----!
 ||1xbet.*^
 ||ads.microsoft.com^
+||cooladblocker.com^
 ||data.microsoft.com^
 ||discusteleost.*^
 ||goddess.*^
