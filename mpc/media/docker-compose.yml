@@ -132,7 +132,7 @@ services:
       - TZ=Africa/Nairobi
       - TRANSMISSION_WEB_HOME= #optional
       - USER=leo
-      - PASS=leo
+      - PASS=1212
       - WHITELIST= #optional
       - PEERPORT= #optional
       - HOST_WHITELIST= #optional
