@@ -92,6 +92,23 @@ services:
       - /docker/filewizard/data/uploads:/app/uploads
       - /docker/filewizard/data/processed:/app/processed
     restart: unless-stopped
+
+  nextexplorer:
+    image: nxzai/explorer:latest
+    container_name: nextexplorer
+    networks:
+      - external_network
+    ports:
+      - '3033:3000'
+    environment:
+      - NODE_ENV=production
+      - PUBLIC_URL=http://localhost:3033
+    volumes:
+      - /docker/nextexplorer/config:/config
+      - /docker/nextexplorer/cache:/cache
+      - /mnt:/mnt
+      - /:/
+    restart: unless-stopped
   
   tor:
     image: dockurr/tor
