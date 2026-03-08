@@ -37,6 +37,7 @@
 @@||lg-app.dstv.com^
 @@||livescore.com^
 @@||netflix.com^
+@@||plex.tv^
 @@||scdn.co^
 @@||spotify.com^
 @@||spotifycdn.com^
