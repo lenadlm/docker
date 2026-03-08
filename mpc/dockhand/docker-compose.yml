@@ -3,10 +3,14 @@ services:
     image: fnsys/dockhand:latest
     container_name: dockhand
     networks:
-      - bridge
+      - internal_network
     ports:
       - "3000:3000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /docker/dockhand/data:/app/data
     restart: unless-stopped
+
+networks:
+  internal_network:
+    external: true
