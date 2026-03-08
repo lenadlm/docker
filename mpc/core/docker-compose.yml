@@ -50,18 +50,6 @@ services:
     stop_grace_period: 15s
     restart: unless-stopped
 
-  dockhand:
-    image: fnsys/dockhand:latest
-    container_name: dockhand
-    networks:
-      - external_network
-    ports:
-      - "3000:3000"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /docker/dockhand/data:/app/data
-    restart: unless-stopped
-
   dozzle:
     image: amir20/dozzle:latest
     container_name: dozzle
