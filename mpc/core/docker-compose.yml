@@ -92,24 +92,6 @@ services:
       - /docker/filewizard/data/uploads:/app/uploads
       - /docker/filewizard/data/processed:/app/processed
     restart: unless-stopped
-
-  nginx-proxy-manager:
-    image: jc21/nginx-proxy-manager:latest
-    container_name: nginx-proxy-manager
-    ports:
-      - "80:80"
-      - "81:81"
-      - "443:443"
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Africa/Nairobi
-    networks:
-      - internal_network
-    volumes:
-      - /docker/npm/data:/data
-      - /docker/npm/letsencrypt:/etc/letsencrypt
-    restart: unless-stopped
   
   tor:
     image: dockurr/tor
@@ -123,7 +105,6 @@ services:
       - /docker/tor/config:/etc/tor
       - /docker/tor/data:/var/lib/tor
     restart: unless-stopped
-      
 networks:
   internal_network:
     external: true
