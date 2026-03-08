@@ -93,7 +93,7 @@ services:
       - /docker/filewizard/data/processed:/app/processed
     restart: unless-stopped
 
- nginx-proxy-manager:
+  nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:latest
     container_name: nginx-proxy-manager
     ports:
@@ -110,7 +110,7 @@ services:
       - /docker/npm/data:/data
       - /docker/npm/letsencrypt:/etc/letsencrypt
     restart: unless-stopped
-
+  
   tor:
     image: dockurr/tor
     container_name: tor
