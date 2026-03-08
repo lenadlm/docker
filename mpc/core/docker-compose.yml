@@ -92,6 +92,20 @@ services:
       - /docker/filewizard/data/uploads:/app/uploads
       - /docker/filewizard/data/processed:/app/processed
     restart: unless-stopped
+
+  tor:
+    image: dockurr/tor
+    container_name: tor
+    ports:
+      - 9050:9050
+      - 9051:9051
+    networks:
+      - external_network
+    volumes:
+      - /docker/tor/config:/etc/tor
+      - /docker/tor/data:/var/lib/tor
+    restart: unless-stopped
+      
 networks:
   internal_network:
     external: true
