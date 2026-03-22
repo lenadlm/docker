@@ -31,6 +31,7 @@
 @@||aliexpress.com^
 @@||amazon.com^
 @@||bnbstatic.com^
+@@||cloudflare-gateway.com^
 @@||docker.com^
 @@||facebook.com^
 @@||ipinfo.io^
