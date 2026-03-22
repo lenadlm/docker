@@ -35,6 +35,7 @@
 @@||docker.com^
 @@||facebook.com^
 @@||ipinfo.io^
+@@||kenya-airways.com^
 @@||lg-app.dstv.com^
 @@||livescore.com^
 @@||netflix.com^
