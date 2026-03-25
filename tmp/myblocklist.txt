@@ -79,6 +79,7 @@
 ||wpad.*^
 ||votravis.*^
 ||zscaler.*^
+||zscaler*.*^
 ||zscalerone.*^
 ||zscalertwo.*^
 ||zscalerthree.net
