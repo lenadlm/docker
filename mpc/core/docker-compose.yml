@@ -106,8 +106,9 @@ services:
     volumes:
       - /docker/nextexplorer/config:/config
       - /docker/nextexplorer/cache:/cache
+      - /docker:/docker
+      - /home/leo:/home/leo
       - /mnt:/mnt
-      - /:/
     restart: unless-stopped
   
   tor:
