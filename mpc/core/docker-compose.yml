@@ -65,7 +65,7 @@ services:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
     environment:
-      - HOMEPAGE_ALLOWED_HOSTS = 192.168.1.197:3300
+      - HOMEPAGE_ALLOWED_HOSTS=192.168.1.197:3300
     networks:
       - external_network
     ports:
