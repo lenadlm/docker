@@ -58,7 +58,21 @@ services:
       - /docker/jellyfin/library:/config
       - /mnt/media:/data
 
-
+  flaresolverr:
+    image: flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=info
+      - LOG_HTML=false
+      - CAPTCHA_SOLVER=none
+      - TZ=Africa/Nairobi
+      - HEADLESS=true
+    networks:
+      - internal_network
+    ports:
+      - "8191:8191"
+    restart: unless-stopped
+    
   overseerr:
     image: lscr.io/linuxserver/overseerr:latest
     container_name: overseerr
