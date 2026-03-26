@@ -40,17 +40,6 @@ services:
     stop_grace_period: 15s
     restart: unless-stopped
 
-  dozzle:
-    image: amir20/dozzle:latest
-    container_name: dozzle
-    networks:
-      - external_network
-    ports:
-      - "8888:8080"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    restart: unless-stopped
-
   filewizard:
     image: loredcast/filewizard:latest
     container_name: filewizard
