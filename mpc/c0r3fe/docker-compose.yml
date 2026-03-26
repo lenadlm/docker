@@ -1,0 +1,53 @@
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    networks:
+      - external_network
+    restart: unless-stopped
+
+  dozzle:
+    image: amir20/dozzle:latest
+    container_name: dozzle
+    networks:
+      - external_network
+    ports:
+      - "8888:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: unless-stopped
+
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS=192.168.1.197:3300
+    networks:
+      - external_network
+    ports:
+      - 3300:3000
+    volumes:
+      - /docker/homepage/config:/app/config # Make sure your local config directory exists
+      - /var/run/docker.sock:/var/run/docker.sock:ro # (optional) For docker integrations
+    restart: unless-stopped
+  
+  tor:
+    image: dockurr/tor
+    container_name: tor
+    ports:
+      - 9050:9050
+      - 9051:9051
+    networks:
+      - external_network
+    volumes:
+      - /docker/tor/config:/etc/tor
+      - /docker/tor/data:/var/lib/tor
+    restart: unless-stopped
+networks:
+  internal_network:
+    external: true
+  external_network:
+    external: true
