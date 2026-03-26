@@ -2,6 +2,10 @@ services:
   dockhand:
     image: fnsys/dockhand:latest
     container_name: dockhand
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Africa/Nairobi
     networks:
       - internal_network
     ports:
