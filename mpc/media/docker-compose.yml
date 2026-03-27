@@ -73,9 +73,9 @@ services:
       - "8191:8191"
     restart: unless-stopped
     
-  overseerr:
-    image: lscr.io/linuxserver/overseerr:latest
-    container_name: overseerr
+  seerr:
+    image: ghcr.io/seerr-team/seerr:latest
+    container_name: seerr
     environment:
       - PUID=1000
       - PGID=1000
