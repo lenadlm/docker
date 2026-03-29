@@ -81,7 +81,7 @@ services:
       - PGID=1000
       - TZ=Africa/Nairobi
     volumes:
-      - /docker/seerr/app/config:/app/config
+      - /docker/overseerr/config:/app/config
     networks:
       - internal_network
     ports:
