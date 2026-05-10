@@ -634,6 +634,7 @@ votravis.online
 *.votravis.online
 votravis.site
 *.votravis.site
+wpad
 zscaler.com
 *.zscaler.com
 zscaler.net
