@@ -1,378 +1,379 @@
-*.1xbet.com
-*.1xbet.net
-*.1xbet.org
-*.1xbet.io
-*.1xbet.co
-*.1xbet.info
-*.1xbet.biz
-*.1xbet.xyz
-*.1xbet.online
-*.1xbet.site
-*.1xbet.ru
-*.1xbet.ua
-*.1xbet.kz
-*.1xbet.uz
-*.1xbet.by
-*.1xbet.am
-*.1xbet.ge
-*.1xbet.md
-*.1xbet.tj
-*.1xbet.tm
-*.1xbet.kg
-*.1xbet.az
-*.1xbet.com.tr
-*.ads.microsoft.com
-*.cooladblocker.com
-*.data.microsoft.com
-*.discusteleost.com
-*.discusteleost.net
-*.discusteleost.org
-*.discusteleost.io
-*.discusteleost.co
-*.discusteleost.info
-*.discusteleost.biz
-*.discusteleost.xyz
-*.discusteleost.online
-*.discusteleost.site
-*.discusteleost.club
-*.discusteleost.shop
-*.discusteleost.store
-*.discusteleost.tv
-*.discusteleost.me
-*.discusteleost.cc
-*.discusteleost.eu
-*.discusteleost.de
-*.discusteleost.fr
-*.discusteleost.es
-*.discusteleost.it
-*.discusteleost.nl
-*.discusteleost.se
-*.discusteleost.no
-*.discusteleost.dk
-*.discusteleost.fi
-*.discusteleost.pl
-*.discusteleost.cz
-*.discusteleost.hu
-*.discusteleost.at
-*.discusteleost.ch
-*.discusteleost.be
-*.goddess.com
-*.goddess.net
-*.goddess.org
-*.goddess.io
-*.goddess.co
-*.goddess.info
-*.goddess.biz
-*.goddess.xyz
-*.goddess.online
-*.goddess.site
-*.goddess.club
-*.goddess.shop
-*.goddess.store
-*.goddess.life
-*.goddess.media
-*.goddess.news
-*.goddess.world
-*.goddess.space
-*.goddess.tech
-*.goddess.app
-*.goddess.blog
-*.goddess.design
-*.hl.com
-*.hl.net
-*.hl.org
-*.hl.io
-*.hl.co
-*.hl.info
-*.hl.biz
-*.hl.xyz
-*.hl.online
-*.hl.site
-*.hl.club
-*.hl.shop
-*.hl.store
-*.hl.tv
-*.hl.me
-*.hl.cc
-*.hl.eu
-*.hl.de
-*.hl.fr
-*.hl.es
-*.hl.it
-*.hl.nl
-*.hl.se
-*.hl.no
-*.hl.dk
-*.hl.fi
-*.hl.pl
-*.hl.cz
-*.hl.hu
-*.hl.at
-*.hl.ch
-*.hl.be
-*.hl.ru
-*.hl.ua
-*.hl.kz
-*.hl.by
-*.hl.in
-*.hl.jp
-*.hl.cn
-*.hl.au
-*.hl.ca
-*.hl.mx
-*.hl.br
-*.hl.ar
-*.hl.cl
-*.hl.co.il
-*.hl.ae
-*.hl.sa
-*.hl.tr
-*.hlag.com
-*.hlag.net
-*.hlag.org
-*.hlag.io
-*.hlag.co
-*.hlag.info
-*.hlag.xyz
-*.hlag.online
-*.hlag.site
-*.hlag.club
-*.hlcl.com
-*.hlcl.net
-*.hlcl.org
-*.hlcl.io
-*.hlcl.co
-*.hlcl.info
-*.hlcl.xyz
-*.hlcl.online
-*.hlcl.site
-*.iqbroker.com
-*.iqbroker.net
-*.iqbroker.org
-*.iqbroker.io
-*.iqbroker.co
-*.iqbroker.info
-*.iqbroker.biz
-*.iqbroker.xyz
-*.iqbroker.online
-*.iqbroker.site
-*.iqbroker.de
-*.iqbroker.uk
-*.iqbroker.eu
-*.iqbroker.fr
-*.iqbroker.es
-*.iqbroker.it
-*.iqbroker.nl
-*.iqbroker.ch
-*.iqbroker.at
-*.iqbroker.be
-*.iqbroker.ru
-*.iqoption.com
-*.iqoption.net
-*.iqoption.org
-*.iqoption.io
-*.iqoption.co
-*.iqoption.info
-*.iqoption.biz
-*.iqoption.xyz
-*.iqoption.online
-*.iqoption.site
-*.iqoption.ru
-*.iqoption.eu
-*.iqoption.de
-*.iqoption.fr
-*.iqoption.es
-*.iqoption.it
-*.iqoption.pl
-*.iqoption.nl
-*.iqoption.se
-*.iqoption.no
-*.iqoption.dk
-*.iqoption.fi
-*.iqoption.cz
-*.iqoption.hu
-*.iqoption.at
-*.iqoption.ch
-*.iqoption.be
-*.iqtrading.com
-*.iqtrading.net
-*.iqtrading.org
-*.iqtrading.io
-*.iqtrading.co
-*.iqtrading.info
-*.iqtrading.biz
-*.iqtrading.xyz
-*.iqtrading.online
-*.iqtrading.site
-*.iqtrading.asia
-*.iqtrading.ru
-*.iqtrading.eu
-*.ixyyijop.com
-*.ixyyijop.net
-*.ixyyijop.org
-*.ixyyijop.io
-*.ixyyijop.co
-*.ixyyijop.xyz
-*.ixyyijop.online
-*.ixyyijop.site
-*.mbogibet.com
-*.mbogibet.net
-*.mbogibet.org
-*.mbogibet.io
-*.mbogibet.co
-*.mbogibet.xyz
-*.mbogibet.online
-*.mbogibet.site
-*.melbet.com
-*.melbet.net
-*.melbet.org
-*.melbet.io
-*.melbet.co
-*.melbet.ru
-*.melbet.ua
-*.melbet.kz
-*.melbet.uz
-*.melbet.by
-*.melbet.am
-*.melbet.ge
-*.melbet.md
-*.melbet.tj
-*.melbet.tm
-*.melbet.kg
-*.melbet.az
-*.mozzartbet.com
-*.mozzartbet.net
-*.mozzartbet.org
-*.mozzartbet.io
-*.mozzartbet.co
-*.mozzartbet.info
-*.mozzartbet.xyz
-*.mozzartbet.online
-*.mozzartbet.site
-*.mozzartbet.rs
-*.mozzartbet.bg
-*.mozzartbet.mk
-*.mozzartbet.ba
-*.mozzartbet.me
-*.mozzartbet.hr
-*.mozzartbet.si
-*.mozzartbet.al
-*.mygamesthebest.com
-*.nexthink.com
-*.nexthink.net
-*.nexthink.org
-*.nexthink.io
-*.nexthink.co
-*.nexthink.xyz
-*.nexthink.online
-*.nexthink.site
-*.play-lg.com
-*.play-lg.net
-*.play-lg.org
-*.play-lg.io
-*.play-lg.co
-*.play-lg.xyz
-*.play-lg.online
-*.play-lg.site
-*.pukabolomen.shop
-*.redirect12.com
-*.redirect12.net
-*.redirect12.org
-*.redirect12.io
-*.redirect12.co
-*.redirect12.xyz
-*.redirect12.online
-*.redirect12.site
-*.toptitaniumapp.com
-*.toptitaniumapp.net
-*.toptitaniumapp.org
-*.toptitaniumapp.io
-*.toptitaniumapp.co
-*.toptitaniumapp.xyz
-*.toptitaniumapp.online
-*.toptitaniumapp.site
-*.thesurferprotector.com
-*.thesurferprotector.net
-*.thesurferprotector.org
-*.thesurferprotector.io
-*.thesurferprotector.co
-*.thesurferprotector.xyz
-*.thesurferprotector.online
-*.thesurferprotector.site
-*.targetchain-flow.com
-*.targetchain-flow.net
-*.targetchain-flow.org
-*.targetchain-flow.io
-*.targetchain-flow.co
-*.targetchain-flow.xyz
-*.targetchain-flow.online
-*.targetchain-flow.site
-*.votravis.com
-*.votravis.net
-*.votravis.org
-*.votravis.io
-*.votravis.co
-*.votravis.xyz
-*.votravis.online
-*.votravis.site
-*.zscaler.com
-*.zscaler.net
-*.zscaler.org
-*.zscaler.io
-*.zscaler.co
-*.zscaler.info
-*.zscaler.biz
-*.zscaler.xyz
-*.zscaler.online
-*.zscaler.site
-*.zscaler.eu
-*.zscaler.us
-*.zscaler.in
-*.zscaler.com.au
-*.zscaler.co.uk
-*.zscaler.de
-*.zscaler.fr
-*.zscaler.es
-*.zscaler.it
-*.zscaler.nl
-*.zscaler.se
-*.zscaler.ae
-*.zscaler.sa
-*.zscalerone.com
-*.zscalerone.net
-*.zscalerone.org
-*.zscalerone.io
-*.zscalerone.co
-*.zscalerone.xyz
-*.zscaltwo.com
-*.zscaltwo.net
-*.zscaltwo.org
-*.zscaltwo.io
-*.zscaltwo.co
-*.zscaltwo.xyz
-*.zscalerthree.net
-*.zscloud.net
-*.zscalerbeta.net
-*.zscalergov.net
-*.zscalerten.net
-*.zpagov.com
-*.zpagov.net
-*.zpagov.org
-*.zpagov.io
-*.zpagov.co
-*.zpagov.xyz
-*.zpagov.us
-*.zpatwo.net
-*.zpabeta.net
-*.zdxcloud.net
-*.zdxgov.net
-*.zdxbeta.net
-*.zdxten.net
-*.ZIdentity.com
-*.ZIdentity.net
-*.ZIdentity.org
-*.ZIdentity.io
-*.ZIdentity.co
-*.ZIdentity.xyz
-*.zslogin.net
-*.zsloginbeta.net
+local-data: "1xbet.com 10200 IN A 0.0.0.0"
+local-data: "1xbet.net 10200 IN A 0.0.0.0"
+local-data: "1xbet.org 10200 IN A 0.0.0.0"
+local-data: "1xbet.io 10200 IN A 0.0.0.0"
+local-data: "1xbet.co 10200 IN A 0.0.0.0"
+local-data: "1xbet.info 10200 IN A 0.0.0.0"
+local-data: "1xbet.biz 10200 IN A 0.0.0.0"
+local-data: "1xbet.xyz 10200 IN A 0.0.0.0"
+local-data: "1xbet.online 10200 IN A 0.0.0.0"
+local-data: "1xbet.site 10200 IN A 0.0.0.0"
+local-data: "1xbet.ru 10200 IN A 0.0.0.0"
+local-data: "1xbet.ua 10200 IN A 0.0.0.0"
+local-data: "1xbet.kz 10200 IN A 0.0.0.0"
+local-data: "1xbet.uz 10200 IN A 0.0.0.0"
+local-data: "1xbet.by 10200 IN A 0.0.0.0"
+local-data: "1xbet.am 10200 IN A 0.0.0.0"
+local-data: "1xbet.ge 10200 IN A 0.0.0.0"
+local-data: "1xbet.md 10200 IN A 0.0.0.0"
+local-data: "1xbet.tj 10200 IN A 0.0.0.0"
+local-data: "1xbet.tm 10200 IN A 0.0.0.0"
+local-data: "1xbet.kg 10200 IN A 0.0.0.0"
+local-data: "1xbet.az 10200 IN A 0.0.0.0"
+local-data: "1xbet.com.tr 10200 IN A 0.0.0.0"
+local-data: "ads.microsoft.com 10200 IN A 0.0.0.0"
+local-data: "cooladblocker.com 10200 IN A 0.0.0.0"
+local-data: "data.microsoft.com 10200 IN A 0.0.0.0"
+local-data: "discusteleost.com 10200 IN A 0.0.0.0"
+local-data: "discusteleost.net 10200 IN A 0.0.0.0"
+local-data: "discusteleost.org 10200 IN A 0.0.0.0"
+local-data: "discusteleost.io 10200 IN A 0.0.0.0"
+local-data: "discusteleost.co 10200 IN A 0.0.0.0"
+local-data: "discusteleost.info 10200 IN A 0.0.0.0"
+local-data: "discusteleost.biz 10200 IN A 0.0.0.0"
+local-data: "discusteleost.xyz 10200 IN A 0.0.0.0"
+local-data: "discusteleost.online 10200 IN A 0.0.0.0"
+local-data: "discusteleost.site 10200 IN A 0.0.0.0"
+local-data: "discusteleost.club 10200 IN A 0.0.0.0"
+local-data: "discusteleost.shop 10200 IN A 0.0.0.0"
+local-data: "discusteleost.store 10200 IN A 0.0.0.0"
+local-data: "discusteleost.tv 10200 IN A 0.0.0.0"
+local-data: "discusteleost.me 10200 IN A 0.0.0.0"
+local-data: "discusteleost.cc 10200 IN A 0.0.0.0"
+local-data: "discusteleost.eu 10200 IN A 0.0.0.0"
+local-data: "discusteleost.de 10200 IN A 0.0.0.0"
+local-data: "discusteleost.fr 10200 IN A 0.0.0.0"
+local-data: "discusteleost.es 10200 IN A 0.0.0.0"
+local-data: "discusteleost.it 10200 IN A 0.0.0.0"
+local-data: "discusteleost.nl 10200 IN A 0.0.0.0"
+local-data: "discusteleost.se 10200 IN A 0.0.0.0"
+local-data: "discusteleost.no 10200 IN A 0.0.0.0"
+local-data: "discusteleost.dk 10200 IN A 0.0.0.0"
+local-data: "discusteleost.fi 10200 IN A 0.0.0.0"
+local-data: "discusteleost.pl 10200 IN A 0.0.0.0"
+local-data: "discusteleost.cz 10200 IN A 0.0.0.0"
+local-data: "discusteleost.hu 10200 IN A 0.0.0.0"
+local-data: "discusteleost.at 10200 IN A 0.0.0.0"
+local-data: "discusteleost.ch 10200 IN A 0.0.0.0"
+local-data: "discusteleost.be 10200 IN A 0.0.0.0"
+local-data: "goddess.com 10200 IN A 0.0.0.0"
+local-data: "goddess.net 10200 IN A 0.0.0.0"
+local-data: "goddess.org 10200 IN A 0.0.0.0"
+local-data: "goddess.io 10200 IN A 0.0.0.0"
+local-data: "goddess.co 10200 IN A 0.0.0.0"
+local-data: "goddess.info 10200 IN A 0.0.0.0"
+local-data: "goddess.biz 10200 IN A 0.0.0.0"
+local-data: "goddess.xyz 10200 IN A 0.0.0.0"
+local-data: "goddess.online 10200 IN A 0.0.0.0"
+local-data: "goddess.site 10200 IN A 0.0.0.0"
+local-data: "goddess.club 10200 IN A 0.0.0.0"
+local-data: "goddess.shop 10200 IN A 0.0.0.0"
+local-data: "goddess.store 10200 IN A 0.0.0.0"
+local-data: "goddess.life 10200 IN A 0.0.0.0"
+local-data: "goddess.media 10200 IN A 0.0.0.0"
+local-data: "goddess.news 10200 IN A 0.0.0.0"
+local-data: "goddess.world 10200 IN A 0.0.0.0"
+local-data: "goddess.space 10200 IN A 0.0.0.0"
+local-data: "goddess.tech 10200 IN A 0.0.0.0"
+local-data: "goddess.app 10200 IN A 0.0.0.0"
+local-data: "goddess.blog 10200 IN A 0.0.0.0"
+local-data: "goddess.design 10200 IN A 0.0.0.0"
+local-data: "hl.com 10200 IN A 0.0.0.0"
+local-data: "hl.net 10200 IN A 0.0.0.0"
+local-data: "hl.org 10200 IN A 0.0.0.0"
+local-data: "hl.io 10200 IN A 0.0.0.0"
+local-data: "hl.co 10200 IN A 0.0.0.0"
+local-data: "hl.info 10200 IN A 0.0.0.0"
+local-data: "hl.biz 10200 IN A 0.0.0.0"
+local-data: "hl.xyz 10200 IN A 0.0.0.0"
+local-data: "hl.online 10200 IN A 0.0.0.0"
+local-data: "hl.site 10200 IN A 0.0.0.0"
+local-data: "hl.club 10200 IN A 0.0.0.0"
+local-data: "hl.shop 10200 IN A 0.0.0.0"
+local-data: "hl.store 10200 IN A 0.0.0.0"
+local-data: "hl.tv 10200 IN A 0.0.0.0"
+local-data: "hl.me 10200 IN A 0.0.0.0"
+local-data: "hl.cc 10200 IN A 0.0.0.0"
+local-data: "hl.eu 10200 IN A 0.0.0.0"
+local-data: "hl.de 10200 IN A 0.0.0.0"
+local-data: "hl.fr 10200 IN A 0.0.0.0"
+local-data: "hl.es 10200 IN A 0.0.0.0"
+local-data: "hl.it 10200 IN A 0.0.0.0"
+local-data: "hl.nl 10200 IN A 0.0.0.0"
+local-data: "hl.se 10200 IN A 0.0.0.0"
+local-data: "hl.no 10200 IN A 0.0.0.0"
+local-data: "hl.dk 10200 IN A 0.0.0.0"
+local-data: "hl.fi 10200 IN A 0.0.0.0"
+local-data: "hl.pl 10200 IN A 0.0.0.0"
+local-data: "hl.cz 10200 IN A 0.0.0.0"
+local-data: "hl.hu 10200 IN A 0.0.0.0"
+local-data: "hl.at 10200 IN A 0.0.0.0"
+local-data: "hl.ch 10200 IN A 0.0.0.0"
+local-data: "hl.be 10200 IN A 0.0.0.0"
+local-data: "hl.ru 10200 IN A 0.0.0.0"
+local-data: "hl.ua 10200 IN A 0.0.0.0"
+local-data: "hl.kz 10200 IN A 0.0.0.0"
+local-data: "hl.by 10200 IN A 0.0.0.0"
+local-data: "hl.in 10200 IN A 0.0.0.0"
+local-data: "hl.jp 10200 IN A 0.0.0.0"
+local-data: "hl.cn 10200 IN A 0.0.0.0"
+local-data: "hl.au 10200 IN A 0.0.0.0"
+local-data: "hl.ca 10200 IN A 0.0.0.0"
+local-data: "hl.mx 10200 IN A 0.0.0.0"
+local-data: "hl.br 10200 IN A 0.0.0.0"
+local-data: "hl.ar 10200 IN A 0.0.0.0"
+local-data: "hl.cl 10200 IN A 0.0.0.0"
+local-data: "hl.co.il 10200 IN A 0.0.0.0"
+local-data: "hl.ae 10200 IN A 0.0.0.0"
+local-data: "hl.sa 10200 IN A 0.0.0.0"
+local-data: "hl.tr 10200 IN A 0.0.0.0"
+local-data: "hlag.com 10200 IN A 0.0.0.0"
+local-data: "hlag.net 10200 IN A 0.0.0.0"
+local-data: "hlag.org 10200 IN A 0.0.0.0"
+local-data: "hlag.io 10200 IN A 0.0.0.0"
+local-data: "hlag.co 10200 IN A 0.0.0.0"
+local-data: "hlag.info 10200 IN A 0.0.0.0"
+local-data: "hlag.xyz 10200 IN A 0.0.0.0"
+local-data: "hlag.online 10200 IN A 0.0.0.0"
+local-data: "hlag.site 10200 IN A 0.0.0.0"
+local-data: "hlag.club 10200 IN A 0.0.0.0"
+local-data: "hlcl.com 10200 IN A 0.0.0.0"
+local-data: "hlcl.net 10200 IN A 0.0.0.0"
+local-data: "hlcl.org 10200 IN A 0.0.0.0"
+local-data: "hlcl.io 10200 IN A 0.0.0.0"
+local-data: "hlcl.co 10200 IN A 0.0.0.0"
+local-data: "hlcl.info 10200 IN A 0.0.0.0"
+local-data: "hlcl.xyz 10200 IN A 0.0.0.0"
+local-data: "hlcl.online 10200 IN A 0.0.0.0"
+local-data: "hlcl.site 10200 IN A 0.0.0.0"
+local-data: "iqbroker.com 10200 IN A 0.0.0.0"
+local-data: "iqbroker.net 10200 IN A 0.0.0.0"
+local-data: "iqbroker.org 10200 IN A 0.0.0.0"
+local-data: "iqbroker.io 10200 IN A 0.0.0.0"
+local-data: "iqbroker.co 10200 IN A 0.0.0.0"
+local-data: "iqbroker.info 10200 IN A 0.0.0.0"
+local-data: "iqbroker.biz 10200 IN A 0.0.0.0"
+local-data: "iqbroker.xyz 10200 IN A 0.0.0.0"
+local-data: "iqbroker.online 10200 IN A 0.0.0.0"
+local-data: "iqbroker.site 10200 IN A 0.0.0.0"
+local-data: "iqbroker.de 10200 IN A 0.0.0.0"
+local-data: "iqbroker.uk 10200 IN A 0.0.0.0"
+local-data: "iqbroker.eu 10200 IN A 0.0.0.0"
+local-data: "iqbroker.fr 10200 IN A 0.0.0.0"
+local-data: "iqbroker.es 10200 IN A 0.0.0.0"
+local-data: "iqbroker.it 10200 IN A 0.0.0.0"
+local-data: "iqbroker.nl 10200 IN A 0.0.0.0"
+local-data: "iqbroker.ch 10200 IN A 0.0.0.0"
+local-data: "iqbroker.at 10200 IN A 0.0.0.0"
+local-data: "iqbroker.be 10200 IN A 0.0.0.0"
+local-data: "iqbroker.ru 10200 IN A 0.0.0.0"
+local-data: "iqoption.com 10200 IN A 0.0.0.0"
+local-data: "iqoption.net 10200 IN A 0.0.0.0"
+local-data: "iqoption.org 10200 IN A 0.0.0.0"
+local-data: "iqoption.io 10200 IN A 0.0.0.0"
+local-data: "iqoption.co 10200 IN A 0.0.0.0"
+local-data: "iqoption.info 10200 IN A 0.0.0.0"
+local-data: "iqoption.biz 10200 IN A 0.0.0.0"
+local-data: "iqoption.xyz 10200 IN A 0.0.0.0"
+local-data: "iqoption.online 10200 IN A 0.0.0.0"
+local-data: "iqoption.site 10200 IN A 0.0.0.0"
+local-data: "iqoption.ru 10200 IN A 0.0.0.0"
+local-data: "iqoption.eu 10200 IN A 0.0.0.0"
+local-data: "iqoption.de 10200 IN A 0.0.0.0"
+local-data: "iqoption.fr 10200 IN A 0.0.0.0"
+local-data: "iqoption.es 10200 IN A 0.0.0.0"
+local-data: "iqoption.it 10200 IN A 0.0.0.0"
+local-data: "iqoption.pl 10200 IN A 0.0.0.0"
+local-data: "iqoption.nl 10200 IN A 0.0.0.0"
+local-data: "iqoption.se 10200 IN A 0.0.0.0"
+local-data: "iqoption.no 10200 IN A 0.0.0.0"
+local-data: "iqoption.dk 10200 IN A 0.0.0.0"
+local-data: "iqoption.fi 10200 IN A 0.0.0.0"
+local-data: "iqoption.cz 10200 IN A 0.0.0.0"
+local-data: "iqoption.hu 10200 IN A 0.0.0.0"
+local-data: "iqoption.at 10200 IN A 0.0.0.0"
+local-data: "iqoption.ch 10200 IN A 0.0.0.0"
+local-data: "iqoption.be 10200 IN A 0.0.0.0"
+local-data: "iqtrading.com 10200 IN A 0.0.0.0"
+local-data: "iqtrading.net 10200 IN A 0.0.0.0"
+local-data: "iqtrading.org 10200 IN A 0.0.0.0"
+local-data: "iqtrading.io 10200 IN A 0.0.0.0"
+local-data: "iqtrading.co 10200 IN A 0.0.0.0"
+local-data: "iqtrading.info 10200 IN A 0.0.0.0"
+local-data: "iqtrading.biz 10200 IN A 0.0.0.0"
+local-data: "iqtrading.xyz 10200 IN A 0.0.0.0"
+local-data: "iqtrading.online 10200 IN A 0.0.0.0"
+local-data: "iqtrading.site 10200 IN A 0.0.0.0"
+local-data: "iqtrading.asia 10200 IN A 0.0.0.0"
+local-data: "iqtrading.ru 10200 IN A 0.0.0.0"
+local-data: "iqtrading.eu 10200 IN A 0.0.0.0"
+local-data: "ixyyijop.com 10200 IN A 0.0.0.0"
+local-data: "ixyyijop.net 10200 IN A 0.0.0.0"
+local-data: "ixyyijop.org 10200 IN A 0.0.0.0"
+local-data: "ixyyijop.io 10200 IN A 0.0.0.0"
+local-data: "ixyyijop.co 10200 IN A 0.0.0.0"
+local-data: "ixyyijop.xyz 10200 IN A 0.0.0.0"
+local-data: "ixyyijop.online 10200 IN A 0.0.0.0"
+local-data: "ixyyijop.site 10200 IN A 0.0.0.0"
+local-data: "mbogibet.com 10200 IN A 0.0.0.0"
+local-data: "mbogibet.net 10200 IN A 0.0.0.0"
+local-data: "mbogibet.org 10200 IN A 0.0.0.0"
+local-data: "mbogibet.io 10200 IN A 0.0.0.0"
+local-data: "mbogibet.co 10200 IN A 0.0.0.0"
+local-data: "mbogibet.xyz 10200 IN A 0.0.0.0"
+local-data: "mbogibet.online 10200 IN A 0.0.0.0"
+local-data: "mbogibet.site 10200 IN A 0.0.0.0"
+local-data: "melbet.com 10200 IN A 0.0.0.0"
+local-data: "melbet.net 10200 IN A 0.0.0.0"
+local-data: "melbet.org 10200 IN A 0.0.0.0"
+local-data: "melbet.io 10200 IN A 0.0.0.0"
+local-data: "melbet.co 10200 IN A 0.0.0.0"
+local-data: "melbet.ru 10200 IN A 0.0.0.0"
+local-data: "melbet.ua 10200 IN A 0.0.0.0"
+local-data: "melbet.kz 10200 IN A 0.0.0.0"
+local-data: "melbet.uz 10200 IN A 0.0.0.0"
+local-data: "melbet.by 10200 IN A 0.0.0.0"
+local-data: "melbet.am 10200 IN A 0.0.0.0"
+local-data: "melbet.ge 10200 IN A 0.0.0.0"
+local-data: "melbet.md 10200 IN A 0.0.0.0"
+local-data: "melbet.tj 10200 IN A 0.0.0.0"
+local-data: "melbet.tm 10200 IN A 0.0.0.0"
+local-data: "melbet.kg 10200 IN A 0.0.0.0"
+local-data: "melbet.az 10200 IN A 0.0.0.0"
+local-data: "mozzartbet.com 10200 IN A 0.0.0.0"
+local-data: "mozzartbet.net 10200 IN A 0.0.0.0"
+local-data: "mozzartbet.org 10200 IN A 0.0.0.0"
+local-data: "mozzartbet.io 10200 IN A 0.0.0.0"
+local-data: "mozzartbet.co 10200 IN A 0.0.0.0"
+local-data: "mozzartbet.info 10200 IN A 0.0.0.0"
+local-data: "mozzartbet.xyz 10200 IN A 0.0.0.0"
+local-data: "mozzartbet.online 10200 IN A 0.0.0.0"
+local-data: "mozzartbet.site 10200 IN A 0.0.0.0"
+local-data: "mozzartbet.rs 10200 IN A 0.0.0.0"
+local-data: "mozzartbet.bg 10200 IN A 0.0.0.0"
+local-data: "mozzartbet.mk 10200 IN A 0.0.0.0"
+local-data: "mozzartbet.ba 10200 IN A 0.0.0.0"
+local-data: "mozzartbet.me 10200 IN A 0.0.0.0"
+local-data: "mozzartbet.hr 10200 IN A 0.0.0.0"
+local-data: "mozzartbet.si 10200 IN A 0.0.0.0"
+local-data: "mozzartbet.al 10200 IN A 0.0.0.0"
+local-data: "mygamesthebest.com 10200 IN A 0.0.0.0"
+local-data: "nexthink.com 10200 IN A 0.0.0.0"
+local-data: "nexthink.net 10200 IN A 0.0.0.0"
+local-data: "nexthink.org 10200 IN A 0.0.0.0"
+local-data: "nexthink.io 10200 IN A 0.0.0.0"
+local-data: "nexthink.co 10200 IN A 0.0.0.0"
+local-data: "nexthink.xyz 10200 IN A 0.0.0.0"
+local-data: "nexthink.online 10200 IN A 0.0.0.0"
+local-data: "nexthink.site 10200 IN A 0.0.0.0"
+local-data: "onenote.com 10200 IN A 0.0.0.0"
+local-data: "play-lg.com 10200 IN A 0.0.0.0"
+local-data: "play-lg.net 10200 IN A 0.0.0.0"
+local-data: "play-lg.org 10200 IN A 0.0.0.0"
+local-data: "play-lg.io 10200 IN A 0.0.0.0"
+local-data: "play-lg.co 10200 IN A 0.0.0.0"
+local-data: "play-lg.xyz 10200 IN A 0.0.0.0"
+local-data: "play-lg.online 10200 IN A 0.0.0.0"
+local-data: "play-lg.site 10200 IN A 0.0.0.0"
+local-data: "pukabolomen.shop 10200 IN A 0.0.0.0"
+local-data: "redirect12.com 10200 IN A 0.0.0.0"
+local-data: "redirect12.net 10200 IN A 0.0.0.0"
+local-data: "redirect12.org 10200 IN A 0.0.0.0"
+local-data: "redirect12.io 10200 IN A 0.0.0.0"
+local-data: "redirect12.co 10200 IN A 0.0.0.0"
+local-data: "redirect12.xyz 10200 IN A 0.0.0.0"
+local-data: "redirect12.online 10200 IN A 0.0.0.0"
+local-data: "redirect12.site 10200 IN A 0.0.0.0"
+local-data: "toptitaniumapp.com 10200 IN A 0.0.0.0"
+local-data: "toptitaniumapp.net 10200 IN A 0.0.0.0"
+local-data: "toptitaniumapp.org 10200 IN A 0.0.0.0"
+local-data: "toptitaniumapp.io 10200 IN A 0.0.0.0"
+local-data: "toptitaniumapp.co 10200 IN A 0.0.0.0"
+local-data: "toptitaniumapp.xyz 10200 IN A 0.0.0.0"
+local-data: "toptitaniumapp.online 10200 IN A 0.0.0.0"
+local-data: "toptitaniumapp.site 10200 IN A 0.0.0.0"
+local-data: "thesurferprotector.com 10200 IN A 0.0.0.0"
+local-data: "thesurferprotector.net 10200 IN A 0.0.0.0"
+local-data: "thesurferprotector.org 10200 IN A 0.0.0.0"
+local-data: "thesurferprotector.io 10200 IN A 0.0.0.0"
+local-data: "thesurferprotector.co 10200 IN A 0.0.0.0"
+local-data: "thesurferprotector.xyz 10200 IN A 0.0.0.0"
+local-data: "thesurferprotector.online 10200 IN A 0.0.0.0"
+local-data: "thesurferprotector.site 10200 IN A 0.0.0.0"
+local-data: "targetchain-flow.com 10200 IN A 0.0.0.0"
+local-data: "targetchain-flow.net 10200 IN A 0.0.0.0"
+local-data: "targetchain-flow.org 10200 IN A 0.0.0.0"
+local-data: "targetchain-flow.io 10200 IN A 0.0.0.0"
+local-data: "targetchain-flow.co 10200 IN A 0.0.0.0"
+local-data: "targetchain-flow.xyz 10200 IN A 0.0.0.0"
+local-data: "targetchain-flow.online 10200 IN A 0.0.0.0"
+local-data: "targetchain-flow.site 10200 IN A 0.0.0.0"
+local-data: "votravis.com 10200 IN A 0.0.0.0"
+local-data: "votravis.net 10200 IN A 0.0.0.0"
+local-data: "votravis.org 10200 IN A 0.0.0.0"
+local-data: "votravis.io 10200 IN A 0.0.0.0"
+local-data: "votravis.co 10200 IN A 0.0.0.0"
+local-data: "votravis.xyz 10200 IN A 0.0.0.0"
+local-data: "votravis.online 10200 IN A 0.0.0.0"
+local-data: "votravis.site 10200 IN A 0.0.0.0"
+local-data: "zscaler.com 10200 IN A 0.0.0.0"
+local-data: "zscaler.net 10200 IN A 0.0.0.0"
+local-data: "zscaler.org 10200 IN A 0.0.0.0"
+local-data: "zscaler.io 10200 IN A 0.0.0.0"
+local-data: "zscaler.co 10200 IN A 0.0.0.0"
+local-data: "zscaler.info 10200 IN A 0.0.0.0"
+local-data: "zscaler.biz 10200 IN A 0.0.0.0"
+local-data: "zscaler.xyz 10200 IN A 0.0.0.0"
+local-data: "zscaler.online 10200 IN A 0.0.0.0"
+local-data: "zscaler.site 10200 IN A 0.0.0.0"
+local-data: "zscaler.eu 10200 IN A 0.0.0.0"
+local-data: "zscaler.us 10200 IN A 0.0.0.0"
+local-data: "zscaler.in 10200 IN A 0.0.0.0"
+local-data: "zscaler.com.au 10200 IN A 0.0.0.0"
+local-data: "zscaler.co.uk 10200 IN A 0.0.0.0"
+local-data: "zscaler.de 10200 IN A 0.0.0.0"
+local-data: "zscaler.fr 10200 IN A 0.0.0.0"
+local-data: "zscaler.es 10200 IN A 0.0.0.0"
+local-data: "zscaler.it 10200 IN A 0.0.0.0"
+local-data: "zscaler.nl 10200 IN A 0.0.0.0"
+local-data: "zscaler.se 10200 IN A 0.0.0.0"
+local-data: "zscaler.ae 10200 IN A 0.0.0.0"
+local-data: "zscaler.sa 10200 IN A 0.0.0.0"
+local-data: "zscalerone.com 10200 IN A 0.0.0.0"
+local-data: "zscalerone.net 10200 IN A 0.0.0.0"
+local-data: "zscalerone.org 10200 IN A 0.0.0.0"
+local-data: "zscalerone.io 10200 IN A 0.0.0.0"
+local-data: "zscalerone.co 10200 IN A 0.0.0.0"
+local-data: "zscalerone.xyz 10200 IN A 0.0.0.0"
+local-data: "zscaltwo.com 10200 IN A 0.0.0.0"
+local-data: "zscaltwo.net 10200 IN A 0.0.0.0"
+local-data: "zscaltwo.org 10200 IN A 0.0.0.0"
+local-data: "zscaltwo.io 10200 IN A 0.0.0.0"
+local-data: "zscaltwo.co 10200 IN A 0.0.0.0"
+local-data: "zscaltwo.xyz 10200 IN A 0.0.0.0"
+local-data: "zscalerthree.net 10200 IN A 0.0.0.0"
+local-data: "zscloud.net 10200 IN A 0.0.0.0"
+local-data: "zscalerbeta.net 10200 IN A 0.0.0.0"
+local-data: "zscalergov.net 10200 IN A 0.0.0.0"
+local-data: "zscalerten.net 10200 IN A 0.0.0.0"
+local-data: "zpagov.com 10200 IN A 0.0.0.0"
+local-data: "zpagov.net 10200 IN A 0.0.0.0"
+local-data: "zpagov.org 10200 IN A 0.0.0.0"
+local-data: "zpagov.io 10200 IN A 0.0.0.0"
+local-data: "zpagov.co 10200 IN A 0.0.0.0"
+local-data: "zpagov.xyz 10200 IN A 0.0.0.0"
+local-data: "zpagov.us 10200 IN A 0.0.0.0"
+local-data: "zpatwo.net 10200 IN A 0.0.0.0"
+local-data: "zpabeta.net 10200 IN A 0.0.0.0"
+local-data: "zdxcloud.net 10200 IN A 0.0.0.0"
+local-data: "zdxgov.net 10200 IN A 0.0.0.0"
+local-data: "zdxbeta.net 10200 IN A 0.0.0.0"
+local-data: "zdxten.net 10200 IN A 0.0.0.0"
+local-data: "ZIdentity.com 10200 IN A 0.0.0.0"
+local-data: "ZIdentity.net 10200 IN A 0.0.0.0"
+local-data: "ZIdentity.org 10200 IN A 0.0.0.0"
+local-data: "ZIdentity.io 10200 IN A 0.0.0.0"
+local-data: "ZIdentity.co 10200 IN A 0.0.0.0"
+local-data: "ZIdentity.xyz 10200 IN A 0.0.0.0"
+local-data: "zslogin.net 10200 IN A 0.0.0.0"
+local-data: "zsloginbeta.net 10200 IN A 0.0.0.0"
