@@ -9,8 +9,14 @@ services:
     volumes:
       - /docker/netbootxyz/config:/config
       - /mnt/shared/assets:/assets
+    networks:
+      - external_network
     ports:
-      - "3000:3000"
+      - "3300:3000"
       - "69:69/udp"
-      - "8080:80"
+      - "8380:80"
     restart: unless-stopped
+
+networks:
+  external_network:
+    external: true
