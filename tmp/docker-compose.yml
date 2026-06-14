@@ -1,0 +1,248 @@
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    networks:
+      - external_network
+    restart: unless-stopped
+	
+  dockhand:
+    image: fnsys/dockhand:latest
+    container_name: dockhand
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=Africa/Nairobi
+    networks:
+      - internal_network
+    ports:
+      - "3000:3000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /docker/dockhand/data:/app/data
+    restart: unless-stopped
+
+  dozzle:
+    image: amir20/dozzle:latest
+    container_name: dozzle
+    networks:
+      - external_network
+    ports:
+      - "8888:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: unless-stopped
+	
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+      - PASSWORD=${PASSWORD}
+      - SUDO_PASSWORD=${SUDO_PASSWORD}
+      - DEFAULT_WORKSPACE=/config/workspace
+      - PWA_APPNAME=code-server
+    networks:
+      - external_network
+    ports:
+      - "8443:8443"
+    volumes:
+      - /docker/code-server/config:/config
+      - /docker:/config/workspace/docker:rw
+      - /mnt/shared:/config/workspace/shared:rw
+    restart: unless-stopped
+
+  copyparty:
+    image: copyparty/ac:latest
+    container_name: copyparty
+    user: "1000:1000"
+    ports:
+      - "3923:3923"
+    volumes:
+      - /docker/copyparty/cfg:/cfg
+      - /docker:/docker:rw
+      - /home/leo:/home/leo:rw
+      - /mnt/shared:/mnt/shared:rw
+      - /mnt/media:/mnt/media:rw
+    environment:
+      LD_PRELOAD: /usr/lib/libmimalloc-secure.so.NOPE
+      PYTHONUNBUFFERED: 1    
+    networks:
+      - external_network
+    stop_grace_period: 15s
+    restart: unless-stopped
+	
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+      - VERSION=docker
+      # - PLEX_CLAIM=${PLEX_CLAIM}
+    ports:
+      - 32400:32400
+    devices:
+      - "/dev/dri:/dev/dri"
+    networks:
+      internal_network:
+        ipv4_address: 172.30.0.32
+    volumes:
+      - /docker/plex/config:/config
+      - /mnt/media:/media
+
+  tautulli:
+    image: lscr.io/linuxserver/tautulli:latest
+    container_name: tautulli
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+    ports:
+      - 8181:8181
+    networks:
+      - internal_network
+    volumes:
+      - /docker/plex/tautulli/config:/config
+
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+      - JELLYFIN_CACHE_DIR=/config/cache
+      - LIBVA_DRIVER_NAME=iHD
+    ports:
+      - 8096:8096
+      - 7359:7359/udp
+      - 1900:1900/udp
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128
+      - /dev/dri/card1:/dev/dri/card1
+    networks:
+      - internal_network
+    volumes:
+      - /docker/jellyfin/library:/config
+      - /mnt/media:/data
+	  
+  netbootxyz:
+    image: ghcr.io/netbootxyz/netbootxyz
+    container_name: netbootxyz
+    environment:
+      - MENU_VERSION=2.0.84
+      - NGINX_PORT=80
+      - WEB_APP_PORT=3300
+    volumes:
+      - /docker/netbootxyz/config:/config
+      - /mnt/shared/assets:/assets
+    networks:
+      - external_network
+    ports:
+      - "3300:3000"
+      - "69:69/udp"
+      - "8380:80"
+    restart: unless-stopped
+
+  flaresolverr:
+    image: flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=info
+      - LOG_HTML=false
+      - CAPTCHA_SOLVER=none
+      - TZ=Africa/Nairobi
+      - HEADLESS=true
+    networks:
+      - internal_network
+    ports:
+      - "8191:8191"
+    restart: unless-stopped
+    
+  seerr:
+    image: ghcr.io/seerr-team/seerr:latest
+    container_name: seerr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+    volumes:
+      - /docker/overseerr/config:/app/config
+    networks:
+      - internal_network
+    ports:
+      - 5055:5055
+    restart: unless-stopped
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+    volumes:
+      - /docker/prowlarr/data:/config
+    networks:
+      - internal_network
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+    volumes:
+      - /docker/radarr/config:/config
+      - /mnt/media/movies:/movies
+      - /mnt/shared/transmission/downloads:/downloads
+    networks:
+      - internal_network
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+    
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Africa/Nairobi
+      - TRANSMISSION_WEB_HOME= #optional
+      - USER=leo
+      - PASS=REDACTED
+      - WHITELIST= #optional
+      - PEERPORT= #optional
+      - HOST_WHITELIST= #optional
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    networks:
+      - internal_network
+    volumes:
+      - /docker/transmission/data:/config
+      - /mnt/shared/transmission/downloads:/downloads
+      - /mnt/shared/transmission/watch:/watch
+	  
+networks:
+  internal_network:
+    external: true
+  external_network:
+    external: true
