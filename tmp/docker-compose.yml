@@ -163,6 +163,8 @@ services:
       - CAPTCHA_SOLVER=none
       - TZ=Africa/Nairobi
       - HEADLESS=true
+    volumes:
+      - /docker/flaresolverr/config:/config
     networks:
       - internal_network
     ports:
