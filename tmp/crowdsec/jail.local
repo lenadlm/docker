@@ -27,3 +27,11 @@ filter    = portscan
 backend   = polling
 maxretry  = 5
 logpath   = /var/log/kern.log
+
+[recidive]
+enabled    = true
+filter     = recidive
+backend    = polling
+logpath    = /var/log/fail2ban.log
+findtime   = 30d
+bantime.maxtime = -1
