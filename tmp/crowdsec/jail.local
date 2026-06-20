@@ -7,10 +7,10 @@ loglevel        = INFO
 logtarget       = /var/log/fail2ban.log
 maxretry        = 2
 findtime        = 12h
-bantime         = 7d
+bantime         = 1d
 bantime.increment = true
-bantime.factor  = 2
-bantime.rndtime = 2d
+bantime.factor  = 6
+bantime.rndtime = 12h
 bantime.maxtime = 90d
 
 [sshd]
@@ -20,3 +20,10 @@ port       = ssh
 mode       = aggressive
 backend    = polling
 logpath    = /var/log/auth.log
+
+[portscan]
+enabled   = true
+filter    = portscan
+backend   = polling
+maxretry  = 5
+logpath   = /var/log/kern.log
