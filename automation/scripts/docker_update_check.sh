@@ -7,7 +7,7 @@ set -euo pipefail
 # Reports results via stdout (captured by cron delivery)
 # ============================================================
 
-DOCKER_HOST="192.168.1.220"
+DOCKER_HOST="${DOCKER_HOST:-192.168.1.220}"
 STACK_DIR="/mnt/shared/tmp/docker"
 LOG_FILE="/mnt/shared/tmp/docker_updates.log"
 

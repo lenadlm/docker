@@ -3,11 +3,14 @@ import json
 import urllib.request
 import urllib.error
 import sys
+import os
 
-TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIyZTg5ZGRkMDA2MGY0MTZiOGMyMWVhNjMyYWI5ZTJiNiIsImlhdCI6MTc3NTg4MTA2MiwiZXhwIjoyMDkxMjQxMDYyfQ.Vpb_vDqO2mu12zQ1Shz83meUCdYZ1596zv_6YuHjzBA"
-URL = "http://192.168.1.123:8123/api/states/update.home_assistant_core_update"
-TELEGRAM_BOT_TOKEN = "BOT_ID_REDACTED:AAE_UkuF3CytuP38Az8-EuCY4QdCme8Qd6g"
-TELEGRAM_CHAT_ID = "CHAT_ID_REDACTED"
+TOKEN = os.environ.get("HA_LONG_LIVED_TOKEN", "")
+HA_HOST = os.environ.get("HA_HOST", "192.168.1.123")
+HA_PORT = os.environ.get("HA_PORT", "8123")
+URL = f"http://{HA_HOST}:{HA_PORT}/api/states/update.home_assistant_core_update"
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
+TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "CHAT_ID_REDACTED")
 
 def send_telegram(message):
     import urllib.parse

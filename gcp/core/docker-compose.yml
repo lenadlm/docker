@@ -13,7 +13,7 @@ services:
     image: fnsys/dockhand:latest
     container_name: dockhand
     ports:
-      - 100.70.60.70:3000:3000
+      - ${TAILSCALE_SRV:-100.70.60.70}:3000:3000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /docker/dockhand/data:/app/data
@@ -23,7 +23,7 @@ services:
     image: amir20/dozzle:latest
     container_name: dozzle
     ports:
-      - 100.70.60.70:8080:8080
+      - ${TAILSCALE_SRV:-100.70.60.70}:8080:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped

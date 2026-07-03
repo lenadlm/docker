@@ -14,7 +14,7 @@ services:
       - com.centurylinklabs.watchtower.enable=true    
     networks:
       internal_network:
-        ipv4_address: 172.30.0.10
+        ipv4_address: ${PORTAINER_IP:-172.30.0.10}
     logging:
       driver: json-file
       options:

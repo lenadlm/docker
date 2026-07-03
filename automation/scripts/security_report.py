@@ -133,7 +133,10 @@ def tailscale_network():
         else:
             report += "\n✅ No health warnings"
         report += "\n\n📡 **Reachability Check:**\n"
-        for name, ip in [("docker", "100.70.60.220"), ("hermes", "100.70.60.222"), ("homeassistant", "100.70.60.123")]:
+        ts_docker = os.environ.get("TAILSCALE_DOCKER", "100.70.60.220")
+        ts_hermes = os.environ.get("TAILSCALE_HERMES", "100.70.60.222")
+        ts_ha = os.environ.get("TAILSCALE_HA", "100.70.60.123")
+        for name, ip in [("docker", ts_docker), ("hermes", ts_hermes), ("homeassistant", ts_ha)]:
             result = run_command(f"tailscale ping --c=1 --timeout=5s {ip} 2>&1 | head -1")
             if "reply" in result.lower() or "ms" in result.lower():
                 report += f"✅ {name} ({ip}): reachable\n"

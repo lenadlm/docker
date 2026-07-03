@@ -5,7 +5,7 @@ import os, sys, json, datetime, requests, urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 HOST = os.environ.get('PROXMOX_HOST','192.168.1.55')
-TOKEN_ID = os.environ.get('PROXMOX_TOKEN_ID','PROXMOX_TOKEN_ID_REDACTED')
+TOKEN_ID = os.environ.get('PROXMOX_TOKEN_ID', '')
 TOKEN_SECRET = os.environ.get('PROXMOX_TOKEN_SECRET')
 
 if not TOKEN_SECRET:

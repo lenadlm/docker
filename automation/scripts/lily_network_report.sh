@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Config / credentials
-TELEGRAM_BOT_TOKEN="269470...Qd6g"
-TELEGRAM_CHAT_ID="CHAT_ID_REDACTED"
+# Config / credentials — read from env (set in ~/.profile or cron context)
+TELEGRAM_BOT_TOKEN="${TELEGRAM_BOT_TOKEN:-}"
+TELEGRAM_CHAT_ID="${TELEGRAM_CHAT_ID:-CHAT_ID_REDACTED}"
 LOG_DIR="${LOG_DIR:-/mnt/shared/tmp}"
 INVENTORY_FILE="${HOME}/.hermes/network_inventory.txt"
 SCRIPT_START_TS="$(date '+%Y-%m-%d %H:%M:%S')"
 REPORT_FILE="${LOG_DIR}/lily_network_report_${SCRIPT_START_TS// /_}.log"
-DOCKER_HOST="192.168.1.220"
-DOCKER_USER="leo"
+DOCKER_HOST="${DOCKER_HOST:-192.168.1.220}"
+DOCKER_USER="${DOCKER_USER:-leo}"
 
 # Ensure log dir exists
 mkdir -p "$LOG_DIR"

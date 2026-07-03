@@ -12,9 +12,9 @@ with open(env_file) as f:
             k, v = line.split("=", 1)
             env[k.strip()] = v.strip()
 
-HOST = env.get("PROXMOX_HOST", "192.168.1.55")
-tid = env.get("PROXMOX_TOKEN_ID", "")
-ts = env.get("PROXMOX_TOKEN_SECRET", "")
+HOST = os.environ.get("PROXMOX_HOST", "192.168.1.55")
+tid = os.environ.get("PROXMOX_TOKEN_ID", "")
+ts = os.environ.get("PROXMOX_TOKEN_SECRET", "")
 
 def api(path):
     url = f"https://{HOST}:8006/api2/json{path}"
@@ -39,7 +39,7 @@ sub = api("/nodes/pve/subscription")
 # Build report dict
 report = {
     "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-    "host": "192.168.1.55",
+    "host": os.environ.get("PROXMOX_HOST", "192.168.1.55"),
     "version": f"Proxmox VE {v.get('release')} ({v.get('version')})" if v else "?",
 }
 
