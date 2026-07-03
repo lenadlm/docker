@@ -1,0 +1,3 @@
+proxmox_token.env
+*.token.env
+*.env

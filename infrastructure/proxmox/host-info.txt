@@ -1,0 +1,2 @@
+pve-manager/9.1.11/8eac2c86f015bdda (running kernel: 7.0.2-3-pve)
+pve

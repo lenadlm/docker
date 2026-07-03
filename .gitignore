@@ -1,0 +1,22 @@
+# Secrets
+.env
+**/.env
+*.token.env
+proxmox_token.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Temp
+*.log
+tmp/
+__pycache__/
+*.pyc
