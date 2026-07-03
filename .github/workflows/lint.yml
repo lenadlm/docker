@@ -1,0 +1,30 @@
+name: Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Shellcheck
+        run: |
+          sudo apt-get -qq update
+          sudo apt-get -qq install -y shellcheck
+          find automation/scripts -name "*.sh" -print0 | xargs -0 shellcheck -s bash || true
+
+      - name: YAML lint
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: docker-stacks/ infrastructure/
+          config_data: |
+            extends: relaxed
+            rules:
+              line-length: disable
+              document-start: disable
+              truthy: disable

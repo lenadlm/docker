@@ -1,0 +1,62 @@
+# Network Topology
+
+## Overview
+
+```
+┌─────────────────────────────────────────────────────┐
+│                   Internet                          │
+└──────────────────┬──────────────────────────────────┘
+                   │
+┌──────────────────▼──────────────────────────────────┐
+│  OPNsense (192.168.1.1)        ┌─────────────────┐  │
+│  VLAN20: 192.168.2.1           │ Tailnet          │  │
+│  VLAN10: 192.168.10.1          │ 100.70.60.0/24   │  │
+│  DHCP, DNS, Firewall           │ WireGuard mesh   │  │
+└──────┬─────────────────────────┴─────────────────┘──┘
+       │
+       │ LAN (192.168.1.0/24)
+       │
+  ┌────┼────┬────┬────┬────┬────┬────┬────┬────┐
+  │    │    │    │    │    │    │    │    │    │
+  ▼    ▼    ▼    ▼    ▼    ▼    ▼    ▼    ▼    ▼
+.11   .15   .55  .70  .74  .106 .123 .174 .220 .222
+Mikro NMBA  PVE  SRV  Ubuntu f106 HA   Ubuntu Docker Hermes
+Tik   9008  9.1  (exit)        OS   18.04   host  Agent
+
+              VLAN20 (192.168.2.0/24)
+              ┌────┐
+              │.224│
+              │DNS │
+              └────┘
+```
+
+## Hosts
+
+| Address | Hostname | Role | Tailscale |
+|---------|----------|------|-----------|
+| 192.168.1.1 | opnsense | Router/Firewall | 100.70.60.50 |
+| 192.168.1.11 | mikrotik | Switch | — |
+| 192.168.1.15 | nmba9008 | SMB/NAS | — |
+| 192.168.1.55 | pve | Proxmox VE | 100.70.60.55 |
+| 192.168.1.70 | srv | Exit node (Tailscale) | 100.70.60.70 |
+| 192.168.1.74 | ubuntu | General purpose | 100.70.60.74 |
+| 192.168.1.106 | f106 | — | 100.70.60.106 |
+| 192.168.1.123 | ha | Home Assistant OS | 100.70.60.123 |
+| 192.168.1.174 | ubuntu | GPU/CI (q35 VM) | 100.70.60.174 |
+| 192.168.1.220 | docker | Docker host (main) | 100.70.60.220 |
+| 192.168.1.222 | hermes | Hermes Agent | 100.70.60.222 |
+
+## Networks
+
+| Network | Subnet | Gateway | Purpose |
+|---------|--------|---------|---------|
+| LAN | 192.168.1.0/24 | .1 | Primary LAN |
+| VLAN20 | 192.168.2.0/24 | .1 | Services/DNS |
+| Docker internal | 172.30.0.0/24 | .1 | Container interconnect |
+| Tailscale | 100.70.60.0/24 | — | Mesh VPN |
+
+## DNS
+
+- Internal: `docker.home.arpa` → 192.168.1.220
+- External: `haos.lenadlm.dev` → Cloudflare → HA
+- Tailscale: `*.tail52be18.ts.net` → MagicDNS
