@@ -17,9 +17,9 @@ timestamp() {
 
 echo "[$(timestamp)] 🔍 Starting Docker update check: $STACK_DIR"
 
-result=$(ssh leo@"$DOCKER_HOST" bash -s <<'REMOTE_SCRIPT'
+result=$(ssh leo@"$DOCKER_HOST" "STACK_DIR=$STACK_DIR" bash -s <<'REMOTE_SCRIPT'
   set -euo pipefail
-  cd /docker/netbootxyz
+  cd "$STACK_DIR"
 
   # Record container start time BEFORE pull
   before_since=$(docker inspect --format '{{.State.StartedAt}}' netbootxyz 2>/dev/null || echo "unknown")
