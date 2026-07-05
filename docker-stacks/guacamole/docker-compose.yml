@@ -47,14 +47,17 @@ services:
         condition: service_started
     environment:
       POSTGRES_HOSTNAME: guacamole-postgres
+      POSTGRESQL_PORT: 5432
       POSTGRES_PORT: 5432
       POSTGRES_USER: ${GUACAMOLE_DB_USER:-guacamole}
       POSTGRES_PASSWORD: ${GUACAMOLE_DB_PASSWORD}
       POSTGRES_DATABASE: ${GUACAMOLE_DB_NAME:-guacamole_db}
       GUACAMOLE_USER: ${GUACAMOLE_USER:-guacadmin}
       GUACAMOLE_PASSWORD: ${GUACAMOLE_PASSWORD}
+    volumes:
+      - /docker/guacamole/guacamole.properties:/etc/guacamole/guacamole.properties:ro
     healthcheck:
-      test: curl -f http://localhost:8080/guacamole/ | grep -q "Guacamole"
+      test: ["CMD", "curl", "-fs", "http://localhost:8080/guacamole/"]
       interval: 30s
       timeout: 10s
       retries: 5
