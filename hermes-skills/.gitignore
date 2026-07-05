@@ -7,3 +7,5 @@
 .bundled_manifest
 .archive/
 *.tar.gz
+secrets/
+secrets-redacted*

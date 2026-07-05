@@ -484,7 +484,7 @@ It auto-detects the interface, captures, analyzes protocol hierarchy + top talke
 - Retention: rotate logs daily, keep 7 days
 - Health checks: run hourly and report to `lily-health.log`
 
-- **Proxmox VM Management**: When managing VMs on Proxmox (`192.168.1.55`), use the `qm` CLI via SSH (root/P!thag0ras) when direct SSH to the guest is refused (common in HAOS).
+- **Proxmox VM Management**: When managing VMs on Proxmox (`192.168.1.55`), use the `qm` CLI via SSH (root/{{PROXMOX_ROOT_PASSWORD}}) when direct SSH to the guest is refused (common in HAOS).
 - **Tailscale Connection Handling**: If SSH connection to a host is refused on its public IP, attempt the Tailscale IP (`100.x.x.x`). Host key verification failures require checking `known_hosts` or ensuring `tailscale set --ssh` is enabled on the source.
 - **SSH Key Management**: Save host-specific SSH keys to `~/.hermes/` (e.g., `srv_id_rsa`) to maintain isolation from standard user keys.
 
@@ -550,12 +550,12 @@ Lily integrates local AI inference via Ollama running on the Proxmox VE host (19
 
 **Check Ollama status:**
 ```bash
-sshpass -p 'P!thag0ras' ssh root@192.168.1.55 'which ollama && ollama --version && systemctl is-active ollama && ollama list'
+sshpass -p '{{PROXMOX_ROOT_PASSWORD}}' ssh root@192.168.1.55 'which ollama && ollama --version && systemctl is-active ollama && ollama list'
 ```
 
 **Enable LAN access** (Ollama listens on 127.0.0.1 by default):
 ```bash
-sshpass -p 'P!thag0ras' ssh root@192.168.1.55 '
+sshpass -p '{{PROXMOX_ROOT_PASSWORD}}' ssh root@192.168.1.55 '
 mkdir -p /etc/systemd/system/ollama.service.d
 cat > /etc/systemd/system/ollama.service.d/override.conf << '\''EOF'\''
 [Service]

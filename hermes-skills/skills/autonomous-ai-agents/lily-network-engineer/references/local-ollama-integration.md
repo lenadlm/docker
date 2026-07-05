@@ -10,18 +10,18 @@
 
 ### Check if Ollama is installed
 ```bash
-sshpass -p 'P!thag0ras' ssh root@192.168.1.55 'which ollama'
+sshpass -p '{{PROXMOX_ROOT_PASSWORD}}' ssh root@192.168.1.55 'which ollama'
 # Expected: /usr/local/bin/ollama
 ```
 
 ### Check version and status
 ```bash
-sshpass -p 'P!thag0ras' ssh root@192.168.1.55 'ollama --version && systemctl is-active ollama && ollama list'
+sshpass -p '{{PROXMOX_ROOT_PASSWORD}}' ssh root@192.168.1.55 'ollama --version && systemctl is-active ollama && ollama list'
 ```
 
 ### Check listening address (before fix — 127.0.0.1 only by default)
 ```bash
-sshpass -p 'P!thag0ras' ssh root@192.168.1.55 'ss -tlnp | grep ollama'
+sshpass -p '{{PROXMOX_ROOT_PASSWORD}}' ssh root@192.168.1.55 'ss -tlnp | grep ollama'
 # Default: LISTEN 0 4096 127.0.0.1:11434
 ```
 
@@ -31,7 +31,7 @@ sshpass -p 'P!thag0ras' ssh root@192.168.1.55 'ss -tlnp | grep ollama'
 The cleanest way to set Ollama environment variables without editing the distro package file:
 
 ```bash
-sshpass -p 'P!thag0ras' ssh root@192.168.1.55 '
+sshpass -p '{{PROXMOX_ROOT_PASSWORD}}' ssh root@192.168.1.55 '
 mkdir -p /etc/systemd/system/ollama.service.d
 cat > /etc/systemd/system/ollama.service.d/override.conf << '\''EOF'\''
 [Service]
@@ -43,7 +43,7 @@ EOF
 
 ### Step 2: Reload and restart
 ```bash
-sshpass -p 'P!thag0ras' ssh root@192.168.1.55 '
+sshpass -p '{{PROXMOX_ROOT_PASSWORD}}' ssh root@192.168.1.55 '
 systemctl daemon-reload
 systemctl restart ollama
 sleep 2

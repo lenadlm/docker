@@ -111,14 +111,14 @@ ha.call_service("media_player", "turn_off", "media_player.lg_webos_tv")
 When SSH is disabled on the Home Assistant VM (port 22 closed), you can still inspect its filesystem using Proxmox's `qm guest exec` command. This is useful for retrieving configuration files (e.g., `configuration.yaml`) or debugging.
 
 ### Prerequisites
-- Proxmox host credentials: `root@192.168.1.55`, password `P!thag0ras`
+- Proxmox host credentials: `root@192.168.1.55`, password `{{PROXMOX_ROOT_PASSWORD}}`
 - Home Assistant VM ID: `109`
 
 ### Step‑by‑Step Exploration
 
 1. **Check SSH connectivity** (should fail):
    ```bash
-   sshpass -p '47454745' ssh -o StrictHostKeyChecking=no leo@192.168.1.123 'echo test'
+   sshpass -p '{{HA_HOST_PASSWORD}}' ssh -o StrictHostKeyChecking=no leo@192.168.1.123 'echo test'
    ```
 
 2. **Try API endpoint** (usually 404):
@@ -128,13 +128,13 @@ When SSH is disabled on the Home Assistant VM (port 22 closed), you can still 
 
 3. **Use Proxmox console to list root directory**:
    ```bash
-   sshpass -p 'P!thag0ras' ssh -o StrictHostKeyChecking=no root@192.168.1.55 \
+   sshpass -p '{{PROXMOX_ROOT_PASSWORD}}' ssh -o StrictHostKeyChecking=no root@192.168.1.55 \
      "qm guest exec 109 -- ls -la /"
    ```
 
 4. **Examine mount points**:
    ```bash
-   sshpass -p 'P!thag0ras' ssh -o StrictHostKeyChecking=no root@192.168.1.55 \
+   sshpass -p '{{PROXMOX_ROOT_PASSWORD}}' ssh -o StrictHostKeyChecking=no root@192.168.1.55 \
      "qm guest exec 109 -- ls -la /mnt"
    ```
    Typical output:
@@ -150,19 +150,19 @@ When SSH is disabled on the Home Assistant VM (port 22 closed), you can still 
 
 5. **Check config directory** (often empty in this mount):
    ```bash
-   sshpass -p 'P!thag0ras' ssh -o StrictHostKeyChecking=no root@192.168.1.55 \
+   sshpass -p '{{PROXMOX_ROOT_PASSWORD}}' ssh -o StrictHostKeyChecking=no root@192.168.1.55 \
      "qm guest exec 109 -- ls -la /mnt/config"
    ```
 
 6. **Inspect overlay filesystem**:
    ```bash
-   sshpass -p 'P!thag0ras' ssh -o StrictHostKeyChecking=no root@192.168.1.55 \
+   sshpass -p '{{PROXMOX_ROOT_PASSWORD}}' ssh -o StrictHostKeyChecking=no root@192.168.1.55 \
      "qm guest exec 109 -- ls -la /mnt/overlay"
    ```
 
 7. **Look for Home Assistant data** (may be on a separate data disk):
    ```bash
-   sshpass -p 'P!thag0ras' ssh -o StrictHostKeyChecking=no root@192.168.1.55 \
+   sshpass -p '{{PROXMOX_ROOT_PASSWORD}}' ssh -o StrictHostKeyChecking=no root@192.168.1.55 \
      "qm guest exec 109 -- find /mnt -name 'configuration.yaml' 2>/dev/null | head -5"
    ```
 
@@ -171,7 +171,7 @@ The Home Assistant configuration is often stored on a dedicated data disk that m
 
 1. **List additional disks attached to VM 109** via Proxmox web UI or CLI:
    ```bash
-   sshpass -p 'P!thag0ras' ssh -o StrictHostKeyChecking=no root@192.168.1.55 \
+   sshpass -p '{{PROXMOX_ROOT_PASSWORD}}' ssh -o StrictHostKeyChecking=no root@192.168.1.55 \
      "qm config 109 | grep -E 'scsi|virtio|ide'"
    ```
 
@@ -180,7 +180,7 @@ The Home Assistant configuration is often stored on a dedicated data disk that m
 ### Quick Copy to Local Machine
 Once the file path is known, copy it locally:
 ```bash
-sshpass -p 'P!thag0ras' ssh -o StrictHostKeyChecking=no root@192.168.1.55 \
+sshpass -p '{{PROXMOX_ROOT_PASSWORD}}' ssh -o StrictHostKeyChecking=no root@192.168.1.55 \
   "qm guest exec 109 -- cat /path/to/configuration.yaml" > ~/homeassistant_configuration.yaml
 ```
 
