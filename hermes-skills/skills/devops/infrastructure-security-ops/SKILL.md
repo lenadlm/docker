@@ -37,6 +37,10 @@ This umbrella skill consolidates class-level patterns for host security monitori
 - **Tailscale Configuration:** If running `tailscale up` to change settings (e.g., `--accept-routes`), you MUST explicitly include all current non-default flags (like `--advertise-exit-node`) or the command will fail with an error about missing flags.
 - **Service Logic (Auditd):** Query via `ausearch -m USER_LOGIN -ts today --success no` to catch current-day failures.
 - **Docker Cleanup:** Before removing images, check for running containers and hidden tags (e.g., `portainer/agent` vs `portainer-agent`).
+- **CrowdSec Bouncer Mode:** If `iptables-restore` errors about missing ipsets (`crowdsec-blacklists-1 doesn't exist`), the bouncer config at `/etc/crowdsec/bouncers/crowdsec-firewall-bouncer.yaml` is using wrong mode. Check `mode:` field — should be `nftables` on modern Ubuntu (not iptables+ipset). The error is harmless if the bouncer is already running in nftables mode; just delete stale iptables entries and restart.
+- **fail2ban sshd mode:** `mode = aggressive` picks up sudo PAM entries from auth.log that aren't SSH-related, causing "odd timestamp" warnings. Use `mode = extra` instead — it catches all real SSH brute force (bad auth, invalid users, timeouts) but skips sudo noise.
+- **auto-ban pipeline:** fail2ban sync script (`fail2ban_sync_check.py`) now auto-bans gap IPs via `cscli decisions add --ip <IP> --duration 7d`. Gap IPs = in fail2ban's banned list but missing from CrowdSec decisions. Run the script to both report and fix gaps.
+- **Git config for repo access:** After setting up SSH keys for GitHub, also set `git config --global user.name` and `user.email` — commits will fail silently otherwise.
 
 ## Verification Checklist
 - [ ] All sub-tasks render as labeled bullets with emojis
