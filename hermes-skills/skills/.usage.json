@@ -341,14 +341,14 @@
     "archived_at": null,
     "created_at": "2026-07-03T17:43:16.885358+00:00",
     "created_by": "agent",
-    "last_patched_at": "2026-07-04T16:23:41.339038+00:00",
-    "last_used_at": "2026-07-05T17:46:55.774407+00:00",
-    "last_viewed_at": "2026-07-05T17:46:55.764727+00:00",
-    "patch_count": 20,
+    "last_patched_at": "2026-07-05T18:29:31.994638+00:00",
+    "last_used_at": "2026-07-05T18:29:47.381703+00:00",
+    "last_viewed_at": "2026-07-05T18:29:47.375479+00:00",
+    "patch_count": 21,
     "pinned": false,
     "state": "active",
-    "use_count": 16,
-    "view_count": 16
+    "use_count": 18,
+    "view_count": 18
   },
   "github-auth": {
     "archived_at": null,
@@ -574,12 +574,12 @@
     "created_at": "2026-05-27T16:04:00.404109+00:00",
     "created_by": null,
     "last_patched_at": "2026-06-21T18:40:06.102515+00:00",
-    "last_used_at": "2026-07-05T18:00:52.301660+00:00",
+    "last_used_at": "2026-07-05T19:00:54.121576+00:00",
     "last_viewed_at": "2026-06-21T18:40:19.112773+00:00",
     "patch_count": 24,
     "pinned": false,
     "state": "active",
-    "use_count": 227,
+    "use_count": 228,
     "view_count": 25
   },
   "llama-cpp": {

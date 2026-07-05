@@ -754,6 +754,147 @@ git push origin main
 - **Multiple hosts**: Inventory across ALL hosts (hermes host, docker host, Proxmox) before organizing. Missing a host means missing configs.
 - **`docker-compose` vs `docker compose`**: Check which syntax the remote host uses before scripting.
 
+### 11. Multi-Host Hermes Skill Sync (Git-Mediated)
+
+**When**: You have two or more Hermes Agent instances and want them to share skills bidirectionally. The pattern is: instance A pushes skills to a shared git repo, instance B pulls and imports them.
+
+This works because skills are plain markdown files (YAML frontmatter + body) under `~/.hermes/skills/<category>/<skill-name>/SKILL.md`. They contain no runtime secrets — just documentation, steps, and templates.
+
+#### Architecture
+
+```
+┌─────────────────┐     push (cron 6h)     ┌──────────────┐     pull (cron 6h)     ┌─────────────────┐
+│  Hermes Host A  │ ──────────────────────▶ │  GitHub Repo  │ ──────────────────────▶ │  Hermes Host B  │
+│  (primary)      │    sync-skills.sh       │  (source of   │    sync-skills.sh       │  (secondary)     │
+│  ~/.hermes/skills│    --push              │   truth)      │    --pull               │  ~/.hermes/skills/│
+└─────────────────┘                         └──────────────┘                         └─────────────────┘
+```
+
+#### Repo Layout
+
+```
+~/projects/
+└── hermes-skills/
+    ├── README.md              ← Overview
+    ├── .gitignore             ← Exclude .env, credentials
+    ├── sync-skills.sh         ← The sync script (commit + push-ready)
+    └── skills/                ← Mirrors ~/.hermes/skills/ structure
+        ├── devops/
+        │   ├── docker-management/SKILL.md
+        │   └── ...
+        ├── mlops/
+        └── ...
+```
+
+#### Sync Script
+
+Place at `~/.hermes/scripts/sync-skills.sh` with three modes:
+
+| Mode | Runs On | Action |
+|---|---|---|
+| `--push` | Host A | rsync `~/.hermes/skills/` → git repo, commit, push |
+| `--pull` | Host B | git pull, rsync git → `~/.hermes/skills/` |
+| `--once` | Either | Copy git → hermes without git pull (seeding) |
+
+Key safety features:
+- **`rsync -a --delete`** in push mode — removes from git anything deleted locally
+- **No `--delete`** in pull mode — preserves any extra skills the target Hermes has
+- **Exclusions** — `.env`, `*secret*`, `*token*`, `*credential*`, `__pycache__`
+- **GPG commit signing** — inherits git config
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+SKILLS_REPO="$HOME/projects/hermes-skills"
+HERMES_SKILLS="$HOME/.hermes/skills"
+LOG="$SKILLS_REPO/sync.log"
+
+push_skills() {
+    rsync -a --delete \
+        --exclude='.env' --exclude='*.secret*' --exclude='*token*' \
+        --exclude='*credential*' --exclude='__pycache__' --exclude='.git' \
+        "$HERMES_SKILLS/" "$SKILLS_REPO/skills/"
+    cd "$SKILLS_REPO"
+    git add -A skills/ README.md .gitignore
+    if ! git diff --cached --quiet; then
+        git commit -m "sync skills: $(date '+%Y-%m-%d %H:%M')"
+        git push origin main
+    fi
+}
+
+pull_skills() {
+    cd "$SKILLS_REPO"
+    git pull origin main
+    rsync -a \
+        --exclude='.env' --exclude='*.secret*' --exclude='*token*' \
+        --exclude='*credential*' --exclude='__pycache__' \
+        "$SKILLS_REPO/skills/" "$HERMES_SKILLS/"
+}
+```
+
+#### Cron Setup
+
+**Host A (push):** Hermes-native cron with `no_agent=True`:
+
+```
+hermes cron create \
+  --schedule "every 6h" \
+  --script push-skills.sh
+```
+
+Where `push-skills.sh` is a one-liner wrapper in `~/.hermes/scripts/`:
+```bash
+#!/usr/bin/env bash
+exec "$HOME/.hermes/scripts/sync-skills.sh" --push
+```
+
+**Host B (pull):** System-level crontab (Hermes cron also works):
+
+```bash
+(crontab -l 2>/dev/null | grep -v pull-skills; \
+ echo "0 */6 * * * /home/leo/.hermes/scripts/pull-skills.sh >> /home/leo/projects/hermes-skills/sync.log 2>&1") \
+ | crontab -
+```
+
+Where `pull-skills.sh` is a one-liner wrapper:
+```bash
+#!/usr/bin/env bash
+exec "$HOME/.hermes/scripts/sync-skills.sh" --pull
+```
+
+#### VPS / Remote Access Pattern
+
+When the secondary Hermes is on a VPS that doesn't expose SSH publicly:
+
+1. **Check Tailscale** — `tailscale status | grep <host>` often reveals a Tailscale IP
+2. **Update SSH config** — Point HostName at the Tailscale IP instead of the public IP
+3. **GitHub key** — The remote host needs SSH key access to the git repo (same deploy key or shared key)
+4. **Clone the repo with sparse checkout** (if cloning only `hermes-skills/` from a larger repo):
+   ```bash
+   mkdir -p ~/projects/hermes-skills && cd ~/projects/hermes-skills
+   git init
+   git remote add origin git@github.com:user/repo.git
+   git sparse-checkout set hermes-skills
+   git pull origin main
+   ```
+
+#### Pitfalls
+
+- **Nested git repos**: If `hermes-skills/` is inside an already-tracked git repo, do NOT `git init` it — just add the directory to the parent repo's tracking. A nested `.git/` breaks everything.
+- **Push without a git remote set**: The script will fail silently on `git push` when network is unavailable — the `|| log "Push failed"` safety keeps the cron from erroring out.
+- **Skill count mismatch**: The push rsync uses `--delete`, so a skill deleted from `~/.hermes/skills/` is also deleted from git. The pull rsync does NOT use `--delete`, so VPS-only skills survive alongside git-synced ones. If you want bidirectional sync, add a push cron on host B too.
+- **GitHub key on VPS**: The VPS user sets up their own GitHub SSH key. Show the pubkey, let them add it. Never attempt to push tokens or auto-configure GitHub keys remotely.
+- **Large initial sync**: First push of 100+ skills is ~30MB and 700+ files. Normal. Subsequent pushes are incremental.
+- **Cron delivery**: With `no_agent=True`, the cron sends stdout verbatim. If you want silent operation (no Telegram spam on every push), ensure the script only prints when there are actual changes.
+
+#### Pitfalls (Tailscale SSH)
+
+- **Tailscale version mismatch**: Client and server versions may differ (e.g., client 1.96.x, server 1.98.x). The connection still works — the version warning is cosmetic.
+- **Relay latency**: If Tailscale shows `relay "xxx"` instead of `direct`, SSH may be slower but still functional.
+- **Exit node + SSH**: If the VPS offers exit node service, SSH over Tailscale still works — exit node status doesn't interfere with direct connections.
+- **SSH keeps timing out**: Run `tailscale status` to check if the peer is `active` or `offline`. If `offline`, the host may be down or disconnected from Tailscale.
+
 ## Related Skills
 
 - `docker-management` — Docker compose lifecycle, deployment from GitHub

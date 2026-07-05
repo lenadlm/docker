@@ -2,3 +2,8 @@
 .env.*
 *credential*
 *sensitive*
+.hub/
+.curator_backups/
+.bundled_manifest
+.archive/
+*.tar.gz
