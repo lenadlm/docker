@@ -1,0 +1,42 @@
+#!/usr/bin/env python3
+import subprocess
+import json
+import re
+from datetime import datetime, timedelta
+
+def run_cmd(cmd):
+    return subprocess.run(cmd, shell=True, capture_output=True, text=True).stdout.strip()
+
+report = f"🚀 **Daily Security Report - {datetime.now().strftime('%Y-%m-%d')}**\n\n"
+
+# Fail2Ban
+since = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+f2b = run_cmd(f"sudo grep -E 'Ban |Unban ' /var/log/fail2ban.log | grep '{since}'")
+bans = re.findall(r"Ban (\d+\.\d+\.\d+\.\d+)", f2b)
+unbans = re.findall(r"Unban (\d+\.\d+\.\d+\.\d+)", f2b)
+
+report += f"🛡 **Fail2Ban Activity (Last 24h)**\n- Banned: {len(bans)}\n- Unbanned: {len(unbans)}\n"
+if bans: report += f"  - {', '.join(set(bans[:5]))}\n"
+
+# CrowdSec
+cs_raw = run_cmd("sudo cscli decisions list -o json")
+try:
+    cs = json.loads(cs_raw)
+    report += f"\n👥 **CrowdSec Active Decisions**\n- Decisions: {len(cs)}\n"
+except:
+    report += "\n👥 **CrowdSec**: No active decisions.\n"
+
+# Auditd
+audit = run_cmd("sudo ausearch -m USER_LOGIN,USER_AUTH -ts today --success no")
+failed = audit.count("type=USER_")
+report += f"\n🔍 **Auditd Events (Today)**\n- Failed Logins: {failed}\n"
+if failed:
+    ips = re.findall(r"addr=(\d+\.\d+\.\d+\.\d+)", audit)
+    accts = re.findall(r"acct=\"([^\"]+)\"", audit)
+    if ips: report += f"  - Top IPs: {', '.join(set(ips[:3]))}\n"
+    if accts: report += f"  - Targeted: {', '.join(set(accts[:3]))}\n"
+
+# Network
+report += f"\n🌐 **Network**\n- Listening Ports: {run_cmd('sudo ss -tuln | grep LISTEN | wc -l')}\n"
+
+print(report)
