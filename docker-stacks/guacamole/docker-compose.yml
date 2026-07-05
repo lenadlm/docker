@@ -1,0 +1,86 @@
+services:
+  guacamole-postgres:
+    image: postgres:16-alpine
+    container_name: guacamole-postgres
+    restart: unless-stopped
+    networks:
+      - internal_network
+    volumes:
+      - /docker/guacamole/postgres:/var/lib/postgresql/data
+      - /docker/guacamole/initdb.sql:/docker-entrypoint-initdb.d/initdb.sql:ro
+    environment:
+      - POSTGRES_USER=${GUACAMOLE_DB_USER:-guacamole}
+      - POSTGRES_PASSWORD=${GUACAMOLE_DB_PASSWORD}
+      - POSTGRES_DB=${GUACAMOLE_DB_NAME:-guacamole_db}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${GUACAMOLE_DB_USER:-guacamole} -d ${GUACAMOLE_DB_NAME:-guacamole_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  guacd:
+    image: guacamole/guacd:latest
+    container_name: guacamole-guacd
+    restart: unless-stopped
+    networks:
+      - internal_network
+    command: ["/opt/guacamole/sbin/guacd", "-b", "0.0.0.0", "-L", "debug"]
+    healthcheck:
+      test: netstat -tln | grep 4822
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  guacamole:
+    image: guacamole/guacamole:latest
+    container_name: guacamole
+    restart: unless-stopped
+    networks:
+      - external_network
+      - internal_network
+    ports:
+      - "8080:8080"
+    depends_on:
+      guacamole-postgres:
+        condition: service_healthy
+      guacd:
+        condition: service_started
+    environment:
+      POSTGRES_HOSTNAME: guacamole-postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${GUACAMOLE_DB_USER:-guacamole}
+      POSTGRES_PASSWORD: ${GUACAMOLE_DB_PASSWORD}
+      POSTGRES_DATABASE: ${GUACAMOLE_DB_NAME:-guacamole_db}
+      GUACAMOLE_USER: ${GUACAMOLE_USER:-guacadmin}
+      GUACAMOLE_PASSWORD: ${GUACAMOLE_PASSWORD}
+    healthcheck:
+      test: curl -f http://localhost:8080/guacamole/ | grep -q "Guacamole"
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # One-time init helper (run manually: docker compose run --rm guacamole-init)
+  guacamole-init:
+    image: guacamole/guacamole:latest
+    container_name: guacamole-init
+    profiles:
+      - init
+    depends_on:
+      guacamole-postgres:
+        condition: service_healthy
+    command: ["/opt/guacamole/bin/initdb.sh", "--postgres"]
+    networks:
+      - internal_network
+    environment:
+      POSTGRES_HOSTNAME: guacamole-postgres
+      POSTGRES_USER: ${GUACAMOLE_DB_USER:-guacamole}
+      POSTGRES_PASSWORD: ${GUACAMOLE_DB_PASSWORD}
+      POSTGRES_DATABASE: ${GUACAMOLE_DB_NAME:-guacamole_db}
+
+networks:
+  external_network:
+    external: true
+    name: external_network
+  internal_network:
+    external: true
+    name: internal_network
