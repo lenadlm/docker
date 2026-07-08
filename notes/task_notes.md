@@ -17,7 +17,7 @@ Never store permanent knowledge, user preferences, reusable procedures, or lesso
 Maintain the following workspace under:
 
 ```text
-~/.hermes/
+~/.hermes/tasks
 ```
 
 ```
