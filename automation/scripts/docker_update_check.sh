@@ -24,10 +24,9 @@ result=$(ssh leo@"$DOCKER_HOST" "STACK_DIR=$STACK_DIR" bash -s <<'REMOTE_SCRIPT'
   # Record container start time BEFORE pull
   before_since=$(docker inspect --format '{{.State.StartedAt}}' netbootxyz 2>/dev/null || echo "unknown")
 
-  # Pull latest images
+  # Pull latest images (tolerate transient registry failures)
   echo "=== PULL ==="
-  docker compose pull 2>&1
-  pull_exit=$?
+  docker compose pull 2>&1 || echo "⚠️ Pull had errors (transient registry failure — will retry next cycle)"
 
   # Redeploy (only recreates if image changed)
   echo "=== UP ==="
@@ -47,7 +46,7 @@ result=$(ssh leo@"$DOCKER_HOST" "STACK_DIR=$STACK_DIR" bash -s <<'REMOTE_SCRIPT'
     echo "UPDATED=false"
   fi
 
-  exit $(( pull_exit | up_exit ))
+  exit $(( up_exit ))
 REMOTE_SCRIPT
 )
 
