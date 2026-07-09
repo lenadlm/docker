@@ -2,7 +2,7 @@
 
 You already have an established Task Notes Protocol located at:
 
-`notes/task_notes.md`
+'ttps://raw.githubusercontent.com/lenadlm/docker/refs/heads/main/notes/task-management-protocol.md
 
 This protocol is the authoritative workflow for maintaining task continuity.
 
